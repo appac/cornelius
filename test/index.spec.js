@@ -45,7 +45,18 @@ describe('findPlayer with pruned param', function() {
 
 describe('getPlayer', function () {
 	it('should return an object', function () {
-		
+		return cornelius.getPlayer('wright', 'nym')
+			.then(function (data) {
+				expect(data).to.be.an('object');
+				expect(data).to.not.be.empty;
+			})
+	});
+	it('should return an empty object given an invalid name or key', function () {
+		return cornelius.getPlayer('invalidname', 'nym')
+			.then(function (data) {
+				expect(data).to.be.an('object');
+				expect(data).to.be.empty;
+			})
 	});
 });
 
