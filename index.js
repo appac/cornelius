@@ -54,7 +54,7 @@ cornelius.prototype.findPlayer = function (playerName, pruned) {
 };
 
 cornelius.prototype.getPlayer = function (playerName, givenKey) {
-		console.log('This gets a player by name and key (player ID or team abbrev).');
+
 };
 
 module.exports = new cornelius();
