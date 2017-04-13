@@ -3,9 +3,9 @@ const http = require('http'),
 			url = require('url'),
 			baseUrl = 'http://m.mlb.com/lookup/json';
 
-var mlb = function () {};
+var cornelius = function () {};
 
-mlb.prototype.search = function (playerName) {
+cornelius.prototype.search = function (playerName) {
 	return new Promise(function (resolve, reject) {
 
 		var uri = url.parse(baseUrl + '/named.search_player_all.bam?sport_code=\'mlb\'&name_part=\'' + playerName + '%25\'&active_sw=\'Y\'');
@@ -49,8 +49,8 @@ mlb.prototype.search = function (playerName) {
 	});
 };
 
-mlb.prototype.get = function (playerName, givenKey) {
+cornelius.prototype.get = function (playerName, givenKey) {
 		console.log('This gets a player by name and key (player ID or team abbrev).');
 };
 
-module.exports = new mlb();
+module.exports = new cornelius();
