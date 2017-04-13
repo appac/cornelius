@@ -5,3 +5,51 @@ const http = require('http'),
 
 var mlb = function () {};
 
+mlb.prototype.search = function (playerName) {
+	return new Promise(function (resolve, reject) {
+
+		var uri = url.parse(baseUrl + '/named.search_player_all.bam?sport_code=\'mlb\'&name_part=\'' + playerName + '%25\'&active_sw=\'Y\'');
+
+		var options = {
+			host: uri.host,
+			path: uri.path
+		};
+
+		http.get(options, function (res) {
+			console.log('2. Making request.')
+			const statusCode = res.statusCode;
+			const contentType = res.headers['content-type'];
+
+			let error;
+
+			if (statusCode !== 200) {
+				error = new Error(`${statusCode} - Request failed.`);
+			} else if (!/^application\/json/.test(contentType)) {
+				error = new Error(`Invalid content type received. Expected JSON, got ${contentType}`);
+			}
+			if (error) {
+				console.log(error.message);
+				res.resume();
+				reject(error.message);
+			}
+
+			res.setEncoding('utf8');
+			let rawData = '';
+			res.on('data', (chunk) => { rawData += chunk; });
+			res.on('end', () => {
+				try {
+					const parsedData = JSON.parse(rawData);
+					resolve(parsedData);
+				} catch (e) {
+					console.error(e.message);
+					reject(e.message)
+				}
+			});
+		}).on('error', (e) => {
+			reject(e.message);
+		});
+
+	});
+};
+
+module.exports = new mlb();
