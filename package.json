@@ -1,7 +1,7 @@
 {
-  "name": "mlbeget",
-  "version": "1.0.0",
-  "description": "A module for easily getting data provided by MLB's lookup routes.",
+  "name": "cornelius",
+  "version": "0.0.1",
+  "description": "A promise based module for easily getting data provided by MLB's public lookup routes.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,7 +15,7 @@
     "get"
   ],
   "author": "Chris Apparicio",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "bluebird": "^3.5.0"
   }
