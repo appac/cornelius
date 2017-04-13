@@ -16,7 +16,6 @@ mlb.prototype.search = function (playerName) {
 		};
 
 		http.get(options, function (res) {
-			console.log('2. Making request.')
 			const statusCode = res.statusCode;
 			const contentType = res.headers['content-type'];
 
@@ -28,7 +27,6 @@ mlb.prototype.search = function (playerName) {
 				error = new Error(`Invalid content type received. Expected JSON, got ${contentType}`);
 			}
 			if (error) {
-				console.log(error.message);
 				res.resume();
 				reject(error.message);
 			}
@@ -41,7 +39,6 @@ mlb.prototype.search = function (playerName) {
 					const parsedData = JSON.parse(rawData);
 					resolve(parsedData);
 				} catch (e) {
-					console.error(e.message);
 					reject(e.message)
 				}
 			});
