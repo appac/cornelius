@@ -5,7 +5,7 @@ const http = require('http'),
 
 var cornelius = function () {};
 
-cornelius.prototype.findPlayer = function (playerName) {
+cornelius.prototype.findPlayer = function (playerName, pruned) {
 	return new Promise(function (resolve, reject) {
 
 		var uri = url.parse(baseUrl + '/named.search_player_all.bam?sport_code=\'mlb\'&name_part=\'' + playerName + '%25\'&active_sw=\'Y\'');
@@ -37,7 +37,11 @@ cornelius.prototype.findPlayer = function (playerName) {
 			res.on('end', () => {
 				try {
 					const parsedData = JSON.parse(rawData);
-					resolve(parsedData);
+					if (pruned === true) {
+						const prunedData = pruneData(parsedData);
+						resolve(prunedData);
+					}
+					resolve(parsedData.search_player_all.queryResults);
 				} catch (e) {
 					reject(e.message)
 				}
@@ -54,3 +58,17 @@ cornelius.prototype.getPlayer = function (playerName, givenKey) {
 };
 
 module.exports = new cornelius();
+
+function pruneData(data) {
+	var prunedData = [];
+	var players = data.search_player_all.queryResults.row;
+
+	if (data.search_player_all.queryResults.totalSize > 0) {
+		players.forEach(function(player) {
+			prunedData.push(player);
+		});
+	}
+
+	return prunedData;
+
+}
