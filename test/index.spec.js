@@ -49,7 +49,7 @@ describe('getPlayer', function () {
 	});
 });
 
-describe('getStats', function () {
+describe.skip('getStats', function () {
 	it('should return an object', function () {
 
 	});
