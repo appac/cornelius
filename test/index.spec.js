@@ -7,6 +7,7 @@ describe('findPlayer', function () {
 		return cornelius.findPlayer('wright')
 			.then(function (data) {
 				expect(data).to.be.an('object');
+				expect(data).to.not.be.empty;
 			});
 	});
 	it('object should have an array of n results with valid search term', function () {
@@ -14,7 +15,7 @@ describe('findPlayer', function () {
 			.then(function (data) {
 				should.exist(data.row);
 				expect(data.row).to.be.an('array');
-				expect(data.row).to.have.length.above(0);
+				expect(data.row).to.not.be.empty;
 			});
 	});
 	it('object should not have an array of results with an invalid search term', function () {
@@ -30,14 +31,14 @@ describe('findPlayer with pruned param', function() {
 		return cornelius.findPlayer('wright', true)
 			.then(function (data) {
 				expect(data).to.be.an('array');
-				expect(data).to.have.length.above(0);
+				expect(data).to.not.be.empty;
 			});
 	});
 	it('should return an empty array when given invalid search term', function () {
 		return cornelius.findPlayer('invalidname', true)
 			.then(function (data) {
 				expect(data).to.be.an('array');
-				expect(data).to.have.length.of(0);
+				expect(data).to.be.empty;
 			});
 	})
 });
