@@ -3,22 +3,20 @@ var expect = require('chai').expect,
 	cornelius = require('../index');
 
 describe('findPlayer', function () {
-	it('should return an object', function () {
+	var players;
+	it('should return a results object', function () {
 		return cornelius.findPlayer('wright')
 			.then(function (data) {
-				expect(data).to.be.an('object');
-				expect(data).to.not.be.empty;
+				expect(data).to.be.an('object').and.not.be.empty;
+				expect(data).to.have.property('totalSize');
+				players = data;
 			});
 	});
-	it('object should have an array of n results with valid search term', function () {
-		return cornelius.findPlayer('wright')
-			.then(function (data) {
-				should.exist(data.row);
-				expect(data.row).to.be.an('array');
-				expect(data.row).to.not.be.empty;
-			});
+	it('should have an array of n results when given "wright"', function () {
+			should.exist(players.row);
+			expect(players.row).to.be.an('array').and.not.be.empty;
 	});
-	it('object should not have an array of results with an invalid search term', function () {
+	it('should have no array when given "invalidname"', function () {
 		return cornelius.findPlayer('invalidname')
 			.then(function (data) {
 				should.not.exist(data.row);
@@ -26,15 +24,15 @@ describe('findPlayer', function () {
 	});
 });
 
-describe('findPlayer with pruned param', function() {
-	it('should return an array of n players', function () {
+describe('findPlayer pruned', function() {
+	it('should return an array of n players when given "wright"', function () {
 		return cornelius.findPlayer('wright', true)
 			.then(function (data) {
 				expect(data).to.be.an('array');
 				expect(data).to.not.be.empty;
 			});
 	});
-	it('should return an empty array when given invalid search term', function () {
+	it('should return an empty array when given "invalidname"', function () {
 		return cornelius.findPlayer('invalidname', true)
 			.then(function (data) {
 				expect(data).to.be.an('array');
@@ -45,19 +43,31 @@ describe('findPlayer with pruned param', function() {
 
 
 describe('getPlayer', function () {
-	it('should return an object', function () {
-		return cornelius.getPlayer('wright', 'nym')
+	var player;
+	it('should return a player object', function () {
+		return cornelius.getPlayer('david wright', 'nym')
 			.then(function (data) {
 				expect(data).to.be.an('object');
 				expect(data).to.not.be.empty;
-			})
+				expect(data).to.have.property('name_display_first_last');
+				player = data;
+			});
 	});
-	it('should return an empty object given an invalid name or key', function () {
-		return cornelius.getPlayer('invalidname', 'nym')
+	it('should mirror parameters when given "david wright"/"nym"', function () {
+				var name = player.name_display_first_last.toLowerCase();
+				name.should.equal('david wright');
+				var team = player.team_abbrev.toLowerCase();
+				team.should.equal('nym');
+	});
+	it('should return empty object when given invalid name or key', function () {
+		return cornelius.getPlayer('invalid name', 'nym')
 			.then(function (data) {
-				expect(data).to.be.an('object');
 				expect(data).to.be.empty;
-			})
+			});
+		return cornelius.getPlayer('david wright', 'inv')
+			.then(function (data) {
+				expect(data).to.be.empty;
+			});
 	});
 });
 
