@@ -111,10 +111,13 @@ function findPlayerInResults(data, key) {
 		return false;
 	}
 
+	var results = data.search_player_all.queryResults.row;
+
 	if (resultsCount > 1) {
-		var results = data.search_player_all.queryResults.row;
 		var p = results.findIndex(hasMatchingKey);
 		requestedPlayer = results[p];
+	} else if (resultsCount == 1) {
+		requestedPlayer = results;
 	}
 
 	return requestedPlayer
