@@ -55,6 +55,20 @@ cornelius.prototype.findPlayer = function (playerName, pruned) {
 
 cornelius.prototype.getPlayer = function (playerName, givenKey) {
 		return new Promise(function (resolve, reject) {
+
+			var isFullName = playerName.split(' ').length > 1;
+			let error;
+			
+			if (!isFullName || !playerName) {
+				error = new Error(`Player's full name required for getPlayer.`);
+			} else if (!givenKey) {
+				error = new Error(`Team code or player ID required for getPlayer.`);
+			}
+
+			if (error) {
+				reject(error.message);
+			}
+
 			var uri = url.parse(baseUrl + '/named.search_player_all.bam?sport_code=\'mlb\'&name_part=\'' + playerName + '%25\'&active_sw=\'Y\'');
 
 			var options = {
