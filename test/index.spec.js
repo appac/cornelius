@@ -62,11 +62,11 @@ describe('getPlayer', function () {
 	it('should return empty object when given invalid name or key', function () {
 		return cornelius.getPlayer('invalid name', 'nym')
 			.then(function (data) {
-				expect(data).to.be.empty;
+				expect(data).to.be.an('object').and.to.be.empty;
 			});
 		return cornelius.getPlayer('david wright', 'inv')
 			.then(function (data) {
-				expect(data).to.be.empty;
+				expect(data).to.be.an('object').and.to.be.empty;
 			});
 	});
 });
