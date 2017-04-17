@@ -107,6 +107,10 @@ cornelius.prototype.getPlayer = function (playerName, givenKey) {
 				res.on('end', () => {
 					try {
 						const parsedData = JSON.parse(rawData);
+						let hasPlayerResults = parsedData.search_player_all.queryResults.totalSize > 0;
+						if (!hasPlayerResults) {
+							reject(new Error(`No player with the name '${playerName}' exists.`));
+						}
 						const player = findPlayerInResults(parsedData, givenKey);
 						resolve(player);
 					} catch (e) {
