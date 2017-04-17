@@ -7,24 +7,17 @@ var chai = require('chai')
 chai.use(chaiAsPromised);
 
 describe('findPlayer', function () {
-	var players;
-	it('should return a results object', function () {
-		return cornelius.findPlayer('wright')
-			.then(function (data) {
-				expect(data).to.be.an('object').and.not.be.empty;
-				expect(data).to.have.property('totalSize');
-				players = data;
-			});
+	it('should return an object with a row property', function () {
+		let query = 'wright';
+		return cornelius.findPlayer(query).should.eventually.be.an('object').with.property('row');
 	});
-	it('should have an array of n results when given "wright"', function () {
-			should.exist(players.row);
-			expect(players.row).to.be.an('array').and.not.be.empty;
+	it('should throw an error when given an non-existent player name', function () {
+		let query = 'fakeplayer';
+		return cornelius.findPlayer(query).should.be.rejectedWith(Error);
 	});
-	it('should have no array when given "invalidname"', function () {
-		return cornelius.findPlayer('invalidname')
-			.then(function (data) {
-				should.not.exist(data.row);
-			});
+	it('should throw an error when given no player name', function () {
+		let query = '';
+		return cornelius.findPlayer(query).should.be.rejectedWith(Error);
 	});
 });
 
