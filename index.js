@@ -8,9 +8,9 @@ var cornelius = function () {};
 cornelius.prototype.findPlayer = function (playerName, pruned) {
 	return new Promise(function (resolve, reject) {
 
-		var uri = url.parse(baseUrl + '/named.search_player_all.bam?sport_code=\'mlb\'&name_part=\'' + playerName + '%25\'&active_sw=\'Y\'');
+		let uri = url.parse(baseUrl + '/named.search_player_all.bam?sport_code=\'mlb\'&name_part=\'' + playerName + '%25\'&active_sw=\'Y\'');
 
-		var options = {
+		let options = {
 			host: uri.host,
 			path: uri.path
 		};
