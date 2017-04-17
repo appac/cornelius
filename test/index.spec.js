@@ -1,6 +1,10 @@
-var expect = require('chai').expect,
-	should = require('chai').should(),
+var chai = require('chai')
+	expect = chai.expect,
+	should = chai.should(),
+	chaiAsPromised = require('chai-as-promised'),
 	cornelius = require('../index');
+
+chai.use(chaiAsPromised);
 
 describe('findPlayer', function () {
 	var players;
