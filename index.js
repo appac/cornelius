@@ -32,7 +32,7 @@ cornelius.prototype.findPlayer = function (playerName, pruned) {
 			}
 			if (error) {
 				res.resume();
-				reject(error.message);
+				reject(error);
 			}
 
 			res.setEncoding('utf8');
@@ -51,11 +51,11 @@ cornelius.prototype.findPlayer = function (playerName, pruned) {
 					}
 					resolve(parsedData.search_player_all.queryResults);
 				} catch (e) {
-					reject(e.message)
+					reject(e)
 				}
 			});
 		}).on('error', (e) => {
-			reject(e.message);
+			reject(e);
 		});
 
 	});
@@ -74,7 +74,7 @@ cornelius.prototype.getPlayer = function (playerName, givenKey) {
 			}
 
 			if (error) {
-				reject(error.message);
+				reject(error);
 			}
 
 			var uri = url.parse(baseUrl + '/named.search_player_all.bam?sport_code=\'mlb\'&name_part=\'' + playerName + '%25\'&active_sw=\'Y\'');
@@ -97,7 +97,7 @@ cornelius.prototype.getPlayer = function (playerName, givenKey) {
 				}
 				if (error) {
 					res.resume();
-					reject(error.message);
+					reject(error);
 				}
 
 				res.setEncoding('utf8');
@@ -109,11 +109,11 @@ cornelius.prototype.getPlayer = function (playerName, givenKey) {
 						const player = findPlayerInResults(parsedData, givenKey);
 						resolve(player);
 					} catch (e) {
-						reject(e.message)
+						reject(e)
 					}
 				});
 			}).on('error', (e) => {
-				reject(e.message);
+				reject(e);
 			});
 
 	});
