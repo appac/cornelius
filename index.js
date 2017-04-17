@@ -66,7 +66,7 @@ cornelius.prototype.getPlayer = function (playerName, givenKey) {
 
 			var isFullName = playerName.split(' ').length > 1;
 			let error;
-			
+
 			if (!isFullName || !playerName) {
 				error = new Error(`Player's full name required for getPlayer.`);
 			} else if (!givenKey) {
@@ -95,6 +95,7 @@ cornelius.prototype.getPlayer = function (playerName, givenKey) {
 				} else if (!/^application\/json/.test(contentType)) {
 					error = new Error(`Invalid content type received. Expected JSON, got ${contentType}`);
 				}
+				
 				if (error) {
 					res.resume();
 					reject(error);
