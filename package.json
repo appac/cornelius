@@ -1,32 +1,32 @@
 {
-	"name": "cornelius",
-	"version": "0.0.1",
-	"description": "A promise based module for easily getting data provided by MLB's public lookup routes.",
-	"main": "index.js",
-	"scripts": {
-		"test": "mocha --reporter spec"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://gitlab.com/appac/cornelius"
-	},
-	"keywords": [
-		"mlb",
-		"baseball",
-		"major",
-		"league",
-		"baseball",
-		"get"
-	],
-	"author": "Chris Apparicio <chris@apparicio.me>",
-	"license": "MIT",
-	"dependencies": {
-		"bluebird": "^3.5.0"
-	},
-	"devDependencies": {
-		"chai": "^3.5.0",
-		"chai-as-promised": "^6.0.0",
-		"mocha": "^3.2.0",
-		"rewire": "^2.5.2"
-	}
+  "name": "cornelius",
+  "version": "0.0.2",
+  "description": "A promise based module for easily getting data provided by MLB's public lookup routes.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/appac/cornelius"
+  },
+  "keywords": [
+    "mlb",
+    "baseball",
+    "major",
+    "league",
+    "baseball",
+    "get"
+  ],
+  "author": "Chris Apparicio <chris@apparicio.me>",
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^3.5.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-as-promised": "^6.0.0",
+    "mocha": "^3.2.0",
+    "rewire": "^2.5.2"
+  }
 }
