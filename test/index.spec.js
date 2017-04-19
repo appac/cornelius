@@ -15,14 +15,22 @@ let findPlayerInResults = cornelius.__get__('findPlayerInResults');
 describe('findPlayerInResults', function () {
 	let options = {
 		data: mlbSearchResponse,
-		validKey: 'bos',
+		validTeamKey: 'kc',
+		validIDKey: '455759',
 		unmatchedKey: 'inv',
 		invalidKey: 123
 	}
-	it('should return a player object', function () {
-		let foundPlayer = findPlayerInResults(options.data, options.validKey);
+	it('should return the correct player object when given a team_abbrev key', function () {
+		let foundPlayer = findPlayerInResults(options.data, options.validTeamKey);
 		expect(foundPlayer).to.be.an('object').and.have.property('name_display_first_last');
 		expect(foundPlayer.name_display_first_last).to.equal('Chris Young');
+		expect(foundPlayer.team_abbrev).to.equal('KC');
+	});
+	it('should return the correct player object when given a player_id key', function () {
+		let foundPlayer = findPlayerInResults(options.data, options.validIDKey);
+		expect(foundPlayer).to.be.an('object').and.have.property('name_display_first_last');
+		expect(foundPlayer.name_display_first_last).to.equal('Chris Young');
+		expect(foundPlayer.team_abbrev).to.equal('BOS');
 	});
 	it('should return an error when not given a key', function () {
 		let error = findPlayerInResults(options.data);
