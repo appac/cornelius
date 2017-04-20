@@ -96,9 +96,15 @@ function findPlayerInResults(mlbData, key) {
 
 }
 
-function callMlb(query) {
+function callMlb(query, isActive) {
 	return new Promise(function (resolve, reject) {
-		let uri = url.parse(baseUrl + '/named.search_player_all.bam?sport_code=\'mlb\'&name_part=\'' + query + '%25\'&active_sw=\'Y\'');
+		let uri;
+
+		if (isActive === false) {
+			uri = url.parse(baseUrl + '/named.search_player_all.bam?sport_code=\'mlb\'&name_part=\'' + query + '%25\'&active_sw=\'N\'');
+		} else {
+			uri = url.parse(baseUrl + '/named.search_player_all.bam?sport_code=\'mlb\'&name_part=\'' + query + '%25\'&active_sw=\'Y\'');
+		}
 
 		let reqOptions = {
 			host: uri.host,
