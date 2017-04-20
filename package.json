@@ -1,6 +1,6 @@
 {
   "name": "cornelius",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "A promise based module for easily getting data provided by MLB's public lookup routes.",
   "main": "index.js",
   "scripts": {

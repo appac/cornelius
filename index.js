@@ -29,6 +29,30 @@ cornelius.prototype.search = function (query) {
 	});
 }
 
+cornelius.prototype.searchHistoric = function (query) {
+	return new Promise(function (resolve, reject) {
+		let error;
+		if (!query || typeof(query) !== 'string') {
+			error = new Error(`No search query provided.`);
+		} else if (typeof(query) !== 'string') {
+			error = new Error(`Expected query to be a string, but was given a ${typeof(query)}.`);
+		}
+
+		if (error) {
+			reject(error);
+		}
+
+		callMlb(query, false)
+			.then(function (data) {
+				resolve(data);
+			})
+			.catch(function (error) {
+				reject(error);
+			});
+
+	});
+}
+
 cornelius.prototype.get = function (query, key) {
 	return new Promise(function (resolve, reject) {
 		let error;
@@ -49,6 +73,37 @@ cornelius.prototype.get = function (query, key) {
 		}
 
 		callMlb(query)
+			.then(function (data) {
+				requestedPlayer = findPlayerInResults(data, key);
+				resolve(requestedPlayer);
+			})
+			.catch(function (error) {
+				reject(error);
+			});
+
+	});
+}
+
+cornelius.prototype.getHistoric = function (query, key) {
+	return new Promise(function (resolve, reject) {
+		let error;
+		if(!query) {
+			error = new Error('No player name provided.')
+		} else if (typeof(query) !== 'string') {
+			error = new Error(`Expected player name to be a string, but was given a ${typeof(query)}.`);
+		} else if (query.split(' ').length < 1) {
+			error = new Error(`Full player name required to get player details.`);
+		} else if (!key) {
+			error = new Error('No key provided.');
+		} else if (typeof(key) !== 'string') {
+			error = new Error(`Expected key to be a string, but was given a ${typeof(key)}.`);
+		}
+
+		if (error) {
+			reject(error);
+		}
+
+		callMlb(query, false)
 			.then(function (data) {
 				requestedPlayer = findPlayerInResults(data, key);
 				resolve(requestedPlayer);
@@ -96,9 +151,15 @@ function findPlayerInResults(mlbData, key) {
 
 }
 
-function callMlb(query) {
+function callMlb(query, isActive) {
 	return new Promise(function (resolve, reject) {
-		let uri = url.parse(baseUrl + '/named.search_player_all.bam?sport_code=\'mlb\'&name_part=\'' + query + '%25\'&active_sw=\'Y\'');
+		let uri;
+
+		if (isActive === false) {
+			uri = url.parse(baseUrl + '/named.search_player_all.bam?sport_code=\'mlb\'&name_part=\'' + query + '%25\'&active_sw=\'N\'');
+		} else {
+			uri = url.parse(baseUrl + '/named.search_player_all.bam?sport_code=\'mlb\'&name_part=\'' + query + '%25\'&active_sw=\'Y\'');
+		}
 
 		let reqOptions = {
 			host: uri.host,
