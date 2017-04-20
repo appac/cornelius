@@ -29,6 +29,30 @@ cornelius.prototype.search = function (query) {
 	});
 }
 
+cornelius.prototype.searchHistoric = function (query) {
+	return new Promise(function (resolve, reject) {
+		let error;
+		if (!query || typeof(query) !== 'string') {
+			error = new Error(`No search query provided.`);
+		} else if (typeof(query) !== 'string') {
+			error = new Error(`Expected query to be a string, but was given a ${typeof(query)}.`);
+		}
+
+		if (error) {
+			reject(error);
+		}
+
+		callMlb(query, false)
+			.then(function (data) {
+				resolve(data);
+			})
+			.catch(function (error) {
+				reject(error);
+			});
+
+	});
+}
+
 cornelius.prototype.get = function (query, key) {
 	return new Promise(function (resolve, reject) {
 		let error;
