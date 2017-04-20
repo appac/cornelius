@@ -22,6 +22,18 @@ cornelius.search('young')
     });
 ```
 
+## cornelius.searchHistoric(query)
+To search for a player that is no longer active in the major leagues, use `cornelius.searchHistoric`.
+```javascript
+cornelius.searchHistoric('griffey')
+    .then(function (results) {
+        // do stuff with search results
+    })
+    .catch(function (error) {
+        // handle error
+    });
+```
+
 ## cornelius.get(playerName, key)
 To grab a specific player, use `cornelius.get`.
 - `playerName` should be the full player's name 
@@ -30,7 +42,6 @@ To grab a specific player, use `cornelius.get`.
 **Find both in search results*
 
 Beware that grabbing a player by their team abbreviation has it's limitations. See the limitations section below.
-
 ```javascript
 // getting Chris Young of the Kansas City Royals via team abbreviation
 cornelius.get('chris young', 'kc')
@@ -50,6 +61,18 @@ cornelius.get('chris young', '455759')
     });
 ```
 
+## cornelius.getHistoric(playerName, key)
+To get a player that is no longer active in the major leagues, use ``cornelius.getHistoric``.
+```javascript
+cornelius.getHistoric('ted williams', 'bos')
+	.then(function (player) {
+		// do stuff with player data
+	})
+	.catch(function (error) {
+		// handle error
+	});
+```
+
 # Limitations
 ## Team abbreviation as key
 `cornelius.get` receives the same results as `cornelius.search`, using the key you provide to determine which player object to return. 
@@ -58,7 +81,7 @@ If two players share a name, `team_abbrev` as a key can differentiate between th
 
 # Todos
 
- - Support historic/non-active players
+ - ~~Support historic/non-active players~~
  - Add player stats - `cornelius.stats(playerName, key)`
  - Add player status - `cornelius.status(playerName, key)`
  - Add team rosters - `cornelius.roster(teamName)`
