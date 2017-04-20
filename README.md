@@ -10,6 +10,8 @@ npm install --save cornelius
 var cornelius = require('cornelius');
 ```
 
+## Searching
+---
 ## cornelius.search(query)
 To search for a player by name, use `cornelius.search`. For best results, the query should be a player surname.
 ```javascript
@@ -33,7 +35,8 @@ cornelius.searchHistoric('griffey')
         // handle error
     });
 ```
-
+## Getting
+---
 ## cornelius.get(playerName, key)
 To grab a specific player, use `cornelius.get`.
 - `playerName` should be the full player's name 
@@ -64,13 +67,44 @@ cornelius.get('chris young', '455759')
 ## cornelius.getHistoric(playerName, key)
 To get a player that is no longer active in the major leagues, use ``cornelius.getHistoric``.
 ```javascript
-cornelius.getHistoric('ted williams', 'bos')
+cornelius.getHistoric('ken griffey', 'sea')
 	.then(function (player) {
 		// do stuff with player data
 	})
 	.catch(function (error) {
 		// handle error
 	});
+```
+
+*The above example is a great way of seeing the team abbreviation as a key limitation. Ken Griffey Sr. and Ken Griffey Jr. both played for the Seattle Mariners (SEA). With the team abbreviation as a key, you'll get one Griffey, but not necessarily the one you want.*
+
+## Pruning Data
+---
+## cornelius.prune(data)
+
+By default, cornelius returns unmodified search results, and unmodified player objects from MLB. If you'd like either to be pruned, you can use `cornelius.prune`.
+
+```javascript
+cornelius.search('young')
+	.then(cornelius.prune)
+	.then(function (data) {
+		// data is now pruned, do stuff
+	})
+	.catch(function (error) {
+		// handle error
+	});
+```
+
+You can also use prune outside of a promise chain.
+
+```javascript
+cornelius.get('young', 'bos')
+	.then(function (data) {
+		let prunedData = cornelius.prune(data);
+	})
+	.catch(function (error) {
+		// handle error
+	})
 ```
 
 # Limitations
@@ -85,7 +119,7 @@ If two players share a name, `team_abbrev` as a key can differentiate between th
  - Add player stats - `cornelius.stats(playerName, key)`
  - Add player status - `cornelius.status(playerName, key)`
  - Add team rosters - `cornelius.roster(teamName)`
- - Add pruned/cleaned data option
+ - ~~Add pruned/cleaned data option~~
 
 # License
 
