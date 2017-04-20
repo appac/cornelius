@@ -84,6 +84,37 @@ cornelius.prototype.get = function (query, key) {
 	});
 }
 
+cornelius.prototype.getHistoric = function (query, key) {
+	return new Promise(function (resolve, reject) {
+		let error;
+		if(!query) {
+			error = new Error('No player name provided.')
+		} else if (typeof(query) !== 'string') {
+			error = new Error(`Expected player name to be a string, but was given a ${typeof(query)}.`);
+		} else if (query.split(' ').length < 1) {
+			error = new Error(`Full player name required to get player details.`);
+		} else if (!key) {
+			error = new Error('No key provided.');
+		} else if (typeof(key) !== 'string') {
+			error = new Error(`Expected key to be a string, but was given a ${typeof(key)}.`);
+		}
+
+		if (error) {
+			reject(error);
+		}
+
+		callMlb(query, false)
+			.then(function (data) {
+				requestedPlayer = findPlayerInResults(data, key);
+				resolve(requestedPlayer);
+			})
+			.catch(function (error) {
+				reject(error);
+			});
+
+	});
+}
+
 module.exports = new cornelius;
 
 function findPlayerInResults(mlbData, key) {
