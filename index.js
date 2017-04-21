@@ -116,6 +116,24 @@ cornelius.prototype.getHistoric = function (query, key) {
 	});
 }
 
+cornelius.prototype.getRoster = function (key) {
+	return new Promise(function (resolve, reject) {
+		key = key.toUpperCase();
+		let teamID = getTeamID(key);
+		if (!teamID) {
+			return new Error(`No team matching '${key}' found.`);
+		}
+		rosterCall(teamID)
+			.then(function (data) {
+				resolve(data);
+		})
+		.catch(function (error) {
+				reject(error);
+		});
+
+	});
+}
+
 cornelius.prototype.prune = function (data) {
 	let isPlayerData = data.hasOwnProperty('player_id');
 	let isSearchResults = data.hasOwnProperty('search_player_all');
@@ -233,6 +251,22 @@ function findPlayerInResults(mlbData, key) {
 
 }
 
+function getTeamID(key) {
+	let teamID;
+
+	teams.forEach(function (team) {
+		let team_abbrev = team.name_abbrev.toUpperCase();
+		let team_name = team.name_display_full.toUpperCase();
+
+		if (key == team_abbrev || key == team.team_id || key == team_name) {
+			teamID = team.team_id;
+		}
+
+	});
+
+	return teamID;
+}
+
 function callMlb(query, isActive) {
 	return new Promise(function (resolve, reject) {
 		let uri;
@@ -276,6 +310,50 @@ function callMlb(query, isActive) {
 					if (!hasPlayerResults) {
 						reject(new Error(`No player with the name '${query}' exists.`));
 					}
+					resolve(parsedData);
+				} catch (e) {
+					reject(e)
+				}
+			});
+		}).on('error', (e) => {
+			reject(e);
+		});
+	});
+}
+
+function rosterCall(teamID) {
+	return new Promise(function (resolve, reject) {
+		let uri = url.parse(baseUrl + `/named.roster_all.bam?roster_all.col_in=player_html&roster_all.col_in=player_id&team_id=%27${teamID}%27&ovrd_enc=utf-8`);
+
+		let reqOptions = {
+			host: uri.host,
+			path: uri.path
+		}
+
+		http.get(reqOptions, function (res) {
+			const statusCode = res.statusCode;
+			const contentType = res.headers['content-type'];
+
+			let error;
+
+			if (statusCode !== 200) {
+				error = new Error(`${statusCode} - Request failed.`);
+			} else if (!/^application\/json/.test(contentType)) {
+				error = new Error(`Invalid content type received. Expected JSON, got ${contentType}`);
+			}
+
+			if (error) {
+				res.resume();
+				reject(error);
+			}
+
+			res.setEncoding('utf8');
+
+			let rawData = '';
+			res.on('data', (chunk) => { rawData += chunk; });
+			res.on('end', () => {
+				try {
+					const parsedData = JSON.parse(rawData);
 					resolve(parsedData);
 				} catch (e) {
 					reject(e)
