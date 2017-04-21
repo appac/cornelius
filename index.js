@@ -118,11 +118,27 @@ cornelius.prototype.getHistoric = function (query, key) {
 
 cornelius.prototype.getRoster = function (key) {
 	return new Promise(function (resolve, reject) {
+		let error;
+		if (!key) {
+			error = new Error('No key provided to getRoster.');
+		} else if (key.length < 2) {
+			error = new Error('Key provided to getRoster is too short.');
+		} else if (typeof(key) !== 'string') {
+			error = new Error(`Expected key to be a string, but was given a ${typeof(key)}.`);
+		}
+
+		if (error) {
+			reject(error);
+		}
+
 		key = key.toUpperCase();
 		let teamID = getTeamID(key);
+
 		if (!teamID) {
-			return new Error(`No team matching '${key}' found.`);
+			error = new Error(`No team matching '${key}' found.`);
+			reject(error);
 		}
+
 		rosterCall(teamID)
 			.then(function (data) {
 				resolve(data);
