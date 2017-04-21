@@ -137,10 +137,13 @@ cornelius.prototype.getRoster = function (key) {
 cornelius.prototype.prune = function (data) {
 	let isPlayerData = data.hasOwnProperty('player_id');
 	let isSearchResults = data.hasOwnProperty('search_player_all');
+	let isRosterData = data.hasOwnProperty('roster_all');
 	if (isPlayerData) {
 		return prunePlayerData(data);
 	} else if (isSearchResults) {
 		return pruneSearchResults(data);
+	} else if (isRosterData) {
+		return pruneRosterData(data);
 	} else {
 		return new Error('Invalid data given to prune.');
 	}
@@ -215,6 +218,23 @@ function pruneSearchResults(data) {
 
 	return prunedResults;
 
+}
+
+function pruneRosterData(data) {
+	let prunedData = [];
+	let roster = data.roster_all.queryResults.row;
+
+	roster.forEach(function (player) {
+		let name = player.player_html;
+		name = name.replace(/\,/g,"").split(' ').reverse().join(' ');
+		let prunedPlayer = {
+			id: player.player_id,
+			name: name
+		}
+		prunedData.push(prunedPlayer);
+	});
+
+	return prunedData;
 }
 
 function findPlayerInResults(mlbData, key) {
