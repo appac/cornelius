@@ -13,6 +13,27 @@ let mlbSearchResponse = require('./mock.search.json');
 let mlbSingleSearchResponse = require('./mock.single-search-result.json');
 
 let findPlayerInResults = corneliusHelpers.__get__('findPlayerInResults');
+let getTeamID = corneliusHelpers.__get__('getTeamID');
+
+describe('cornelius.getRoster', function () {
+	it('should resolve with roster results', function () {
+		return cornelius.getRoster('nym').should.eventually.be.an('object').with.property('roster_all');
+	});
+	describe('error handling', function (){
+		it('should be rejected with an error when given an invalid key type', function () {
+			return cornelius.getRoster(123).should.eventually.be.rejectedWith('Expected key to be a string, but was given a number.');
+		});
+		it('should be rejected with an error when given no key', function () {
+			return cornelius.getRoster().should.eventually.be.rejectedWith('No key provided to getRoster.');
+		});
+		it('should be rejected with an error when given too short a key', function () {
+			return cornelius.getRoster('N').should.eventually.be.rejectedWith('Key provided to getRoster is too short.');
+		});
+		it('should be rejected with an error when no team matches the key', function () {
+			return cornelius.getRoster('INV').should.eventually.be.rejectedWith('No team matching \'INV\' found.');
+		})
+	});
+});
 
 describe('findPlayerInResults', function () {
 	let options = {
