@@ -1,4 +1,6 @@
-Cornelius lets you grab data from MLB's `/lookup/json` routes. All data is property of MLB Advanced Media, and subject to their [usage terms](http://gdx.mlb.com/components/copyright.txt).
+Cornelius lets you grab data from MLB's `/lookup/json` routes. 
+
+All the data that Cornelius can get you is property of MLB Advanced Media, and subject to their [usage terms](http://gdx.mlb.com/components/copyright.txt).
 
 # Install
 ```sh
@@ -10,8 +12,8 @@ npm install --save cornelius
 var cornelius = require('cornelius');
 ```
 
-## Searching
----
+## **Searching For Players**
+
 ## cornelius.search(query)
 To search for a player by name, use `cornelius.search`. For best results, the query should be a player surname.
 ```javascript
@@ -35,8 +37,8 @@ cornelius.searchHistoric('griffey')
         // handle error
     });
 ```
-## Getting
----
+## **Getting Individual Players**
+
 ## cornelius.get(playerName, key)
 To grab a specific player, use `cornelius.get`.
 - `playerName` should be the full player's name 
@@ -44,7 +46,6 @@ To grab a specific player, use `cornelius.get`.
 
 **Find both in search results*
 
-Beware that grabbing a player by their team abbreviation has it's limitations. See the limitations section below.
 ```javascript
 // getting Chris Young of the Kansas City Royals via team abbreviation
 cornelius.get('chris young', 'kc')
@@ -64,6 +65,8 @@ cornelius.get('chris young', '455759')
     });
 ```
 
+*Beware that grabbing a player by their team abbreviation has it's limitations. More details in `cornelius.getHistoric` and the limitations section.*
+
 ## cornelius.getHistoric(playerName, key)
 To get a player that is no longer active in the major leagues, use ``cornelius.getHistoric``.
 ```javascript
@@ -76,13 +79,32 @@ cornelius.getHistoric('ken griffey', 'sea')
 	});
 ```
 
-*The above example is a great way of seeing the team abbreviation as a key limitation. Ken Griffey Sr. and Ken Griffey Jr. both played for the Seattle Mariners (SEA). With the team abbreviation as a key, you'll get one Griffey, but not necessarily the one you want.*
+*The above example is a great way of seeing the team abbreviation as a key limitation. Ken Griffey Sr. and Ken Griffey Jr. both played for the Seattle Mariners (SEA). With the team abbreviation as a key, you'll get one Griffey, but not necessarily the one you want. To solve this, you'd use a player ID as the key.*
 
-## Pruning Data
----
+## **Rosters**
+
+## cornelius.getRoster(key)
+
+To get a teams current roster, use `cornelius.getRoster`.
+
+- `key` can be `team_abbrev`, `team_id` or a team's full name
+
+```javascript
+cornelius.getRoster('New York Mets')
+	.then(mlb.prune) // you can prune rosters too
+	.then(function (data) {
+		// do stuff with roster
+	})
+	.catch(function (error) {
+		// handle error
+	});
+```
+
+## **Pruning**
+
 ## cornelius.prune(data)
 
-By default, cornelius returns unmodified search results, and unmodified player objects from MLB. If you'd like either to be pruned, you can use `cornelius.prune`.
+By default, cornelius returns unmodified search results, and unmodified player objects from MLB. If you'd like either to be pruned, you can use `cornelius.prune`. Prunining is available on players, search results, and rosters.
 
 ```javascript
 cornelius.search('young')
@@ -95,7 +117,7 @@ cornelius.search('young')
 	});
 ```
 
-You can also use prune outside of a promise chain.
+You can also use prune standalone.
 
 ```javascript
 cornelius.get('young', 'bos')
@@ -118,7 +140,7 @@ If two players share a name, `team_abbrev` as a key can differentiate between th
  - ~~Support historic/non-active players~~
  - Add player stats - `cornelius.stats(playerName, key)`
  - Add player status - `cornelius.status(playerName, key)`
- - Add team rosters - `cornelius.roster(teamName)`
+ - ~~Add team rosters - `cornelius.roster(teamName)`~~
  - ~~Add pruned/cleaned data option~~
 
 # License
