@@ -13,7 +13,7 @@ describe('find', function () {
 			let requestedPlayer = find.player(testData, '458913');
 			expect(requestedPlayer).to.have.property('player_id', '458913');
 		});
-		it('should return the correct player when given a team abbreviation', function () {
+		it('should find and return the correct player when given a team abbreviation', function () {
 			// Looking for Chris Young of the Kansas City Royals - 432934
 			let requestedPlayer = find.player(testData, 'KC');
 			expect(requestedPlayer).to.have.property('player_id', '432934');
