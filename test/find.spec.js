@@ -50,6 +50,20 @@ describe('find', function () {
 			let teamId = find.teamId('121');
 			expect(teamId).to.equal('121');
 		});
+		it('should return undefined if no team ID can be found', function () {
+				let requestedPlayer = find.teamId('inv');
+				expect(requestedPlayer).to.be.undefined;
+			});
+		describe('error handling', function () {
+			it('should return missing key error if no key is given', function () {
+				let requestedPlayer = find.teamId('');
+				expect(requestedPlayer).to.be.an('error', 'find.teamId wasn\'t given a key');
+			});
+			it('should return an invalid key type error if an invalid key is given', function () {
+				let requestedPlayer = find.teamId(123456);
+				expect(requestedPlayer).to.be.an('error', 'find.teamId expected key to be a string, but was given a number.')
+			});
+		});
 	});
 
 });
