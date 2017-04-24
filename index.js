@@ -138,8 +138,8 @@ cornelius.prototype.getRoster = function (key) {
 			error = new Error(`No team matching '${key}' found.`);
 			reject(error);
 		}
-
-		rosterCall(teamId)
+			
+		mlb.roster(teamId)
 			.then(function (data) {
 				resolve(data);
 		})
