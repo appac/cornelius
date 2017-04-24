@@ -2,9 +2,9 @@ let find = function () {}
 
 find.prototype.player = function (data, key) {
 	if (!key) {
-		return new Error('findPlayerInResults wasn\'t given a key.');
+		return new Error(`find.player was not given a key.`);
 	} else if (typeof (key) !== 'string') {
-		return new Error(`findPlayerInResults expected key to be a string, but was given a ${typeof(key)}.`);
+		return new Error(`find.player expected key to be a string, but was given a ${typeof(key)}.`);
 	}
 
 	function hasMatchingKey(player) {
@@ -28,7 +28,7 @@ find.prototype.player = function (data, key) {
 	}
 
 	if (!requestedPlayer) {
-		return new Error('No player found with matching key.');
+		return new Error('find.player could not find a player with a matching key.');
 	}
 
 	return requestedPlayer;
