@@ -1,0 +1,174 @@
+{
+	"roster_all": {
+		"copyRight": " Copyright 2017 MLB Advanced Media, L.P.  Use of any content on this page acknowledges agreement to the terms posted here http://gdx.mlb.com/components/copyright.txt  ",
+		"queryResults": {
+			"created": "2017-04-24T13:14:01",
+			"totalSize": "41",
+			"row": [{
+					"player_html": "Becerra, Wuilmer",
+					"player_id": "610141"
+				},
+				{
+					"player_html": "Blevins, Jerry",
+					"player_id": "460283"
+				},
+				{
+					"player_html": "Bruce, Jay",
+					"player_id": "457803"
+				},
+				{
+					"player_html": "Cabrera, Asdrubal",
+					"player_id": "452678"
+				},
+				{
+					"player_html": "Cecchini, Gavin",
+					"player_id": "608325"
+				},
+				{
+					"player_html": "Céspedes, Yoenis",
+					"player_id": "493316"
+				},
+				{
+					"player_html": "Conforto, Michael",
+					"player_id": "624424"
+				},
+				{
+					"player_html": "d'Arnaud, Travis",
+					"player_id": "518595"
+				},
+				{
+					"player_html": "deGrom, Jacob",
+					"player_id": "594798"
+				},
+				{
+					"player_html": "Duda, Lucas",
+					"player_id": "446263"
+				},
+				{
+					"player_html": "Edgin, Josh",
+					"player_id": "572831"
+				},
+				{
+					"player_html": "Familia, Jeurys",
+					"player_id": "544727"
+				},
+				{
+					"player_html": "Flexen, Chris",
+					"player_id": "623167"
+				},
+				{
+					"player_html": "Flores, Wilmer",
+					"player_id": "527038"
+				},
+				{
+					"player_html": "Gilmartin, Sean",
+					"player_id": "543219"
+				},
+				{
+					"player_html": "Goeddel, Erik",
+					"player_id": "592340"
+				},
+				{
+					"player_html": "Granderson, Curtis",
+					"player_id": "434158"
+				},
+				{
+					"player_html": "Gsellman, Robert",
+					"player_id": "607229"
+				},
+				{
+					"player_html": "Harvey, Matt",
+					"player_id": "518774"
+				},
+				{
+					"player_html": "Lagares, Juan",
+					"player_id": "501571"
+				},
+				{
+					"player_html": "Lugo, Seth",
+					"player_id": "607625"
+				},
+				{
+					"player_html": "Matz, Steven",
+					"player_id": "571927"
+				},
+				{
+					"player_html": "Molina, Marcos",
+					"player_id": "622506"
+				},
+				{
+					"player_html": "Montero, Rafael",
+					"player_id": "606160"
+				},
+				{
+					"player_html": "Nido, Tomas",
+					"player_id": "621512"
+				},
+				{
+					"player_html": "Nimmo, Brandon",
+					"player_id": "607043"
+				},
+				{
+					"player_html": "Plawecki, Kevin",
+					"player_id": "608700"
+				},
+				{
+					"player_html": "Reed, Addison",
+					"player_id": "592665"
+				},
+				{
+					"player_html": "Reyes, Jose",
+					"player_id": "408314"
+				},
+				{
+					"player_html": "Reynolds, Matt",
+					"player_id": "608703"
+				},
+				{
+					"player_html": "Rivera, Rene",
+					"player_id": "425784"
+				},
+				{
+					"player_html": "Rivera, T.J.",
+					"player_id": "608061"
+				},
+				{
+					"player_html": "Robles, Hansel",
+					"player_id": "570663"
+				},
+				{
+					"player_html": "Rosario, Amed",
+					"player_id": "642708"
+				},
+				{
+					"player_html": "Salas, Fernando",
+					"player_id": "477569"
+				},
+				{
+					"player_html": "Sewald, Paul",
+					"player_id": "623149"
+				},
+				{
+					"player_html": "Smoker, Josh",
+					"player_id": "519294"
+				},
+				{
+					"player_html": "Syndergaard, Noah",
+					"player_id": "592789"
+				},
+				{
+					"player_html": "Walker, Neil",
+					"player_id": "435522"
+				},
+				{
+					"player_html": "Wheeler, Zack",
+					"player_id": "554430"
+				},
+				{
+					"player_html": "Wright, David",
+					"player_id": "431151"
+				}
+			]
+		}
+	}
+}
