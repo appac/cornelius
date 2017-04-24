@@ -1,7 +1,7 @@
 {
   "name": "cornelius",
   "version": "0.3.0",
-  "description": "A promise based module for easily getting data provided by MLB's public lookup routes.",
+  "description": "Get data provided by MLB's public lookup routes.",
   "main": "index.js",
   "scripts": {
     "test": "mocha --reporter spec"
