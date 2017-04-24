@@ -35,6 +35,7 @@ find.prototype.player = function (data, key) {
 }
 
 find.prototype.teamId = function (key) {
+	key = key.toUpperCase();
 	let teamID;
 	let teams = require('./team.manifest.json');
 	

@@ -130,7 +130,7 @@ cornelius.prototype.getRoster = function (key) {
 			reject(error);
 		}
 
-		key = key.toUpperCase();
+		// key = key.toUpperCase();
 		let teamId = find.teamId(key);
 
 		if (!teamId) {
