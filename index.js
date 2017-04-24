@@ -1,5 +1,4 @@
 const Promise = require('bluebird'),
-			teams = require('./team.manifest.json'),
 			prune = require('./utils/prune'),
 			find = require('./utils/find'),
 			mlb = require('./utils/mlb');

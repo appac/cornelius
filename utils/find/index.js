@@ -36,16 +36,17 @@ find.prototype.player = function (data, key) {
 
 find.prototype.teamId = function (key) {
 	let teamID;
-
-	teams.forEach(function (team) {
+	let teams = require('./team.manifest.json');
+	
+	for (let i = 0; i < teams.length; i++) {
+		let team = teams[i];
 		let team_abbrev = team.name_abbrev.toUpperCase();
 		let team_name = team.name_display_full.toUpperCase();
 
 		if (key == team_abbrev || key == team.team_id || key == team_name) {
 			teamID = team.team_id;
 		}
-
-	});
+	}
 
 	return teamID;
 }
