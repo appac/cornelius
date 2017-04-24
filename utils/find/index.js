@@ -35,6 +35,12 @@ find.prototype.player = function (data, key) {
 }
 
 find.prototype.teamId = function (key) {
+	if (!key) {
+		return new Error(`find.teamId was not given a key.`);
+	} else if (typeof (key) !== 'string') {
+		return new Error(`find.teamId expected key to be a string, but was given a ${typeof(key)}.`);
+	}
+	
 	key = key.toUpperCase();
 	let teamID;
 	let teams = require('./team.manifest.json');
