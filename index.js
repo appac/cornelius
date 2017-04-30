@@ -149,10 +149,55 @@ cornelius.prototype.getRoster = function (key) {
 	});
 }
 
+cornelius.prototype.getStats = function (options) {
+	return new Promise (function (resolve, reject) {
+		// TODO
+		// check for player ID and validity (is string)
+		// check for player role and validity (is string)
+		// check for year and validity (is string)
+		let error;
+
+		if (!options.id) {
+			error = new Error(`getStats - No id provided.`);
+		} else if (typeof(options.id) !== 'string') {
+			error = new Error(`getStats - Expected id to be a string but was given a '${typeof(options.id)}'.`)
+		} else if (options.role && typeof(options.role) !== 'string') {
+			error = new Error(`getStats - Expected role to be a string but was given a '${typeof(options.role)}'.`)
+		} else if (options.year && typeof(options.year) !== 'string') {
+			error = new Error(`getStats - Expected year to be a string but was given a '${typeof(options.year)}'.`)
+		}
+
+		if (error) {
+			reject(error);
+		}
+
+		if (options.role === 'pitching') {
+			mlb.pitchingStats(options.id, options.year)
+				.then(function (data) {
+					resolve(data);
+				})
+				.catch(function (error) {
+					reject(error)
+				});
+		} else {
+			mlb.hittingStats(options.id, options.year)
+				.then(function (data) {
+					resolve(data);
+				})
+				.catch(function (error) {
+					reject(error);
+				});
+		}
+
+
+	});
+}
+
 cornelius.prototype.prune = function (data) {
 	let isPlayerData = data.hasOwnProperty('player_id');
 	let isSearchResults = data.hasOwnProperty('search_player_all');
 	let isRosterData = data.hasOwnProperty('roster_all');
+	let isPlayerStats = data.hasOwnProperty('sport_hitting_tm') || data.hasOwnProperty('sport_pitching_tm');
 
 	if (isPlayerData) {
 		return prune.playerData(data);
@@ -160,6 +205,8 @@ cornelius.prototype.prune = function (data) {
 		return prune.searchResults(data);
 	} else if (isRosterData) {
 		return prune.rosterData(data);
+	} else if (isPlayerStats) {
+		return prune.playerStats(data);
 	} else {
 		return new Error('Invalid data given to prune.');
 	}
