@@ -151,10 +151,6 @@ cornelius.prototype.getRoster = function (key) {
 
 cornelius.prototype.getStats = function (options) {
 	return new Promise (function (resolve, reject) {
-		// TODO
-		// check for player ID and validity (is string)
-		// check for player role and validity (is string)
-		// check for year and validity (is string)
 		let error;
 
 		if (!options.id) {
