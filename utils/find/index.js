@@ -1,6 +1,7 @@
 let find = function () {}
 
-find.prototype.player = function (data, key) {
+find.prototype.player = function (data, options) {
+	let key = options.key;
 	if (!key) {
 		return new Error(`find.player was not given a key.`);
 	} else if (typeof (key) !== 'string') {
@@ -26,9 +27,19 @@ find.prototype.player = function (data, key) {
 	} else if (resultsCount == 1) {
 		requestedPlayer = results;
 	}
+	
+	let error;
+	let gotName = requestedPlayer.name_display_first_last.toUpperCase();
+	let expectedName = options.query.toUpperCase();
 
 	if (!requestedPlayer) {
-		return new Error('find.player could not find a player with a matching key.');
+		error = new Error('find.player could not find a player with a matching key.');
+	} else if (gotName !== expectedName) {
+		error = new Error('find.player - Name of found player does not match query.')
+	}
+	
+	if (error) {
+		return error;
 	}
 
 	return requestedPlayer;
