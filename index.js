@@ -5,48 +5,24 @@ const Promise = require('bluebird'),
 
 let cornelius = function () {};
 
-cornelius.prototype.search = function (query) {
+cornelius.prototype.searchPlayer = function (options) {
 	return new Promise(function (resolve, reject) {
 		let error;
-		if (!query || typeof(query) !== 'string') {
-			error = new Error(`No search query provided.`);
-		} else if (typeof(query) !== 'string') {
-			error = new Error(`Expected query to be a string, but was given a ${typeof(query)}.`);
+		if (!options.query) {
+			error = new Error(`searchPlayer - No search query provided.`);
+		} else if (typeof(options.query) !== 'string') {
+			error = new Error(`searchPlayer - Expected query to be a string, but was given a ${typeof(options.query)}.`);
 		}
 
 		if (error) {
 			reject(error);
 		}
 
-		mlb.search(query)
-			.then(function (data) {
+		mlb.search(options)
+			.then(data => {
 				resolve(data);
 			})
-			.catch(function (error) {
-				reject(error);
-			});
-
-	});
-}
-
-cornelius.prototype.searchHistoric = function (query) {
-	return new Promise(function (resolve, reject) {
-		let error;
-		if (!query || typeof(query) !== 'string') {
-			error = new Error(`No search query provided.`);
-		} else if (typeof(query) !== 'string') {
-			error = new Error(`Expected query to be a string, but was given a ${typeof(query)}.`);
-		}
-
-		if (error) {
-			reject(error);
-		}
-
-		mlb.search(query, false)
-			.then(function (data) {
-				resolve(data);
-			})
-			.catch(function (error) {
+			.catch(error => {
 				reject(error);
 			});
 
