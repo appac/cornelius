@@ -19,14 +19,14 @@ function buildRequest(type, options) {
 			if (options.active === false) {
 				uri += `${endpoints.search}?sport_code='mlb'&name_part='${options.query}%25'&active_sw='N'`;
 			} else {
-				uri += `${endpoints.search}?sport_code='mlb'&name_part='${options.query}%25'&active_sw='Y'`;
+				uri += `${endpoints.search}?sport_code='mlb'&name_part='${options.query || options}%25'&active_sw='Y'`;
 			}
 			break;
 		case 'roster':
 			if (options.full) {
-				uri += `${endpoints.roster}?team_id='${options.key}'`
+				uri += `${endpoints.roster}?team_id='${options.key || options}'`
 			} else {
-				uri += `${endpoints.roster}?team_id='${options.key}'&roster_all.col_in=name_display_first_last&roster_all.col_in=player_id`
+				uri += `${endpoints.roster}?team_id='${options.key || options}'&roster_all.col_in=name_display_first_last&roster_all.col_in=player_id`
 			}
 			break;
 		case 'statsHitting':
