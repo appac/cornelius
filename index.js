@@ -8,14 +8,17 @@ let cornelius = function () {};
 cornelius.prototype.searchPlayer = function (options) {
 	return new Promise(function (resolve, reject) {
 		let error;
-		if (!options.query) {
-			error = new Error(`searchPlayer - No search query provided.`);
-		} else if (typeof(options.query) !== 'string') {
-			error = new Error(`searchPlayer - Expected query to be a string, but was given a ${typeof(options.query)}.`);
-		} else if (options.key && typeof(options.key) !== 'string') {
-			error = new Error(`searchPlayer - Expected key to be a string, but was given a ${typeof(options.key)}.`)
-		} else if (options.active && typeof(options.active) !== 'boolean') {
-			error = new Error(`searchPlayer - Expected active to be a boolean, but was given a ${typeof(options.active)}.`)
+
+		if (typeof options === 'object') {
+			if (!options.query) {
+				error = new Error(`searchPlayer - No search query provided.`);
+			} else if (typeof options.query !== 'string') {
+				error = new Error(`searchPlayer - Expected query to be a string, but was given a ${typeof(options.query)}.`);
+			} else if (options.key && typeof options.key !== 'string') {
+				error = new Error(`searchPlayer - Expected key to be a string, but was given a ${typeof(options.key)}.`)
+			} else if (options.active && typeof options.active !== 'boolean') {
+				error = new Error(`searchPlayer - Expected active to be a boolean, but was given a ${typeof(options.active)}.`)
+			}
 		}
 
 		if (error) {
@@ -40,29 +43,35 @@ cornelius.prototype.searchPlayer = function (options) {
 cornelius.prototype.getRoster = function (options) {
 	return new Promise(function (resolve, reject) {
 		let error;
-		if (!options.key) {
-			error = new Error('No key provided to getRoster.');
-		} else if (options.key.length < 2) {
-			error = new Error('Key provided to getRoster is too short.');
-		} else if (typeof(options.key) !== 'string') {
-			error = new Error(`Expected key to be a string, but was given a ${typeof(options.key)}.`);
-		} else if (options.full && typeof (options.full) !== 'boolean') {
-			error = new Error (`Expected full to be a boolean, but was given a ${typeof(options.full)}.`)
+		if (typeof options === 'object') {
+			if (!options.key) {
+				error = new Error('No key provided to getRoster.');
+			} else if (options.key.length < 2) {
+				error = new Error('Key provided to getRoster is too short.');
+			} else if (typeof(options.key) !== 'string') {
+				error = new Error(`Expected key to be a string, but was given a ${typeof(options.key)}.`);
+			} else if (options.full && typeof (options.full) !== 'boolean') {
+				error = new Error (`Expected full to be a boolean, but was given a ${typeof(options.full)}.`)
+			}
 		}
 
 		if (error) {
 			reject(error);
 		}
 
-		let teamId = find.teamId(options.key);
+		let teamId = find.teamId(options.key || options);
 
 		if (!teamId) {
-			error = new Error(`No team matching '${options.key}' found.`);
+			error = new Error(`No team matching '${options.key || options}' found.`);
 			reject(error);
+		} else {
+			if (options.key) {
+				options.key = teamId;
+			} else {
+				options = teamId;
+			}
 		}
 
-		options.key = teamId;
-			
 		mlb.roster(options)
 			.then(function (data) {
 				resolve(data);
