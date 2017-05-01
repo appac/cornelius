@@ -136,8 +136,8 @@ cornelius.prototype.getStats = function (options) {
 			error = new Error(`getStats - No id provided.`);
 		} else if (typeof(options.id) !== 'string') {
 			error = new Error(`getStats - Expected id to be a string but was given a '${typeof(options.id)}'.`)
-		} else if (options.role && typeof(options.role) !== 'string') {
-			error = new Error(`getStats - Expected role to be a string but was given a '${typeof(options.role)}'.`)
+		} else if (options.type && typeof(options.type) !== 'string') {
+			error = new Error(`getStats - Expected role to be a string but was given a '${typeof(options.type)}'.`)
 		} else if (options.year && typeof(options.year) !== 'string') {
 			error = new Error(`getStats - Expected year to be a string but was given a '${typeof(options.year)}'.`)
 		}
@@ -146,23 +146,13 @@ cornelius.prototype.getStats = function (options) {
 			reject(error);
 		}
 
-		if (options.role === 'pitching') {
-			mlb.pitchingStats(options.id, options.year)
-				.then(function (data) {
-					resolve(data);
-				})
-				.catch(function (error) {
-					reject(error)
-				});
-		} else {
-			mlb.hittingStats(options.id, options.year)
-				.then(function (data) {
-					resolve(data);
-				})
-				.catch(function (error) {
-					reject(error);
-				});
-		}
+		mlb.stats(options)
+			.then(data => {
+				resolve(data);
+			})
+			.catch(error => {
+				reject(error);
+			});
 
 
 	});
