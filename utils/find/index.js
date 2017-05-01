@@ -35,7 +35,7 @@ find.prototype.player = function (data, options) {
 	if (!requestedPlayer) {
 		error = new Error('find.player could not find a player with a matching key.');
 	} else if (gotName !== expectedName) {
-		error = new Error('find.player - Name of found player does not match query.')
+		error = new Error(`find.player - Name of found player does not match query. Found ${gotName} but query was ${expectedName}.`)
 	}
 	
 	if (error) {
