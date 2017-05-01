@@ -91,36 +91,39 @@ cornelius.prototype.getHistoric = function (query, key) {
 	});
 }
 
-cornelius.prototype.getRoster = function (key) {
+cornelius.prototype.getRoster = function (options) {
 	return new Promise(function (resolve, reject) {
 		let error;
-		if (!key) {
+		if (!options.key) {
 			error = new Error('No key provided to getRoster.');
-		} else if (key.length < 2) {
+		} else if (options.key.length < 2) {
 			error = new Error('Key provided to getRoster is too short.');
-		} else if (typeof(key) !== 'string') {
-			error = new Error(`Expected key to be a string, but was given a ${typeof(key)}.`);
+		} else if (typeof(options.key) !== 'string') {
+			error = new Error(`Expected key to be a string, but was given a ${typeof(options.key)}.`);
+		} else if (options.full && typeof (options.full) !== 'boolean') {
+			error = new Error (`Expected full to be a boolean, but was given a ${typeof(options.full)}.`)
 		}
 
 		if (error) {
 			reject(error);
 		}
 
-		// key = key.toUpperCase();
-		let teamId = find.teamId(key);
+		let teamId = find.teamId(options.key);
 
 		if (!teamId) {
-			error = new Error(`No team matching '${key}' found.`);
+			error = new Error(`No team matching '${options.key}' found.`);
 			reject(error);
 		}
+
+		options.key = teamId;
 			
-		mlb.roster(teamId)
+		mlb.roster(options)
 			.then(function (data) {
 				resolve(data);
-		})
-		.catch(function (error) {
-				reject(error);
-		});
+			})
+			.catch(function (error) {
+					reject(error);
+			});
 
 	});
 }
