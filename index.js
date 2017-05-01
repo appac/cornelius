@@ -12,6 +12,10 @@ cornelius.prototype.searchPlayer = function (options) {
 			error = new Error(`searchPlayer - No search query provided.`);
 		} else if (typeof(options.query) !== 'string') {
 			error = new Error(`searchPlayer - Expected query to be a string, but was given a ${typeof(options.query)}.`);
+		} else if (options.key && typeof(options.key) !== 'string') {
+			error = new Error(`searchPlayer - Expected key to be a string, but was given a ${typeof(options.key)}.`)
+		} else if (options.active && typeof(options.active) !== 'boolean') {
+			error = new Error(`searchPlayer - Expected active to be a boolean, but was given a ${typeof(options.active)}.`)
 		}
 
 		if (error) {
@@ -20,71 +24,13 @@ cornelius.prototype.searchPlayer = function (options) {
 
 		mlb.search(options)
 			.then(data => {
+				if (options.key) {
+					let requestedPlayer = find.player(data, options);
+					data = requestedPlayer;
+				}
 				resolve(data);
 			})
 			.catch(error => {
-				reject(error);
-			});
-
-	});
-}
-
-cornelius.prototype.get = function (query, key) {
-	return new Promise(function (resolve, reject) {
-		let error;
-		if(!query) {
-			error = new Error('No player name provided.')
-		} else if (typeof(query) !== 'string') {
-			error = new Error(`Expected player name to be a string, but was given a ${typeof(query)}.`);
-		} else if (query.split(' ').length < 1) {
-			error = new Error(`Full player name required to get player details.`);
-		} else if (!key) {
-			error = new Error('No key provided.');
-		} else if (typeof(key) !== 'string') {
-			error = new Error(`Expected key to be a string, but was given a ${typeof(key)}.`);
-		}
-
-		if (error) {
-			reject(error);
-		}
-
-		mlb.search(query)
-			.then(function (data) {
-				let requestedPlayer = find.player(data, key);
-				resolve(requestedPlayer);
-			})
-			.catch(function (error) {
-				reject(error);
-			});
-
-	});
-}
-
-cornelius.prototype.getHistoric = function (query, key) {
-	return new Promise(function (resolve, reject) {
-		let error;
-		if(!query) {
-			error = new Error('No player name provided.')
-		} else if (typeof(query) !== 'string') {
-			error = new Error(`Expected player name to be a string, but was given a ${typeof(query)}.`);
-		} else if (query.split(' ').length < 1) {
-			error = new Error(`Full player name required to get player details.`);
-		} else if (!key) {
-			error = new Error('No key provided.');
-		} else if (typeof(key) !== 'string') {
-			error = new Error(`Expected key to be a string, but was given a ${typeof(key)}.`);
-		}
-
-		if (error) {
-			reject(error);
-		}
-
-		mlb.search(query, false)
-			.then(function (data) {
-				let requestedPlayer = find.player(data, key);
-				resolve(requestedPlayer);
-			})
-			.catch(function (error) {
 				reject(error);
 			});
 
