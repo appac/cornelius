@@ -85,11 +85,9 @@ prune.prototype.rosterData = function (data) {
 	let roster = data.roster_all.queryResults.row;
 
 	roster.forEach(function (player) {
-		let name = player.player_html;
-		name = name.replace(/\,/g,"").split(' ').reverse().join(' ');
 		let prunedPlayer = {
 			id: player.player_id,
-			name: name
+			name: player.name_display_first_last
 		}
 		prunedData.push(prunedPlayer);
 	});
