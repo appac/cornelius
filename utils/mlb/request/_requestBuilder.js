@@ -12,7 +12,6 @@ let endpoints = {
 
 function buildRequest(type, options) {
 	let uri = base;
-	let currentYear = new Date().getFullYear();
 
 	switch (type) {
 		case 'search':
