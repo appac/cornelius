@@ -42,9 +42,9 @@ function buildRequest(type, options) {
 			} else {
 				uri += `${endpoints.stats.pitching}?player_id=${options.id || options}&game_type='R'&league_list_id='mlb'`;
 			}
-
 			break;
 		default:
+			return new Error('Invalid request type.');
 			break;
 	}
 	
