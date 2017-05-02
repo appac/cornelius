@@ -27,10 +27,6 @@ cornelius.prototype.searchPlayer = function (options) {
 
 		mlb.search(options)
 			.then(data => {
-				if (options.key) {
-					let requestedPlayer = find.player(data, options);
-					data = requestedPlayer;
-				}
 				resolve(data);
 			})
 			.catch(error => {
@@ -57,19 +53,6 @@ cornelius.prototype.getRoster = function (options) {
 
 		if (error) {
 			reject(error);
-		}
-
-		let teamId = find.teamId(options.key || options);
-
-		if (!teamId) {
-			error = new Error(`No team matching '${options.key || options}' found.`);
-			reject(error);
-		} else {
-			if (options.key) {
-				options.key = teamId;
-			} else {
-				options = teamId;
-			}
 		}
 
 		mlb.roster(options)
