@@ -30,10 +30,19 @@ function buildRequest(type, options) {
 			}
 			break;
 		case 'statsHitting':
-			uri += `${endpoints.stats.hitting}?player_id=${options.id}&sport_hitting_tm.season=${options.year || currentYear}&game_type='R'&league_list_id='mlb'`;
+			if (options.year) {
+				uri += `${endpoints.stats.hitting}?player_id=${options.id || options}&sport_hitting_tm.season=${options.year}&game_type='R'&league_list_id='mlb'`;
+			} else {
+				uri += `${endpoints.stats.hitting}?player_id=${options.id || options}&game_type='R'&league_list_id='mlb'`;
+			}
 			break;
 		case 'statsPitching':
-			uri += `${endpoints.stats.pitching}?player_id=${options.id}&sport_pitching_tm.season=${options.year || currentYear}&game_type='R'&league_list_id='mlb'`;
+			if (options.year) {
+				uri += `${endpoints.stats.pitching}?player_id=${options.id || options}&sport_pitching_tm.season=${options.year}&game_type='R'&league_list_id='mlb'`;
+			} else {
+				uri += `${endpoints.stats.pitching}?player_id=${options.id || options}&game_type='R'&league_list_id='mlb'`;
+			}
+
 			break;
 		default:
 			break;
