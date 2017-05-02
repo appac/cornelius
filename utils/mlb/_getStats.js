@@ -16,7 +16,6 @@ function getStats (options) {
 				if (options.year) {
 					resolve(data);
 				} else {
-					// TODO: Add a function that handles grabbing the latest stats (in find?)
 					let latestStats = find.latestStats(data);
 					resolve(latestStats);
 				}
