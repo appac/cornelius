@@ -87,14 +87,16 @@ cornelius.prototype.getStats = function (options) {
 	return new Promise (function (resolve, reject) {
 		let error;
 
-		if (!options.id) {
-			error = new Error(`getStats - No id provided.`);
-		} else if (typeof(options.id) !== 'string') {
-			error = new Error(`getStats - Expected id to be a string but was given a '${typeof(options.id)}'.`)
-		} else if (options.type && typeof(options.type) !== 'string') {
-			error = new Error(`getStats - Expected role to be a string but was given a '${typeof(options.type)}'.`)
-		} else if (options.year && typeof(options.year) !== 'string') {
-			error = new Error(`getStats - Expected year to be a string but was given a '${typeof(options.year)}'.`)
+		if (typeof options === 'object') {
+			if (!options.id) {
+				error = new Error(`getStats - No id provided.`);
+			} else if (typeof(options.id) !== 'string') {
+				error = new Error(`getStats - Expected id to be a string but was given a '${typeof(options.id)}'.`)
+			} else if (options.type && typeof(options.type) !== 'string') {
+				error = new Error(`getStats - Expected role to be a string but was given a '${typeof(options.type)}'.`)
+			} else if (options.year && typeof(options.year) !== 'string') {
+				error = new Error(`getStats - Expected year to be a string but was given a '${typeof(options.year)}'.`)
+			}
 		}
 
 		if (error) {
