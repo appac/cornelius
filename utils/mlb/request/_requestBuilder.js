@@ -4,6 +4,7 @@ let base = 'http://mlb.mlb.com/lookup/json/named.';
 let endpoints = {
 	search: 'search_player_all.bam',
 	roster: 'roster_all.bam',
+	player_info: 'player_info.bam',
 	stats: {
 		hitting: 'sport_hitting_tm.bam',
 		pitching: 'sport_pitching_tm.bam'
@@ -20,6 +21,9 @@ function buildRequest(type, options) {
 			} else {
 				uri += `${endpoints.search}?sport_code='mlb'&name_part='${options.query || options}%25'&active_sw='Y'`;
 			}
+			break;
+		case 'get':
+			uri += `${endpoints.player_info}?sport_code='mlb'&player_id='${options}'`;
 			break;
 		case 'roster':
 			if (options.full) {
