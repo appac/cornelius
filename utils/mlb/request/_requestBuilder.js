@@ -3,8 +3,8 @@ const url = require('url');
 let base = 'http://mlb.mlb.com/lookup/json/named.';
 let endpoints = {
 	search: 'search_player_all.bam',
-	roster: 'roster_all.bam',
 	player_info: 'player_info.bam',
+	roster: 'roster_40.bam',
 	stats: {
 		hitting: 'sport_hitting_tm.bam',
 		pitching: 'sport_pitching_tm.bam'
