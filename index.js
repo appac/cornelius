@@ -9,17 +9,34 @@ cornelius.prototype.searchPlayer = function (options) {
 	return new Promise(function (resolve, reject) {
 
 		let error;
-		if (options.key) {
-			error = validation.handler('get', options);
-		} else {
-			error = validation.handler('search', options);
-		}
+		error = validation.handler('search', options);
 
 		if (error) {
 			reject(error);
 		}
 
 		mlb.search(options)
+			.then(data => {
+				resolve(data);
+			})
+			.catch(error => {
+				reject(error);
+			});
+
+	});
+}
+
+cornelius.prototype.getPlayer = function (options) {
+		return new Promise(function (resolve, reject) {
+
+		let error;
+		error = validation.handler('get', options);
+
+		if (error) {
+			reject(error);
+		}
+
+		mlb.player(options)
 			.then(data => {
 				resolve(data);
 			})
