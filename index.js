@@ -74,23 +74,8 @@ cornelius.prototype.getStats = function (options) {
 }
 
 cornelius.prototype.prune = function (data) {
-	let isPlayerData = data.hasOwnProperty('player_id');
-	let isSearchResults = data.hasOwnProperty('search_player_all');
-	let isRosterData = data.hasOwnProperty('roster_all');
-	let isPlayerStats = data.hasOwnProperty('sport_hitting_tm') || data.hasOwnProperty('sport_pitching_tm');
-
-	if (isPlayerData) {
-		return prune.playerData(data);
-	} else if (isSearchResults) {
-		return prune.searchResults(data);
-	} else if (isRosterData) {
-		return prune.rosterData(data);
-	} else if (isPlayerStats) {
-		return prune.playerStats(data);
-	} else {
-		return new Error('Invalid data given to prune.');
-	}
-
+	let prunedData = prune.handler(data);
+	return prunedData;
 }
 
 module.exports = new cornelius;
