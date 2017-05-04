@@ -1,6 +1,5 @@
 const Promise = require('bluebird'),
 			prune = require('./utils/prune'),
-			find = require('./utils/find'),
 			mlb = require('./utils/mlb');
 
 let cornelius = function () {};
