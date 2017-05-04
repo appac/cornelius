@@ -28,7 +28,7 @@ function pruneHandler (data) {
 }
 
 function checkTypeOfData (data) {
-	let isPlayerData = data.hasOwnProperty('player_id');
+	let isPlayerData = data.hasOwnProperty('player_id') || data.hasOwnProperty('player_info');
 	let isSearchResults = data.hasOwnProperty('search_player_all');
 	let isRosterData = data.hasOwnProperty('roster_all');
 	let isPlayerStats = data.hasOwnProperty('sport_hitting_tm') || data.hasOwnProperty('sport_pitching_tm');

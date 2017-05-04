@@ -1,46 +1,102 @@
-function prunePlayerData (data) {
-	let player = {
-		id: data.player_id,
-		name: {
-			full: data.name_display_first_last,
-			first: data.name_first,
-			last: data.name_last,
-			roster: data.name_display_roster
-		},
-		position: {
-			id: data.position_id,
-			code: data.position
-		},
-		team: {
-			id: data.team_id,
-			name: data.team_full,
-			abbrev: data.team_abbrev,
-			code: data.team_code,
-			league: data.league
-		},
-		date: {
-			pro_debut: data.pro_debut_date,
-			birth: data.birth_date
-		},
-		geo: {
-			city: data.birth_city,
-			state: data.birth_city,
-			country: data.birth_country,
-			high_school: data.high_school,
-			college: data.college
-		},
-		attribute: {
-			bats: data.bats,
-			throws: data.throws,
-			weight: data.weight,
-			height: {
-				feet: data.height_feet,
-				inches: data.height_inches
-			}
-		}
-	};
+function prunePlayerData(data) {
+	let rawPlayer;
+	let prunedPlayer;
 
-	return player;
+	if (data.hasOwnProperty('player_info')) {
+		rawPlayer = data.player_info.queryResults.row;
+		prunedPlayer = {
+			id: rawPlayer.player_id,
+			jersey_number: rawPlayer.jersey_number,
+			status: {
+				full: rawPlayer.status,
+				code: rawPlayer.status_code,
+				date: rawPlayer.status_date
+			},
+			name: {
+				full: rawPlayer.name_display_first_last,
+				first: rawPlayer.name_first,
+				last: rawPlayer.name_last,
+				roster: rawPlayer.name_display_roster
+			},
+			position: {
+				id: rawPlayer.primary_position,
+				code: rawPlayer.primary_position_txt,
+			},
+			team: {
+				id: rawPlayer.team_id,
+				name: rawPlayer.team_name,
+				abbrev: rawPlayer.team_abbrev,
+				code: rawPlayer.team_code,
+			},
+			date: {
+				debut: rawPlayer.pro_debut_date,
+				birth: rawPlayer.birth_date
+			},
+			geo: {
+				city: rawPlayer.birth_city,
+				state: rawPlayer.birth_city,
+				country: rawPlayer.birth_country,
+				high_school: rawPlayer.high_school,
+				college: rawPlayer.college
+			},
+			attribute: {
+				age: rawPlayer.age,
+				gender: rawPlayer.gender,
+				bats: rawPlayer.bats,
+				throws: rawPlayer.throws,
+				weight: rawPlayer.weight,
+				height: {
+					feet: rawPlayer.height_feet,
+					inches: rawPlayer.height_inches
+				}
+			}
+		};
+	} else {
+		rawPlayer = data;
+		prunedPlayer = {
+			id: rawPlayer.player_id,
+			name: {
+				full: rawPlayer.name_display_first_last,
+				first: rawPlayer.name_first,
+				last: rawPlayer.name_last,
+				roster: rawPlayer.name_display_roster
+			},
+			position: {
+				id: rawPlayer.position_id,
+				code: rawPlayer.position,
+			},
+			team: {
+				id: rawPlayer.team_id,
+				name: rawPlayer.team_full,
+				abbrev: rawPlayer.team_abbrev,
+				code: rawPlayer.team_code,
+				league: rawPlayer.league
+			},
+			date: {
+				pro_debut: rawPlayer.pro_debut_date,
+				birth: rawPlayer.birth_date
+			},
+			geo: {
+				city: rawPlayer.birth_city,
+				state: rawPlayer.birth_city,
+				country: rawPlayer.birth_country,
+				high_school: rawPlayer.high_school,
+				college: rawPlayer.college
+			},
+			attribute: {
+				bats: rawPlayer.bats,
+				throws: rawPlayer.throws,
+				weight: rawPlayer.weight,
+				height: {
+					feet: rawPlayer.height_feet,
+					inches: rawPlayer.height_inches
+				}
+			}
+		};
+	}
+
+	return prunedPlayer;
+
 }
 
 module.exports = prunePlayerData;
