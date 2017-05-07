@@ -1,3 +1,8 @@
+/* jslint node: true */
+/* jslint esversion: 6 */
+
+'use strict';
+
 function validateRosterOptions(options) {
 	let error;
 

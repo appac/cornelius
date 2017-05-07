@@ -1,3 +1,8 @@
+/* jslint node: true */
+/* jslint esversion: 6 */
+
+'use strict';
+
 function matchingTeamId (key) {
 	if (!key) {
 		return new Error(`find.teamId was not given a key.`);

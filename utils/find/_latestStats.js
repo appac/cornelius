@@ -1,3 +1,8 @@
+/* jslint node: true */
+/* jslint esversion: 6 */
+
+'use strict';
+
 function latestStats (data) {
 	let isHittingStats = data.hasOwnProperty('sport_hitting_tm');
 	let latestStats;

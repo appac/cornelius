@@ -1,3 +1,8 @@
+/* jslint node: true */
+/* jslint esversion: 6 */
+
+'use strict';
+
 let prunePlayerData = require('./_playerData'),
 		pruneSearchResults = require('./_searchResults.js'),
 		pruneRosterData = require('./_rosterData'),

@@ -1,4 +1,6 @@
 const url = require('url');
+/* jslint node: true */
+/* jslint esversion: 6 */
 
 let base = 'http://mlb.mlb.com/lookup/json/named.';
 let endpoints = {
@@ -10,6 +12,7 @@ let endpoints = {
 		pitching: 'sport_pitching_tm.bam'
 	}
 };
+'use strict';
 
 function buildRequest(type, options) {
 	let uri = base;

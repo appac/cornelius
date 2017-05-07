@@ -1,3 +1,8 @@
+/* jslint node: true */
+/* jslint esversion: 6 */
+
+'use strict';
+
 let prunePlayerData = require('./_playerData');
 
 function pruneRosterData (data) {

@@ -1,3 +1,8 @@
+/* jslint node: true */
+/* jslint esversion: 6 */
+
+'use strict';
+
 let validateSearchOptions = require('./_searchOptions'),
 		validateGetOptions = require('./_getOptions'),
 		validateStatsOptions = require('./_statsOptions'),

@@ -1,3 +1,8 @@
+/* jslint node: true */
+/* jslint esversion: 6 */
+
+'use strict';
+
 const Promise = require('bluebird'),
 			prune = require('./utils/prune'),
 			validation = require('./utils/validate'),

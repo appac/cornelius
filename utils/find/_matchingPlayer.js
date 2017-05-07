@@ -1,3 +1,8 @@
+/* jslint node: true */
+/* jslint esversion: 6 */
+
+'use strict';
+
 function matchingPlayer (data, options) {
 	let key = options.key;
 	if (!key) {

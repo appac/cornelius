@@ -1,3 +1,8 @@
+/* jslint node: true */
+/* jslint esversion: 6 */
+
+'use strict';
+
 module.exports = {
 	search: require('./_playerSearch'),
 	player: require('./_getPlayer'),
