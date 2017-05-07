@@ -1,9 +1,9 @@
 'use strict';
 
 const Promise = require('bluebird'),
-			prune = require('./utils/prune'),
-			validation = require('./utils/validate'),
-			mlb = require('./utils/mlb');
+	prune = require('./utils/prune'),
+	validation = require('./utils/validate'),
+	mlb = require('./utils/mlb');
 
 let cornelius = function () {};
 
@@ -29,7 +29,7 @@ cornelius.prototype.searchPlayer = function (options) {
 };
 
 cornelius.prototype.getPlayer = function (options) {
-		return new Promise(function (resolve, reject) {
+	return new Promise(function (resolve, reject) {
 
 		let error;
 		error = validation.handler('get', options);
@@ -64,14 +64,14 @@ cornelius.prototype.getRoster = function (options) {
 				resolve(data);
 			})
 			.catch(function (error) {
-					reject(error);
+				reject(error);
 			});
 
 	});
 };
 
 cornelius.prototype.getStats = function (options) {
-	return new Promise (function (resolve, reject) {
+	return new Promise(function (resolve, reject) {
 
 		let error;
 		error = validation.handler('stats', options);
