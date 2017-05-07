@@ -1,11 +1,8 @@
-/* jslint node: true */
-/* jslint esversion: 6 */
-
 'use strict';
 
 let prunePlayerData = require('./_playerData');
 
-function pruneRosterData (data) {
+function pruneRosterData(data) {
 	let prunedData = [];
 	let roster = data.roster_all.queryResults.row;
 	let hasFullPlayerData = roster[0].hasOwnProperty('pro_debut_date');

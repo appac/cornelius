@@ -1,12 +1,9 @@
-/* jslint node: true */
-/* jslint esversion: 6 */
-
 'use strict';
 
 let mlbRequest = require('./request'),
-		find = require('../find');
+	find = require('../find');
 
-function playerSearch (options) {
+function playerSearch(options) {
 	return new Promise(function (resolve, reject) {
 
 		let url = mlbRequest.build('search', options);

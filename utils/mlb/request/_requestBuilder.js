@@ -1,19 +1,16 @@
-/* jslint node: true */
-/* jslint esversion: 6 */
-
 'use strict';
 
 const url = require('url'),
-			base = 'http://mlb.mlb.com/lookup/json/named.',
-			endpoints = {
-				search: 'search_player_all.bam',
-				player_info: 'player_info.bam',
-				roster: 'roster_40.bam',
-				stats: {
-					hitting: 'sport_hitting_tm.bam',
-					pitching: 'sport_pitching_tm.bam'
-				}
-			};
+	base = 'http://mlb.mlb.com/lookup/json/named.',
+	endpoints = {
+		search: 'search_player_all.bam',
+		player_info: 'player_info.bam',
+		roster: 'roster_40.bam',
+		stats: {
+			hitting: 'sport_hitting_tm.bam',
+			pitching: 'sport_pitching_tm.bam'
+		}
+	};
 
 function buildRequest(type, options) {
 	let uri = base;
@@ -53,7 +50,7 @@ function buildRequest(type, options) {
 		default:
 			return new Error('Invalid request type.');
 	}
-	
+
 	return url.parse(uri);
 
 }

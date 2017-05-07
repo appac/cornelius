@@ -1,9 +1,6 @@
-/* jslint node: true */
-/* jslint esversion: 6 */
-
 'use strict';
 
-function validateGetOptions (options) {
+function validateGetOptions(options) {
 	let error;
 
 	if (typeof options !== 'string') {

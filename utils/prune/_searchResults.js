@@ -1,14 +1,11 @@
-/* jslint node: true */
-/* jslint esversion: 6 */
-
 'use strict';
 
 let prunePlayerData = require('./_playerData');
 
-function pruneSearchResults (data) {
+function pruneSearchResults(data) {
 	let resultsCount = data.search_player_all.queryResults.totalSize;
 	let prunedResults = [];
-	
+
 	if (resultsCount > 1) {
 		let searchResults = data.search_player_all.queryResults.row;
 

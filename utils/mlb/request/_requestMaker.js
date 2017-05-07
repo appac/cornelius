@@ -1,12 +1,9 @@
-/* jslint node: true */
-/* jslint esversion: 6 */
-
 'use strict';
 
 const http = require('http'),
-			Promise = require('bluebird');
+	Promise = require('bluebird');
 
-function requestMaker (url) {
+function requestMaker(url) {
 	return new Promise(function (resolve, reject) {
 
 		let options = {
