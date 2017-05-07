@@ -49,6 +49,26 @@ cornelius.prototype.getPlayer = function (options) {
 	});
 };
 
+cornelius.prototype.getPlayerId = function (options) {
+	return new Promise(function (resolve, reject) {
+		let error;
+		error = validation.handler('search', options);
+		
+		if (error) {
+			reject(error);
+		}
+
+		mlb.playerId(options)
+			.then(data => {
+				resolve(data);
+			})
+			.catch(error => {
+				reject(error);
+			});
+
+	});
+};
+
 cornelius.prototype.getRoster = function (options) {
 	return new Promise(function (resolve, reject) {
 
