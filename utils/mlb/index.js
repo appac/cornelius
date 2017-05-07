@@ -5,4 +5,4 @@ module.exports = {
 	player: require('./_getPlayer'),
 	roster: require('./_getRoster'),
 	stats: require('./_getStats')
-}
+};

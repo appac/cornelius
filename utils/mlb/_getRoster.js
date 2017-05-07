@@ -10,7 +10,7 @@ function getRoster (options) {
 		options = {
 			key: teamID,
 			full: options.full
-		}
+		};
 
 		let url = mlbRequest.build('roster', options);
 

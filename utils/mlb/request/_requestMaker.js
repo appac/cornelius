@@ -40,7 +40,7 @@ function requestMaker(url) {
 					const parsedData = JSON.parse(rawData);
 					resolve(parsedData);
 				} catch (e) {
-					reject(e)
+					reject(e);
 				}
 			});
 		}).on('error', (e) => {

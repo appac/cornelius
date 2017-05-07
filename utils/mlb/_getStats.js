@@ -24,7 +24,7 @@ function getStats (options) {
 			})
 			.catch(error => {
 				reject(error);
-			})
+			});
 	});
 }
 

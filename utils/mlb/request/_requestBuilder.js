@@ -28,9 +28,9 @@ function buildRequest(type, options) {
 			break;
 		case 'roster':
 			if (options.full) {
-				uri += `${endpoints.roster}?team_id='${options.key || options}'`
+				uri += `${endpoints.roster}?team_id='${options.key || options}'`;
 			} else {
-				uri += `${endpoints.roster}?team_id='${options.key || options}'&roster_all.col_in=name_display_first_last&roster_all.col_in=player_id`
+				uri += `${endpoints.roster}?team_id='${options.key || options}'&roster_all.col_in=name_display_first_last&roster_all.col_in=player_id`;
 			}
 			break;
 		case 'statsHitting':

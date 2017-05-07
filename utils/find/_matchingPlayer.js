@@ -38,7 +38,7 @@ function matchingPlayer (data, options) {
 	if (!requestedPlayer) {
 		error = new Error('Could not find a player with a matching key.');
 	} else if (gotName !== expectedName) {
-		error = new Error(`Name of found player does not match query. Found '${gotName}' but query was '${expectedName}'.`)
+		error = new Error(`Name of found player does not match query. Found '${gotName}' but query was '${expectedName}'.`);
 	}
 	
 	if (error) {

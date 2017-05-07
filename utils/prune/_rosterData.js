@@ -18,7 +18,7 @@ function pruneRosterData(data) {
 			let prunedPlayer = {
 				id: player.player_id,
 				name: player.name_display_first_last
-			}
+			};
 			prunedData.push(prunedPlayer);
 		}
 	}
