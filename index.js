@@ -29,7 +29,7 @@ cornelius.prototype.searchPlayer = function (options) {
 			});
 
 	});
-}
+};
 
 cornelius.prototype.getPlayer = function (options) {
 		return new Promise(function (resolve, reject) {
@@ -50,7 +50,7 @@ cornelius.prototype.getPlayer = function (options) {
 			});
 
 	});
-}
+};
 
 cornelius.prototype.getRoster = function (options) {
 	return new Promise(function (resolve, reject) {
@@ -71,7 +71,7 @@ cornelius.prototype.getRoster = function (options) {
 			});
 
 	});
-}
+};
 
 cornelius.prototype.getStats = function (options) {
 	return new Promise (function (resolve, reject) {
@@ -93,11 +93,11 @@ cornelius.prototype.getStats = function (options) {
 
 
 	});
-}
+};
 
 cornelius.prototype.prune = function (data) {
 	let prunedData = prune.handler(data);
 	return prunedData;
-}
+};
 
-module.exports = new cornelius;
+module.exports = new cornelius();
