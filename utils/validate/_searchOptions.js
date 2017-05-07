@@ -9,7 +9,7 @@ function validateSearchOptions(options) {
 		} else if (typeof options.query !== 'string') {
 			error = new Error(`Expected query to be a string, but was given a ${typeof(options.query)}.`);
 		} else if (options.active && typeof options.active !== 'boolean') {
-			error = new Error(`Expected active to be a boolean, but was given a ${typeof(options.active)}.`)
+			error = new Error(`Expected active to be a boolean, but was given a ${typeof(options.active)}.`);
 		}
 	} else if (typeof options === 'string') {
 		if (!options) {

@@ -7,11 +7,11 @@ function validateStatsOptions(options) {
 		if (!options.player_id) {
 			error = new Error(`No player_id provided.`);
 		} else if (typeof (options.player_id) !== 'string') {
-			error = new Error(`Expected player_id to be a string but was given a '${typeof(options.player_id)}'.`)
+			error = new Error(`Expected player_id to be a string but was given a '${typeof(options.player_id)}'.`);
 		} else if (options.type && typeof (options.type) !== 'string') {
-			error = new Error(`Expected type to be a string but was given a '${typeof(options.type)}'.`)
+			error = new Error(`Expected type to be a string but was given a '${typeof(options.type)}'.`);
 		} else if (options.year && typeof (options.year) !== 'string') {
-			error = new Error(`Expected year to be a string but was given a '${typeof(options.year)}'.`)
+			error = new Error(`Expected year to be a string but was given a '${typeof(options.year)}'.`);
 		}
 	} else if (typeof options === 'string') {
 		if (!options) {
