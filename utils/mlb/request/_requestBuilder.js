@@ -48,7 +48,6 @@ function buildRequest(type, options) {
 			break;
 		default:
 			return new Error('Invalid request type.');
-			break;
 	}
 	
 	return url.parse(uri);

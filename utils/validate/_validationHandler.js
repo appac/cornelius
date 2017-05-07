@@ -7,18 +7,14 @@ function validationHandler (type, options) {
 	switch (type) {
 		case 'search':
 			return validateSearchOptions(options);
-			break;
 		case 'get':
 			return validateGetOptions(options);
-			break;
 		case 'roster':
 			return validateRosterOptions(options);
-			break;
 		case 'stats':
 			return validateStatsOptions(options);
 		default:
 			return new Error(`Invalid type '${type}', cannot validate.`);
-			break;
 	}
 
 }
