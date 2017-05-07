@@ -1,18 +1,19 @@
-const url = require('url');
 /* jslint node: true */
 /* jslint esversion: 6 */
 
-let base = 'http://mlb.mlb.com/lookup/json/named.';
-let endpoints = {
-	search: 'search_player_all.bam',
-	player_info: 'player_info.bam',
-	roster: 'roster_40.bam',
-	stats: {
-		hitting: 'sport_hitting_tm.bam',
-		pitching: 'sport_pitching_tm.bam'
-	}
-};
 'use strict';
+
+const url = require('url'),
+			base = 'http://mlb.mlb.com/lookup/json/named.',
+			endpoints = {
+				search: 'search_player_all.bam',
+				player_info: 'player_info.bam',
+				roster: 'roster_40.bam',
+				stats: {
+					hitting: 'sport_hitting_tm.bam',
+					pitching: 'sport_pitching_tm.bam'
+				}
+			};
 
 function buildRequest(type, options) {
 	let uri = base;
