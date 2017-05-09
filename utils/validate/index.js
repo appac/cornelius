@@ -1,5 +1,8 @@
 'use strict';
 
 module.exports = {
-	handler: require('./_validationHandler')
+	searchPlayer: require('./_searchOptions'),
+	getPlayer: require('./_getOptions'),
+	getRoster: require('./_rosterOptions'),
+	getStats: require('./_statsOptions')
 };
