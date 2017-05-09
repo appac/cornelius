@@ -3,12 +3,11 @@
 function matchingPlayerId (data, options) {
 	function hasMatchingKey(player) {
 		let givenKey = options.key.toUpperCase();
-		// TODO: Move name cleaning to own function
-		let givenName = options.query.replace(/([',.,-])/g, '').toUpperCase();
+		let givenName = prepareStringForCompare(options.query);
 
 		let playerID = player.player_id.toUpperCase();
 		let playerTeamAbbrev = player.team_abbrev.toUpperCase();
-		let playerName = player.name_display_first_last.replace(/([',.,-])/g, '').toUpperCase();
+		let playerName = prepareStringForCompare(player.name_display_first_last);
 
 		if (givenKey === playerID || givenKey === playerTeamAbbrev && givenName === playerName) {
 			return true;
@@ -39,6 +38,14 @@ function matchingPlayerId (data, options) {
 	}
 
 	return requestedPlayer.player_id;
+}
+
+function prepareStringForCompare (string) {
+	let charsToRemove = /([',.,-])/g;
+	let cleanedString = string.replace(charsToRemove, '');
+	let finalString = cleanedString.toUpperCase();
+
+	return finalString;
 }
 
 module.exports = matchingPlayerId;
