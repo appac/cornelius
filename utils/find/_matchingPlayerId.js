@@ -1,5 +1,15 @@
 'use strict';
 
+/**
+ * Looks for a player matching a key in search data.
+ * 
+ * @private
+ * @param {Object} data - The search data to look through.
+ * @param {Object} options
+ * @param {string} options.query - Search term to use.
+ * @param {string} options.key - Key to match to.
+ * @returns {string} player_id - The ID of the player matching the key and query.
+ */
 function matchingPlayerId (data, options) {
 	function hasMatchingKey(player) {
 		let givenKey = options.key.toUpperCase();
@@ -40,6 +50,13 @@ function matchingPlayerId (data, options) {
 	return requestedPlayer.player_id;
 }
 
+/**
+ * Prepares a string for comparing by stripping special chars and uppercasing it.
+ * 
+ * @private
+ * @param {string} string - The string to prepare.
+ * @returns {string} - The modified string.
+ */
 function prepareStringForCompare (string) {
 	let charsToRemove = /([',.,-])/g;
 	let cleanedString = string.replace(charsToRemove, '');

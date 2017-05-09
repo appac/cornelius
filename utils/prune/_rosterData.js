@@ -2,6 +2,13 @@
 
 let prunePlayerData = require('./_playerData');
 
+/**
+ * Prunes roster data.
+ * 
+ * @private
+ * @param {Object} data - The raw roster data to be pruned.
+ * @returns {Object} prunedData - Pruned roster data.
+ */
 function pruneRosterData(data) {
 	let prunedData = [];
 	let roster = data.roster_all.queryResults.row;

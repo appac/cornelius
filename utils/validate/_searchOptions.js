@@ -1,5 +1,12 @@
 'use strict';
 
+/**
+ * Checks method options are valid, throws error if not.
+ * 
+ * @private
+ * @param {Object} options - The options to validate.
+ * @returns {Error|undefined} - An error or undefined if validation successful.
+ */
 function validateSearchOptions(options) {
 	let error;
 	

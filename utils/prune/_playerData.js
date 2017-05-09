@@ -1,5 +1,12 @@
 'use strict';
 
+/**
+ * Prunes player data.
+ * 
+ * @private
+ * @param {Object} data - The raw player data to be pruned.
+ * @returns {Object} prunedPlayer - Pruned player data.
+ */
 function prunePlayerData(data) {
 	let rawPlayer;
 	let prunedPlayer;

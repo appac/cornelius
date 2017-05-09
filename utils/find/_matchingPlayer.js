@@ -1,5 +1,15 @@
 'use strict';
 
+/**
+ * Looks for a player matching a key in search data.
+ *
+ * @private
+ * @param {Object} data - The search data to look through
+ * @param {Object} options
+ * @param {string} options.query - Query used to perform search.
+ * @param {string} options.key - Key to match to.
+ * @returns {Object} search_player_all - Modified version of the search data.
+ */
 function matchingPlayer (data, options) {
 	let key = options.key;
 	if (!key) {

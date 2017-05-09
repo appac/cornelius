@@ -2,6 +2,13 @@
 
 let prunePlayerData = require('./_playerData');
 
+/**
+ * Prunes search results.
+ * 
+ * @private
+ * @param {Object} data - The raw search data to be pruned.
+ * @returns {Object} prunedResults - Pruned search data.
+ */
 function pruneSearchResults(data) {
 	let resultsCount = data.search_player_all.queryResults.totalSize;
 	let prunedResults = [];

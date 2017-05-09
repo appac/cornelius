@@ -1,5 +1,13 @@
 'use strict';
 
+/**
+ * Given a key, finds a matching team ID from a local manifest.
+ * 
+ * @private
+ * @param {string} key - The key to match to.
+ * @returns {string} teamID - The ID of the team matching the key.
+ * @throws {Error} - Throws an error if no team matching the key is found.
+ */
 function matchingTeamId (key) {
 	if (!key) {
 		return new Error(`find.teamId was not given a key.`);

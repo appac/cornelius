@@ -1,5 +1,12 @@
 'use strict';
 
+/**
+ * Prunes player stats data.
+ * 
+ * @private
+ * @param {Object} data - The raw stats data to be pruned.
+ * @returns {Object} prunedData - Pruned stats data.
+ */
 function prunePlayerStats(data) {
 	let prunedData;
 	let isHittingStats = data.hasOwnProperty('sport_hitting_tm');

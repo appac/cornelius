@@ -1,8 +1,16 @@
 'use strict';
 
 const http = require('http'),
-	Promise = require('bluebird');
+			Promise = require('bluebird');
 
+/**
+ * Makes the request to MLB.
+ * 
+ * @private
+ * @param {Object} url - Parsed URL object.
+ * @returns {Promise} - Promise to be fulfilled with JSON parsed response data, or error.
+ * @throws {Error} - Throws an error if request cannot be made.
+ */
 function requestMaker(url) {
 	return new Promise(function (resolve, reject) {
 
