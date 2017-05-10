@@ -12,10 +12,10 @@ let mlbRequest = require('./request'),
  * @param {boolean} [options.prune=false] - Whether the data retrieved should be pruned.
  * @returns {Promise} - Promise to be fulfilled with player info object, or error.
  */
-function getPlayer(player_id) {
+function getPlayer(options) {
 	return new Promise(function (resolve, reject) {
 
-		let url = mlbRequest.build('get', player_id);
+		let url = mlbRequest.build('get', options);
 
 		mlbRequest.make(url)
 			.then(data => {
