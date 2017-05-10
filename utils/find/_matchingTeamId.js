@@ -9,13 +9,7 @@
  * @throws {Error} - Throws an error if no team matching the key is found.
  */
 function matchingTeamId (key) {
-	if (!key) {
-		return new Error(`find.teamId was not given a key.`);
-	} else if (typeof (key) !== 'string') {
-		return new Error(`find.teamId expected key to be a string, but was given a ${typeof(key)}.`);
-	}
-	
-	key = key.toUpperCase();
+	key = key.team_id.toUpperCase() || key.toUpperCase();
 	let teamID;
 	let teams = require('./team.manifest.json');
 	
@@ -30,7 +24,7 @@ function matchingTeamId (key) {
 	}
 
 	if (!teamID) {
-		return new Error(`No team matching '${key}' found.`);
+		throw new Error(`No team matching '${key}' found.`);
 	}
 
 	return teamID;
