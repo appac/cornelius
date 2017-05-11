@@ -21,7 +21,7 @@ function playerSearch(options) {
 
 		mlbRequest.make(url)
 			.then(data => {
-				if (options.prune) {
+				if (options.prune === true) {
 					data = pruneData.handler(data);
 				}
 				resolve(data);

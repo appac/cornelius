@@ -10,7 +10,7 @@ let mlbRequest = require('./request'),
  * @private
  * @param {Object|string} options - The options to make the request with.
  * @param {string} options.player_id - ID of player to get stats for.
- * @param {string} [options.type='hitting'] - The type of stats to get.
+ * @param {string} [options.pitching=false] - The type of stats to get.
  * @param {string} [options.year] - The season to get stats for.
  * @returns {Promise} - Promise to be fulfilled with player stats object, or error.
  */
@@ -25,7 +25,7 @@ function getStats (options) {
 				if (!options.year) {
 					data = find.latestStats(data);
 				}
-				if (options.prune) {
+				if (options.prune === true) {
 					data = pruneData.handler(data);
 				}
 				resolve(data);
