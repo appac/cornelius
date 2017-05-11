@@ -17,12 +17,8 @@ let mlbRequest = require('./request'),
 function getStats (options) {
 	return new Promise (function (resolve, reject) {
 		let url;
-		
-		if (options.type === 'pitching') {
-			url = mlbRequest.build('statsPitching', options); 
-		} else {
-			url = mlbRequest.build('statsHitting', options);
-		}
+
+		url = mlbRequest.build('stats', options);
 
 		mlbRequest.make(url)
 			.then(data => {
