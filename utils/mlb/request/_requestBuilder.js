@@ -35,10 +35,10 @@ function buildRequest(type, options) {
 			uri += `${endpoints.player_info}?sport_code='mlb'&player_id='${options.player_id || options}'`;
 			break;
 		case 'roster':
-			if (options.full) {
+			if (options.full === true) {
 				uri += `${endpoints.roster}?team_id='${options.team_id || options}'`;
 			} else {
-				uri += `${endpoints.roster}?team_id='${options.team_id || options}'&roster_all.col_in=name_display_first_last&roster_all.col_in=player_id`;
+				uri += `${endpoints.roster}?team_id='${options.team_id || options}'&roster_40.col_in=name_display_first_last&roster_40.col_in=player_id`;
 			}
 			break;
 		case 'statsHitting':
