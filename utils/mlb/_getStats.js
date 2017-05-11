@@ -1,7 +1,8 @@
 'use strict';
 
 let mlbRequest = require('./request'),
-		find = require('../find');
+		find = require('../find'),
+		pruneData = require('../prune');
 
 /**
  * Constructs and makes call to MLB for stats.
@@ -25,12 +26,13 @@ function getStats (options) {
 
 		mlbRequest.make(url)
 			.then(data => {
-				if (options.year) {
-					resolve(data);
-				} else {
-					let latestStats = find.latestStats(data);
-					resolve(latestStats);
+				if (!options.year) {
+					data = find.latestStats(data);
 				}
+				if (options.prune) {
+					data = pruneData.handler(data);
+				}
+				resolve(data);
 			})
 			.catch(error => {
 				reject(error);

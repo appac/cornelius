@@ -1,7 +1,8 @@
 'use strict';
 
 let mlbRequest = require('./request'),
-		find = require('../find');
+		find = require('../find'),
+		pruneData = require('../prune');
 
 /**
  * Constructs and makes call to MLB for getting a player.
@@ -19,6 +20,9 @@ function getPlayer(options) {
 
 		mlbRequest.make(url)
 			.then(data => {
+				if (options.prune) {
+					data = pruneData.handler(data);
+				}
 				resolve(data);
 			})
 			.catch(error => {
