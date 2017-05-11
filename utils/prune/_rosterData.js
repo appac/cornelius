@@ -1,6 +1,6 @@
 'use strict';
 
-let prunePlayerData = require('./_playerData');
+let pruneRosterPlayer = require('./_rosterPlayerData');
 
 /**
  * Prunes roster data.
@@ -11,12 +11,13 @@ let prunePlayerData = require('./_playerData');
  */
 function pruneRosterData(data) {
 	let prunedData = [];
-	let roster = data.roster_all.queryResults.row;
+	let roster = data.roster_40.queryResults.row;
 	let hasFullPlayerData = roster[0].hasOwnProperty('pro_debut_date');
+
 	if (hasFullPlayerData) {
 		for (let i = 0; i < roster.length; i++) {
 			let player = roster[i];
-			let prunedPlayer = prunePlayerData(player);
+			let prunedPlayer = pruneRosterPlayer(player);
 			prunedData.push(prunedPlayer);
 		}
 	} else {

@@ -4,7 +4,7 @@
  * Prunes player data.
  * 
  * @private
- * @param {Object} data - The raw player data to be pruned.
+ * @param {Object} data - The raw data to be pruned.
  * @returns {Object} prunedPlayer - Pruned player data.
  */
 function prunePlayerData(data) {
@@ -43,7 +43,7 @@ function prunePlayerData(data) {
 			},
 			geo: {
 				city: rawPlayer.birth_city,
-				state: rawPlayer.birth_city,
+				state: rawPlayer.birth_state,
 				country: rawPlayer.birth_country,
 				high_school: rawPlayer.high_school,
 				college: rawPlayer.college
@@ -87,7 +87,7 @@ function prunePlayerData(data) {
 			},
 			geo: {
 				city: rawPlayer.birth_city,
-				state: rawPlayer.birth_city,
+				state: rawPlayer.birth_state,
 				country: rawPlayer.birth_country,
 				high_school: rawPlayer.high_school,
 				college: rawPlayer.college
