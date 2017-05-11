@@ -9,7 +9,7 @@
  * @throws {Error} - Throws an error if no team matching the key is found.
  */
 function matchingTeamId (key) {
-	key = key.team_id.toUpperCase() || key.toUpperCase();
+	key = key.toUpperCase();
 	let teamID;
 	let teams = require('./team.manifest.json');
 	
