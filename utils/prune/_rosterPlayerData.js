@@ -3,6 +3,7 @@
 /**
  * Prunes roster player data.
  * 
+ * @private
  * @param {Object} rawPlayer - The raw player data to prune.
  * @returns {Object} prunedPlayer - The pruned player data.
  */
