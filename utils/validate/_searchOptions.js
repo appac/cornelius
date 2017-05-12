@@ -26,7 +26,11 @@ function validateSearchOptions(options) {
 		error = new Error(`Expected options to be a string or object, but was given a ${typeof(options)}.`);
 	}
 
-	return error;
+	if (error) {
+		throw error;
+	} else {
+		return;
+	}
 
 }
 

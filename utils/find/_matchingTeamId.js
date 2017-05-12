@@ -22,12 +22,13 @@ function matchingTeamId (key) {
 			teamID = team.team_id;
 		}
 	}
-
+	
 	if (!teamID) {
-		throw new Error(`No team matching '${key}' found.`);
+		throw new Error('No team matching the key was found.');
+	} else {
+		return teamID;
 	}
 
-	return teamID;
 }
 
 module.exports = matchingTeamId;

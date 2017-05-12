@@ -2,7 +2,8 @@
 
 let mlbRequest = require('./request'),
 		find = require('../find'),
-		pruneData = require('../prune');
+		pruneData = require('../prune'),
+		validate = require('../validate');
 
 /**
  * Constructs and makes call to MLB for stats.
@@ -15,6 +16,7 @@ let mlbRequest = require('./request'),
  * @returns {Promise} - Promise to be fulfilled with player stats object, or error.
  */
 function getStats (options) {
+	validate.getStats(options);
 	return new Promise (function (resolve, reject) {
 		let url;
 

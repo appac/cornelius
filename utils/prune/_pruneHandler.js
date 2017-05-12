@@ -26,7 +26,7 @@ function pruneHandler(data) {
 		case 'stats':
 			return prunePlayerStats(data);
 		default:
-			return new Error('Invalid data, cannot prune.');
+			throw new Error('Invalid data, cannot prune.');
 	}
 
 }

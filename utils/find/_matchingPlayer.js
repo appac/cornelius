@@ -52,10 +52,11 @@ function matchingPlayer (data, options) {
 	}
 	
 	if (error) {
-		return error;
+		throw error;
+	} else {
+		return data;
 	}
-
-	return data;
+	
 }
 
 module.exports = matchingPlayer;

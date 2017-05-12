@@ -2,7 +2,8 @@
 
 let mlbRequest = require('./request'),
 		find = require('../find'),
-		pruneData = require('../prune');
+		pruneData = require('../prune'),
+		validate = require('../validate');
 
 /**
  * Constructs and makes call to MLB for player search.
@@ -15,6 +16,7 @@ let mlbRequest = require('./request'),
  * @returns {Promise} - Promise to be fulfilled with search results object, or error.
  */
 function playerSearch(options) {
+	validate.searchPlayer(options);
 	return new Promise(function (resolve, reject) {
 
 		let url = mlbRequest.build('search', options);

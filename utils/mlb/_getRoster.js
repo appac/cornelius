@@ -2,7 +2,8 @@
 
 let mlbRequest = require('./request'),
 		find = require('../find'),
-		pruneData = require('../prune');
+		pruneData = require('../prune'),
+		validate = require('../validate');
 
 /**
  * Constructs and makes call to MLB for a roster.
@@ -15,6 +16,7 @@ let mlbRequest = require('./request'),
  * @returns {Promise} - Promise to be fulfilled with team roster object, or error.
  */
 function getRoster (options) {
+	validate.getRoster(options);
 	return new Promise(function (resolve, reject) {
 		let teamID = find.matchingTeamId(options.team_id || options);
 
