@@ -20,9 +20,12 @@ function getRoster (options) {
 	return new Promise(function (resolve, reject) {
 		let teamID = find.matchingTeamId(options.team_id || options);
 
-		options.team_id = teamID;
+		let buildOptions = {
+			team_id: teamID,
+			full: options.full
+		};
 
-		let url = mlbRequest.build('roster', options);
+		let url = mlbRequest.build('roster', buildOptions);
 
 		mlbRequest.make(url)
 			.then(data => {
