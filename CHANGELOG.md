@@ -2,11 +2,27 @@
 ## [Unreleased]
 ### Added
 - Player status functionality
-- Player stats functionality
 
-## [0.3.3] - 2017-04-25
+## [1.0.0] - 2017-05-01
 ### Added
-- This CHANGELOG.md
+- This changelog
+- `getStats` functionality for getting player stats
+- `validate` utility - validates options for core functions.
+
+### Changed
+- `get` is now `getPlayer`.
+- `searchPlayer`, `getPlayer`, `getRoster`, and `getStats` now all take an `options` object with varying properties - see readme
+- Pruning can now be handled by passing a `prune` flag via the options object.
+	- `cornelius.prune` will be deprecated in later versions.
+- `getPlayer` now uses the `player_info` endpoint to get a specific player by ID.
+	- This means results are accurate and Cornelius no longer needs to check whether you want an active/historic player.
+- Core functions abstracted out into `/lib`.
+- Utility functions (further) abstracted out into `/utils`.
+
+### Removed
+- `searchHistoric`
+- `get`
+- `getHistoric`
 
 ## [0.3.2] - 2017-04-24
 ### Changed
