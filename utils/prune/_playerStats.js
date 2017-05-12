@@ -9,15 +9,25 @@
  */
 function prunePlayerStats(data) {
 	let prunedData;
+	let hasStats;
 	let isHittingStats = data.hasOwnProperty('sport_hitting_tm');
 
 	if (isHittingStats) {
-		prunedData = data.sport_hitting_tm.queryResults.row;
+		hasStats = data.sport_hitting_tm.queryResults.totalSize > 0;
 	} else {
-		prunedData = data.sport_pitching_tm.queryResults.row;
+		hasStats = data.sport_pitching_tm.queryResults.totalSize > 0;
 	}
 
-	return prunedData;
+	if (hasStats) {
+		if (isHittingStats) {
+				prunedData = data.sport_hitting_tm.queryResults.row;
+		} else {
+			prunedData = data.sport_pitching_tm.queryResults.row;
+		}
+		return prunedData;
+	}
+
+	throw new Error('No stats found to prune.');
 }
 
 module.exports = prunePlayerStats;
