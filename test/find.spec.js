@@ -1,68 +1,59 @@
+'use strict';
+
 const chai = require('chai'),
-			expect = chai.expect
+			expect = chai.expect,
 			find = require('../utils/find');
 
-let testData = require('./mock/search.json');
+let search_player_all = require('./mock/search_player_all.json');
+let sport_hitting_tm = require('./mock/sport_hitting_tm.json');
+let sport_pitching_tm = require('./mock/sport_pitching_tm.json');
 
 describe('find', function () {
-
-	describe('player', function () {
-
-		it('should find and return the correct player when given a player ID', function () {
-			// Looking for Eric Young Jr. of the New York Yankees - 458913
-			let requestedPlayer = find.player(testData, '458913');
-			expect(requestedPlayer).to.have.property('player_id', '458913');
+	describe('_matchingTeamId', function () {
+		it('abbrev - should return the correct team ID when given a valid key', function () {
+			let teamID;
+			teamID = find.matchingTeamId('nym');
+			expect(teamID).to.equal('121');
 		});
-		it('should find and return the correct player when given a team abbreviation', function () {
-			// Looking for Chris Young of the Kansas City Royals - 432934
-			let requestedPlayer = find.player(testData, 'KC');
-			expect(requestedPlayer).to.have.property('player_id', '432934');
+		it('name - should return the correct team ID when given a valid key', function () {
+			let teamID;
+			teamID = find.matchingTeamId('new york mets');
+			expect(teamID).to.equal('121');
 		});
-
-		describe('error handling', function () {
-			it('should return missing key error if no key is given', function() {
-				let requestedPlayer = find.player(testData, '');
-				expect(requestedPlayer).to.be.an('error', 'find.player wasn\'t given a key');
-			});
-			it('should return an invalid key type error if an invalid key is given', function () {
-				let requestedPlayer = find.player(testData, 123456);
-				expect(requestedPlayer).to.be.an('error', 'find.player expected key to be a string, but was given a number.')
-			});
-			it('should return an error if no matching key is found', function () {
-				let requestedPlayer = find.player(testData, '123456');
-				expect(requestedPlayer).to.be.an('error', 'find.player could not find a player with a matching key.');
-			});
+		it('id - should return the correct team ID when given a valid key', function () {
+			let teamID;
+			teamID = find.matchingTeamId('121');
+			expect(teamID).to.equal('121');
 		});
-
+		it('invalid - should throw an error if no matching team was found', function () {
+			expect(function () {find.matchingTeamId('inv')})
+				.to.throw('No team matching the key was found.');
+		});
 	});
+	describe('_latestStats', function () {
+		it('hitting - should return a modified MLB response with one stats object', function () {
+			let data;
+			let statsCount;
+			let latestStats;
 
-	describe('teamId', function () {
-		// Find team ID of New York Mets - 121
-		it ('should find and return the correct team ID when given a team abbreviation', function () {
-			let teamId = find.teamId('nym');
-			expect(teamId).to.equal('121');
+			data = find.latestStats(sport_hitting_tm);
+			statsCount = data.sport_hitting_tm.queryResults.totalSize;
+			latestStats = data.sport_hitting_tm.queryResults.row;
+			expect(data).to.be.an('object').with.property('sport_hitting_tm');
+			expect(statsCount).to.equal(1);
+			expect(latestStats).to.be.an('object').with.property('h');
 		});
-		it ('should find and return the correct team ID when given a team name', function () {
-			let teamId = find.teamId('New York Mets')
-			expect(teamId).to.equal('121');
-		});
-		it ('should find and return the correct team ID when given a team ID', function () {
-			let teamId = find.teamId('121');
-			expect(teamId).to.equal('121');
-		});
-		it('should return undefined if no team ID can be found', function () {
-				let requestedPlayer = find.teamId('inv');
-				expect(requestedPlayer).to.be.undefined;
-			});
-		describe('error handling', function () {
-			it('should return missing key error if no key is given', function () {
-				let requestedPlayer = find.teamId('');
-				expect(requestedPlayer).to.be.an('error', 'find.teamId wasn\'t given a key');
-			});
-			it('should return an invalid key type error if an invalid key is given', function () {
-				let requestedPlayer = find.teamId(123456);
-				expect(requestedPlayer).to.be.an('error', 'find.teamId expected key to be a string, but was given a number.')
-			});
+		it('pitching - should return a modified MLB response with one stats object', function () {
+			let data;
+			let statsCount;
+			let latestStats;
+
+			data = find.latestStats(sport_pitching_tm);
+			statsCount = data.sport_pitching_tm.queryResults.totalSize;
+			latestStats = data.sport_pitching_tm.queryResults.row;
+			expect(data).to.be.an('object').with.property('sport_pitching_tm');
+			expect(statsCount).to.equal(1);
+			expect(latestStats).to.be.an('object').with.property('era');
 		});
 	});
 
