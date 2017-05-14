@@ -12,6 +12,8 @@ const url = require('url'),
 		}
 	};
 
+
+
 /**
  * Builds the MLB request url.
  * 
@@ -57,7 +59,7 @@ function buildRequest(type, options) {
 			}
 			break;
 		default:
-			throw new Error('Invalid request type.');
+			return;
 	}
 
 	return url.parse(uri);

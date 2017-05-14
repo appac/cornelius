@@ -2,7 +2,7 @@
 
 let mlbRequest = require('./request'),
 		find = require('../find'),
-		pruneData = require('../prune'),
+		pruneData = require('../prune/'),
 		validate = require('../validate');
 
 /**
@@ -16,15 +16,23 @@ let mlbRequest = require('./request'),
  * @returns {Promise} - Promise to be fulfilled with search results object, or error.
  */
 function playerSearch(options) {
-	validate.searchPlayer(options);
 	return new Promise(function (resolve, reject) {
+		let error = validate.searchPlayer(options);
+
+		if (error) {
+			reject(error);
+		}
 
 		let url = mlbRequest.build('search', options);
+
+		if (!url) {
+			reject(new Error('Error building search_player_all request URL.'));
+		}
 
 		mlbRequest.make(url)
 			.then(data => {
 				if (options.prune === true) {
-					data = pruneData.handler(data);
+					data = pruneData.searchResults(data);
 				}
 				resolve(data);
 			})

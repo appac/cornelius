@@ -5,8 +5,7 @@
  * 
  * @private
  * @param {string} key - The key to match to.
- * @returns {string} teamID - The ID of the team matching the key.
- * @throws {Error} - Throws an error if no team matching the key is found.
+ * @returns {string|undefined} teamID - The ID of the team matching the key, or undefined if none was found.
  */
 function matchingTeamId (key) {
 	key = key.toUpperCase();
@@ -23,11 +22,7 @@ function matchingTeamId (key) {
 		}
 	}
 	
-	if (!teamID) {
-		throw new Error('No team matching the key was found.');
-	} else {
-		return teamID;
-	}
+	return teamID;
 
 }
 

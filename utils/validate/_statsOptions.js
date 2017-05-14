@@ -28,11 +28,7 @@ function validateStatsOptions(options) {
 		error = new Error(`Expected options to be a string or object, but was given a ${typeof(options)}.`);
 	}
 
-	if (error) {
-		throw error;
-	} else {
-		return;
-	}
+	return error;
 
 }
 
