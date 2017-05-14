@@ -13,12 +13,12 @@ let sport_pitching_tm = require('./mock/sport_pitching_tm.json');
 let sport_pitching_tm_empty = require('./mock/sport_pitching_tm_empty.json');
 
 describe('prune', function () {
-	it('should return an error when given invalid data', function () {
+	it('should return the original data if it\'s invalid', function () {
 		let data = {
 			some: 'invalid data'
 		};
-		expect(function () {prune.handler(data)})
-			.to.throw('Invalid data, cannot prune.');
+		let prunedData = prune.handler(data);
+		expect(prunedData).to.eql(data);
 	});
 	describe('_searchResults', function () {
 		it('should return an array of pruned results', function () {
@@ -84,11 +84,11 @@ describe('prune', function () {
 			expect(prunedData).to.be.an('object')
 				.with.ownProperty('era');
 		});
-		it('should throw an error if there are no stats to prune', function () {
+		it('should return an empty object if there\'s no stats to prune', function () {
 			let data = sport_pitching_tm_empty;
+			let prunedData = prune.handler(data);
 
-			expect(function () {prune.handler(data)})
-				.to.throw('No stats found to prune.');
+			expect(prunedData).to.be.an('object').and.be.empty;
 		});
 	});
 	
