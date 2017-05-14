@@ -15,14 +15,23 @@ let mlbRequest = require('./request'),
  * @returns {Promise} - Promise to be fulfilled with player info object, or error.
  */
 function getPlayer(options) {
-	validate.getPlayer(options);
 	return new Promise(function (resolve, reject) {
+		let error = validate.getPlayer(options);
+
+		if (error) {
+			reject(error);
+		}
+
 		let url = mlbRequest.build('get', options);
+
+		if (!url) {
+			reject(new Error('Error building player_info request URL.'));
+		}
 
 		mlbRequest.make(url)
 			.then(data => {
 				if (options.prune === true) {
-					data = pruneData.handler(data);
+					data = pruneData.playerInfo(data);
 				}
 				resolve(data);
 			})

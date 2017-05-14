@@ -13,12 +13,19 @@ let mlbRequest = require('./request'),
  * @param {string} options.team_id - ID of team to get roster for.
  * @param {boolean} [options.full=true] - Whether players in the roster should have their full info.
  * @param {boolean} [options.prune=false] - Whether the data should be pruned.
- * @returns {Promise} - Promise to be fulfilled with team roster object, or error.
+ * @returns {Promise} - Promise to be fulfilled with roster data, or error.
  */
 function getRoster (options) {
-	validate.getRoster(options);
 	return new Promise(function (resolve, reject) {
+		let error = validate.getRoster(options);
+		if (error) {
+			reject(error);
+		}
+
 		let teamID = find.matchingTeamId(options.team_id || options);
+		if (!teamID) {
+			reject(`No team matching '${options.team_id || options}' was found.`);
+		}
 
 		let buildOptions = {
 			team_id: teamID,
@@ -27,10 +34,14 @@ function getRoster (options) {
 
 		let url = mlbRequest.build('roster', buildOptions);
 
+		if (!url) {
+			reject(new Error('Error building roster_40 request URL.'));
+		}
+
 		mlbRequest.make(url)
 			.then(data => {
 				if (options.prune === true) {
-					data = pruneData.handler(data);
+					data = pruneData.roster(data);
 				}
 				resolve(data);
 			})

@@ -13,9 +13,9 @@
 function matchingPlayer (data, options) {
 	let key = options.key;
 	if (!key) {
-		return new Error(`find.player was not given a key.`);
+		return new Error(`No key provided.`);
 	} else if (typeof (key) !== 'string') {
-		return new Error(`find.player expected key to be a string, but was given a ${typeof(key)}.`);
+		return new Error(`Expected key to be a string, but was given a ${typeof(key)}.`);
 	}
 
 	function hasMatchingKey(player) {
@@ -46,16 +46,12 @@ function matchingPlayer (data, options) {
 	let expectedName = options.query.toUpperCase();
 
 	if (!requestedPlayer) {
-		error = new Error('Could not find a player with a matching key.');
+		return 'Could not find a player with a matching key.';
 	} else if (gotName !== expectedName) {
-		error = new Error(`Name of found player does not match query. Found '${gotName}' but query was '${expectedName}'.`);
+		return `Name of found player does not match query. Found '${gotName}' but query was '${expectedName}'.`;
 	}
 	
-	if (error) {
-		throw error;
-	} else {
-		return data;
-	}
+	return data;
 	
 }
 

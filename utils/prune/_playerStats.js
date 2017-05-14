@@ -5,29 +5,30 @@
  * 
  * @private
  * @param {Object} data - The raw stats data to be pruned.
- * @returns {Object} prunedData - Pruned stats data.
+ * @returns {Object} - Pruned stats, or an empty object if there's nothing to prune.
  */
 function prunePlayerStats(data) {
-	let prunedData;
-	let hasStats;
-	let isHittingStats = data.hasOwnProperty('sport_hitting_tm');
 
+	let isHittingStats = data.hasOwnProperty('sport_hitting_tm');
+	let hasStats;
 	if (isHittingStats) {
 		hasStats = data.sport_hitting_tm.queryResults.totalSize > 0;
 	} else {
 		hasStats = data.sport_pitching_tm.queryResults.totalSize > 0;
 	}
 
-	if (hasStats) {
+	let prunedStats = {};
+	if (!hasStats) {
+		return prunedStats;
+	} else {
 		if (isHittingStats) {
-				prunedData = data.sport_hitting_tm.queryResults.row;
+			prunedStats = data.sport_hitting_tm.queryResults.row;
 		} else {
-			prunedData = data.sport_pitching_tm.queryResults.row;
+			prunedStats = data.sport_pitching_tm.queryResults.row;
 		}
-		return prunedData;
+		return prunedStats;
 	}
 
-	throw new Error('No stats found to prune.');
 }
 
 module.exports = prunePlayerStats;

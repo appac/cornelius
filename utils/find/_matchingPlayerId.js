@@ -8,7 +8,7 @@
  * @param {Object} options
  * @param {string} options.query - Search term to use.
  * @param {string} options.key - Key to match to.
- * @returns {string} player_id - The ID of the player matching the key and query.
+ * @returns {string|undefined} - The matching player ID or undefined if none was found.
  */
 function matchingPlayerId (data, options) {
 	function hasMatchingKey(player) {
@@ -36,15 +36,9 @@ function matchingPlayerId (data, options) {
 	} else if (resultsCount == 1) {
 		requestedPlayer = results;
 	}
-	
-	let error;
 
 	if (!requestedPlayer) {
-		error = new Error('Could not find a player with a matching key.');
-	}
-	
-	if (error) {
-		return error;
+		return;
 	}
 
 	return requestedPlayer.player_id;

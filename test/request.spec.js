@@ -3,7 +3,7 @@
 const chai = require('chai'),
 			expect = chai.expect,
 			mlbRequest = require('../utils/mlb/request');
-			
+
 describe('mlb', function () {
 	describe('_requestBuilder', function () {
 		it('should return a valid search url', function () {
@@ -46,9 +46,10 @@ describe('mlb', function () {
 			expect(url).to.have.property('href')
 				.that.equals('http://mlb.mlb.com/lookup/json/named.roster_40.bam?team_id=%27123%27&roster_40.col_in=name_display_first_last&roster_40.col_in=player_id');
 		});
-		it('should throw an error when given an invalid request type', function () {
-			expect(function () {mlbRequest.build('invalidReq', 'testQuery')})
-				.to.throw('Invalid request type.');
+		it('should return undefined if an invalid request type is provided', function () {
+			let url = mlbRequest.build('invalidReq', 'testQuery');
+
+			expect(url).to.be.undefined;
 		});
 	});
 });

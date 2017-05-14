@@ -1,6 +1,6 @@
 'use strict';
 
-let prunePlayerData = require('./_playerData'),
+let prunePlayerData = require('./_playerInfo'),
 		pruneSearchResults = require('./_searchResults.js'),
 		pruneRosterData = require('./_rosterData'),
 		prunePlayerStats = require('./_playerStats');
@@ -10,7 +10,7 @@ let prunePlayerData = require('./_playerData'),
  * 
  * @private
  * @param {Object} data - The raw data.
- * @throws Throws an error if type of data cannot be determined.
+ * @returns {Object} - The original raw data, if no appropriate pruner exists.
  */
 function pruneHandler(data) {
 
@@ -26,7 +26,7 @@ function pruneHandler(data) {
 		case 'stats':
 			return prunePlayerStats(data);
 		default:
-			throw new Error('Invalid data, cannot prune.');
+			return data;
 	}
 
 }
