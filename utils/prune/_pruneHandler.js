@@ -1,6 +1,6 @@
 'use strict';
 
-let prunePlayerData = require('./_playerData'),
+let prunePlayerData = require('./_playerInfo'),
 		pruneSearchResults = require('./_searchResults.js'),
 		pruneRosterData = require('./_rosterData'),
 		prunePlayerStats = require('./_playerStats');
