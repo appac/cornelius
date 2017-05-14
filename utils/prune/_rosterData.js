@@ -7,7 +7,7 @@ let pruneRosterPlayer = require('./_rosterPlayerData');
  * 
  * @private
  * @param {Object} data - The raw roster data to be pruned.
- * @returns {Object} prunedData - Pruned roster data.
+ * @returns {Array} - Pruned roster data, or an empty array if there's nothing to prune.
  */
 function pruneRosterData(data) {
 	let hasRoster = data.roster_40.queryResults.totalSize > 0;

@@ -10,7 +10,7 @@ let prunePlayerData = require('./_playerInfo'),
  * 
  * @private
  * @param {Object} data - The raw data.
- * @throws Throws an error if type of data cannot be determined.
+ * @returns {Object} - The original raw data, if no appropriate pruner exists.
  */
 function pruneHandler(data) {
 

@@ -5,7 +5,7 @@
  * 
  * @private
  * @param {Object} data - The raw stats data to be pruned.
- * @returns {Object} prunedData - Pruned stats data.
+ * @returns {Object} - Pruned stats, or an empty object if there's nothing to prune.
  */
 function prunePlayerStats(data) {
 

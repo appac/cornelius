@@ -5,7 +5,7 @@
  * 
  * @private
  * @param {Object} data - The raw data to be pruned.
- * @returns {Object} prunedPlayer - Pruned player data.
+ * @returns {Object} - Pruned player data, or an empty object if there's nothing to prune.
  */
 function prunePlayerInfo(data) {
 	let hasPlayer = data.player_info.queryResults.totalSize > 0;

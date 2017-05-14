@@ -5,7 +5,7 @@
  * 
  * @private
  * @param {Object} options - The options to validate.
- * @returns {Error|undefined} - An error or undefined if validation successful.
+ * @returns {Error|undefined} - An error, or undefined if validation successful.
  */
 function validateStatsOptions(options) {
 	let error;

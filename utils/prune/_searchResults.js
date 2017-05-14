@@ -7,7 +7,7 @@ let pruneSearchPlayerData = require('./_searchPlayerData');
  * 
  * @private
  * @param {Object} data - The raw search data to be pruned.
- * @returns {Array} - Pruned player objects.
+ * @returns {Array} - Pruned player objects, or an empty array if there's nothing to prune.
  */
 function pruneSearchResults(data) {
 	let hasResults = data.search_player_all.queryResults.totalSize > 0;
