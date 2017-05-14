@@ -21,6 +21,7 @@ var cornelius = require('cornelius');
 Takes a search term (player name) and returns search results.
 
 `options` can be an object or a string. If it's a string it will return search results of active players that match the search term.
+If the prune flag is set to `true` but there are no search results, you'll get an empty array.
 
 **Parameters**
 
@@ -67,6 +68,7 @@ Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 Takes a player's ID and returns their information.
 
 `options` can be an object or a string. If it's a string, it will return a players raw information.
+If the prune flag is set to `true` but there was no player result, you'll get an empty object.
 
 **Parameters**
 
@@ -95,12 +97,13 @@ Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 Takes a player's ID and returns their stats.
 
 `options` can be an object or a string. If it's a string, it will return the player's latest _hitting_ stats.
+If the prune flag is set to `true` but there's no stats to prune, you'll get an empty object.
 
 **Parameters**
 
 -   `options` **([Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object) \| [string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String))** 
     -   `options.player_id` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** Player's ID.
-    -   `options.year` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** The season to get stats for.
+    -   `options.year` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)?** The season to get stats for.
     -   `options.pitching` **[boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Return pitching stats instead. (optional, default `false`)
     -   `options.prune` **[boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Prune the data. (optional, default `false`)
 
@@ -143,6 +146,7 @@ Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 Takes a team's ID, name, or abbreviated name, and returns their 40 man roster. 
 
 `options` can be an object or a string. If it's a string it will return the roster with short form player objects -- just a name and ID.
+An error message alerts you to an invalid `team_id`.
 
 **Parameters**
 
