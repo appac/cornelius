@@ -18,17 +18,23 @@ let mlbRequest = require('./request'),
 function getStats (options) {
 	validate.getStats(options);
 	return new Promise (function (resolve, reject) {
-		let url;
+		let error = validate.getStats(options);
+		if (error) {
+			reject(error);
+		}
 
-		url = mlbRequest.build('stats', options);
+		let url = mlbRequest.build('stats', options);
+		if (!url) {
+			reject(new Error('Error building sport_[stat_type]_tm request URL.'));
+		}
 
 		mlbRequest.make(url)
 			.then(data => {
 				if (!options.year) {
 					data = find.latestStats(data);
 				}
-				if (options.prune === true) {
-					data = pruneData.handler(data);
+				if (options.prune) {
+					data = pruneData.playerStats(data);
 				}
 				resolve(data);
 			})

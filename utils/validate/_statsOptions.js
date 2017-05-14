@@ -5,7 +5,7 @@
  * 
  * @private
  * @param {Object} options - The options to validate.
- * @returns {Error|undefined} - An error or undefined if validation successful.
+ * @returns {Error|undefined} - An error, or undefined if validation successful.
  */
 function validateStatsOptions(options) {
 	let error;
@@ -28,11 +28,7 @@ function validateStatsOptions(options) {
 		error = new Error(`Expected options to be a string or object, but was given a ${typeof(options)}.`);
 	}
 
-	if (error) {
-		throw error;
-	} else {
-		return;
-	}
+	return error;
 
 }
 

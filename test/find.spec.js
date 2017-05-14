@@ -25,9 +25,9 @@ describe('find', function () {
 			teamID = find.matchingTeamId('121');
 			expect(teamID).to.equal('121');
 		});
-		it('invalid - should throw an error if no matching team was found', function () {
-			expect(function () {find.matchingTeamId('inv')})
-				.to.throw('No team matching the key was found.');
+		it('invalid - should return undefined', function () {
+			let teamID = find.matchingTeamId('inv');
+			expect(teamID).to.be.undefined;
 		});
 	});
 	describe('_latestStats', function () {

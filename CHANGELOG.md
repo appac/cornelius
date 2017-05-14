@@ -3,7 +3,17 @@
 ### Added
 - Player status functionality
 
-## [1.0.0] - 2017-05-01
+## [1.0.1] - 2017-05-15
+### Changed
+- Utility functions no longer throw errors, so *valid* queries that result in no data won't cause terminations.
+	- Ex: If you perform a search with a query that has no resulting players, you'll get an empty array.
+	- Ex: If `prune` can't select an appropriate pruner, it will return the original data.
+	- Ex: If a specific pruner can't find relevant data to prune, it will return an empty object or array depending on the data.
+	- Ex: If `validate` is given invalid options, it will *return* an error that will be used to reject the promise it was called in.
+	- See readme for more details.
+- Pruning of different types of player data has now been seperated out.
+
+## [1.0.0] - 2017-05-12
 ### Added
 - This changelog
 - `getStats` functionality for getting player stats
