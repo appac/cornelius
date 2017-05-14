@@ -24,7 +24,7 @@ function pruneSearchResults(data) {
 				let prunedPlayer = pruneSearchPlayerData(player);
 				prunedResults.push(prunedPlayer);
 			}
-		} else if (resultsCount === 0) {
+		} else {
 			let player = data.search_player_all.queryResults.row;
 			let prunedPlayer = pruneSearchPlayerData(player);
 			prunedResults.push(prunedPlayer);
