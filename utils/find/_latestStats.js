@@ -8,29 +8,15 @@
  * @returns {Object} sport_[stat_type]_tm - Returns a modified version of the stats data.
  */
 function latestStats (data) {
-	let isHittingStats = data.hasOwnProperty('sport_hitting_tm');
-
-	let hasStats;
-	if (isHittingStats) {
-		hasStats = data.sport_hitting_tm.queryResults.totalSize > 0;
-	} else {
-		hasStats = data.sport_pitching_tm.queryResults.totalSize > 0;
-	}
-
+	let statType = data.hasOwnProperty('sport_hitting_tm') ? 'sport_hitting_tm' : 'sport_pitching_tm';
+	let hasStats = data[statType].queryResults.totalSize > 0;
 
 	if (!hasStats) {
 		return data;
 	} else {
-		let latestStats;
-		if (isHittingStats) {
-			latestStats = data.sport_hitting_tm.queryResults.row.pop();
-			data.sport_hitting_tm.queryResults.row = latestStats;
-			data.sport_hitting_tm.queryResults.totalSize = 1;
-		} else {
-			latestStats = data.sport_pitching_tm.queryResults.row.pop();
-			data.sport_pitching_tm.queryResults.row = latestStats;
-			data.sport_pitching_tm.queryResults.totalSize = 1;
-		}
+		let latestStats = data[statType].queryResults.row.pop();
+		data[statType].queryResults.row = latestStats;
+		data[statType].queryResults.totalSize = 1;
 		return data;
 	}
 

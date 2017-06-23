@@ -19,11 +19,7 @@ function matchingPlayerId (data, options) {
 		let playerTeamAbbrev = player.team_abbrev.toUpperCase();
 		let playerName = prepareStringForCompare(player.name_display_first_last);
 
-		if (givenKey === playerID || givenKey === playerTeamAbbrev && givenName === playerName) {
-			return true;
-		} else {
-			return false;
-		}
+		return givenKey === playerID || givenKey === playerTeamAbbrev && givenName === playerName;
 	}
 
 	let results = data.search_player_all.queryResults.row;
