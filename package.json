@@ -1,6 +1,6 @@
 {
   "name": "cornelius",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Get data provided by MLB's public lookup routes.",
   "main": "index.js",
   "scripts": {
