@@ -3,6 +3,11 @@
 ### Added
 - Player status functionality
 
+## [1.0.2] - 2017-07-04
+### Changes
+- On pruning stats data, certain properties are now organised.
+	- Ex: `team_id`, `team_abbrev`, `team_short` etc. are now organised into a `_team` object property.
+
 ## [1.0.1] - 2017-05-15
 ### Changed
 - Utility functions no longer throw errors, so *valid* queries that result in no data won't cause terminations.
