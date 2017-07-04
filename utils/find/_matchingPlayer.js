@@ -20,11 +20,7 @@ function matchingPlayer (data, options) {
 
 	function hasMatchingKey(player) {
 		let keyUpper = key.toUpperCase();
-		if (player.player_id === keyUpper || player.team_abbrev === keyUpper) {
-			return true;
-		} else {
-			return false;
-		}
+		return player.player_id == keyUpper || player.team_abbrev === keyUpper;
 	}
 
 	let results = data.search_player_all.queryResults.row;
