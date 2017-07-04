@@ -16,8 +16,41 @@ function prunePlayerStats(data) {
 		return prunedStats;
 	} else {
 		prunedStats = data[statType].queryResults.row;
+		prunedStats = organiseProps(prunedStats);
+
 		return prunedStats;
 	}
+}
+
+/**
+ * Organises pruned stats properties into associated objects.
+ * 
+ * @private
+ * @param {Object} stats - Pruned stat data.
+ * @returns {Object} - Pruned stat data with properties organised.
+ */
+function organiseProps (stats) {
+	let organisedStats = stats;
+	var props = Object.keys(organisedStats);
+	organisedStats._team = {};
+	organisedStats._league = {};
+	organisedStats._sport = {};
+
+	props.forEach(prop => {
+		let value = stats[prop];
+		if (/team/.test(prop)) {
+			organisedStats._team[prop] = value;
+			delete organisedStats[prop];
+		} else if (/league/.test(prop)) {
+			organisedStats._league[prop] = value;
+			delete organisedStats[prop];
+		} else if (/sport/.test(prop)) {
+			organisedStats._sport[prop] = value;
+			delete organisedStats[prop];
+		}
+	});
+
+	return organisedStats;
 }
 
 module.exports = prunePlayerStats;
