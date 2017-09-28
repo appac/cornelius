@@ -2,6 +2,19 @@ Cornelius lets you grab data from MLB's `/lookup/json` routes.
 
 All of the data Cornelius returns is property of MLB Advanced Media, and subject to their [usage terms](http://gdx.mlb.com/components/copyright.txt).
 
+# Table of Contents
+
+- [Getting Started](#getting-started)
+- [Usage](#usage)
+	-   [cornelius.searchPlayer](#corneliussearchplayer)
+	-   [cornelius.getPlayer](#corneliusgetplayer)
+	-   [cornelius.getStats](#corneliusgetstats)
+	-   [cornelius.getRoster](#corneliusgetroster)
+	-   [cornelius.pruneData](#corneliusprunedata)
+- [Limitations](#limitations)
+- [Development](#development)
+- [Todos](#todos)
+
 # Getting Started
 
 ```sh
