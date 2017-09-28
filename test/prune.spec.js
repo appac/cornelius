@@ -4,13 +4,13 @@ const chai = require('chai'),
 			expect = chai.expect,
 			prune = require('../utils/prune');
 
-let search_player_all = require('./mock/search_player_all.json');
-let player_info = require('./mock/player_info.json');
-let roster_40 = require('./mock/roster_40.json');
-let roster_40_short = require('./mock/roster_40.short.json');
-let sport_hitting_tm = require('./mock/sport_hitting_tm.json');
-let sport_pitching_tm = require('./mock/sport_pitching_tm.json');
-let sport_pitching_tm_empty = require('./mock/sport_pitching_tm_empty.json');
+const search_player_all = require('./mock/search_player_all.json'),
+			player_info = require('./mock/player_info.json'),
+			roster_40 = require('./mock/roster_40.json'),
+			roster_40_short = require('./mock/roster_40.short.json'),
+			sport_hitting_tm = require('./mock/sport_hitting_tm.json'),
+			sport_pitching_tm = require('./mock/sport_pitching_tm.json'),
+			sport_pitching_tm_empty = require('./mock/sport_pitching_tm_empty.json');
 
 describe('prune', function () {
 	it('should return the original data if it\'s invalid', function () {
