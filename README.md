@@ -233,12 +233,27 @@ Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 
 -   **deprecated**: pruneData will be deprecated in future versions. Switch to providing a `prune` flag to `options`.
 
-
 # Limitations
 
 ## No extensive pruning on stats
 
 Pruning aims to make the data you get easier to navigate and work with. Cornelius will strip extraneous properties and structure from stats data if `prune` is set to true, but anything more intensive than this would be highly opinionated and not necessarily any easier to navigate.
+
+# Development
+
+## Generating Data for Testing
+
+For now, Cornelius uses a simple script to get and save data from each of the main endpoints it works with. This data is stored in the `test/mock` directory, which will be created if it does not already exist.
+
+This step is required before proper testing can be done.
+
+```javascript
+npm run test-data-gen
+```
+
+## Tests
+
+Once you've generated data for testing, you can run tests with `npm test`.
 
 # Todos
 
