@@ -1,15 +1,7 @@
 'use strict';
 
 let fs = require('fs'),
-		http = require('http');
-
-fs.stat(__dirname + '/mock', (err, stats) => {
-	if (err) {
-		if (err.code == 'ENOENT') {
-			fs.mkdirSync(__dirname + '/mock');
-		}
-	}
-});
+	http = require('http');
 
 const endpoints = [
 	{
@@ -42,36 +34,62 @@ const endpoints = [
 	}
 ];
 
-endpoints.forEach( (endpoint) => {
-	http.get(endpoint.url, (res) => {
-		const { statusCode } = res;
-		const contentType = res.headers['content-type'];
-	
-		let error;
-		if (statusCode !== 200) {
-			error = new Error('Request Failed.\n' +
-												`Status Code: ${statusCode}`);
-		} else if (!/^application\/json/.test(contentType)) {
-			error = new Error('Invalid content-type.\n' +
-												`Expected application/json but received ${contentType}`);
-		}
-		if (error) {
-			console.error(error.message);
-			res.resume();
-			return;
-		}
-	
-		res.setEncoding('utf8');
+let directory = __dirname + '/mock';
+fs.stat(directory, (err) => {
 
-		let writeStream = fs.createWriteStream(`${__dirname}/mock/${endpoint.name}.json`, 'utf8');
-		res.on('data', (chunk) => { writeStream.write(chunk); });
-		res.on('end', () => {
-			writeStream.end();
+	if (err) {
+		if (err.code == 'ENOENT') {
+			fs.mkdir(directory, (err) => {
+				if (err) {
+					throw new Error(err.message);
+				}
+			});
+		}
+	}
+
+	endpoints.forEach( (endpoint) => {
+
+		let currentFileName = endpoint.name + '.json';
+		let currentFile = `${directory}/${currentFileName}`;
+
+		fs.stat(currentFile, (err, stats) => {
+			if (err) {
+				if (err.code === 'ENOENT') {
+					createFile(endpoint, currentFile);
+				}
+			} else if (stats.size === 0) {
+				createFile(endpoint, currentFile);
+			}
 		});
 
-	}).on('error', (error) => {
-		console.log(`Error making request: ${error.message}`);
 	});
+
 });
 
-console.log('Mock data generation completed.');
+function createFile (endpoint, currentFile) {
+	http.get(endpoint.url, (res) => {
+		const {statusCode} = res;
+		const contentType = res.headers['content-type'];
+
+		let error;
+		if (statusCode !== 200) {
+			error = new Error('Request Failed.\n' + `Status Code: ${statusCode}`);
+		} else if (!/^application\/json/.test(contentType)) {
+			error = new Error('Invalid content-type.\n' + `Expected application/json but received ${contentType}`);
+		}
+
+		if (error) {
+			res.resume();
+			throw new Error(error.message);
+		}
+
+		res.setEncoding('utf8');
+		let writeStream = fs.createWriteStream(currentFile, 'utf8');
+		res.on('data', (chunk) => { writeStream.write(chunk); });
+		res.on('end', () => { 
+			writeStream.end();
+		});
+	}).on('error', (error) => {
+		throw new Error(`Error making request: ${error.message}`);
+	});
+}
