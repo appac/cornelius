@@ -254,19 +254,11 @@ Pruning aims to make the data you get easier to navigate and work with. Corneliu
 
 # Development
 
-## Generating Data for Testing
-
-For now, Cornelius uses a simple script to get and save data from each of the main endpoints it works with. This data is stored in the `test/mock` directory, which will be created if it does not already exist.
-
-This step is required before proper testing can be done.
-
-```javascript
-npm run test-data-gen
-```
-
 ## Tests
 
-Once you've generated data for testing, you can run tests with `npm test`.
+Run `npm test`. 
+
+The `pretest` script will make GET requests to MLB endpoints and save the response data locally for testing, in the `test/mock` directory. If you need fresh data, deleting a file within, or the entire `test/mock` directory, will cause it to be regnerated.
 
 # Todos
 
