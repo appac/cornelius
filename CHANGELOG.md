@@ -3,8 +3,13 @@
 ### Added
 - Player status functionality
 
+## [1.1.1] - 2017-09-28
+### Changed
+- Data used to test against is now generated via requests to MLB, and is no longer distributed with Cornelius.
+ - See the 'Development' section of the readme for more information.
+
 ## [1.1.0] - 2017-07-04
-### Changes
+### Changed
 - On pruning stats data, certain properties are now organised.
 	- Ex: `team_id`, `team_abbrev`, `team_short` etc. are now organised into a `_team` object property.
 
