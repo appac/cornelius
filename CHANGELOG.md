@@ -7,6 +7,8 @@
 ### Changed
 - Data used to test against is now generated via requests to MLB, and is no longer distributed with Cornelius.
  - See the 'Development' section of the readme for more information.
+- Switched from jshint to eslint
+	- Files were tidied to meet new eslint rules
 
 ## [1.1.0] - 2017-07-04
 ### Changed
