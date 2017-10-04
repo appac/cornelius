@@ -4,8 +4,8 @@
   "description": "Get data provided by MLB's public lookup routes.",
   "main": "index.js",
   "scripts": {
-		"test-data-gen": "node test/mock.gen.js",
-		"test": "mocha --reporter spec"
+    "pretest": "node test/mock.gen.js",
+    "test": "mocha --reporter spec"
   },
   "repository": {
     "type": "git",
