@@ -1,8 +1,8 @@
 'use strict';
 
 const chai = require('chai'),
-			expect = chai.expect,
-			mlbRequest = require('../utils/mlb/request');
+	expect = chai.expect,
+	mlbRequest = require('../utils/mlb/request');
 
 describe('mlb', function () {
 	describe('_requestBuilder', function () {

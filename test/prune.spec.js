@@ -1,16 +1,16 @@
 'use strict';
 
 const chai = require('chai'),
-			expect = chai.expect,
-			prune = require('../utils/prune');
+	expect = chai.expect,
+	prune = require('../utils/prune');
 
 const search_player_all = require('./mock/search_player_all.json'),
-			player_info = require('./mock/player_info.json'),
-			roster_40 = require('./mock/roster_40.json'),
-			roster_40_short = require('./mock/roster_40.short.json'),
-			sport_hitting_tm = require('./mock/sport_hitting_tm.json'),
-			sport_pitching_tm = require('./mock/sport_pitching_tm.json'),
-			sport_pitching_tm_empty = require('./mock/sport_pitching_tm_empty.json');
+	player_info = require('./mock/player_info.json'),
+	roster_40 = require('./mock/roster_40.json'),
+	roster_40_short = require('./mock/roster_40.short.json'),
+	sport_hitting_tm = require('./mock/sport_hitting_tm.json'),
+	sport_pitching_tm = require('./mock/sport_pitching_tm.json'),
+	sport_pitching_tm_empty = require('./mock/sport_pitching_tm_empty.json');
 
 describe('prune', function () {
 	it('should return the original data if it\'s invalid', function () {
@@ -39,9 +39,9 @@ describe('prune', function () {
 				.that.is.an('object')
 				.that.deep.equals({
 					full: 'David Wright',
-     			first: 'David',
-     			last: 'Wright',
-     			roster: 'Wright'
+					first: 'David',
+					last: 'Wright',
+					roster: 'Wright'
 				});
 		});
 	});

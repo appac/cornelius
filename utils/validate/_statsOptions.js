@@ -14,7 +14,7 @@ function validateStatsOptions(options) {
 		error = new Error('No options provided.');
 	} else if (typeof options === 'object') {
 		if (!options.player_id) {
-			error = new Error(`No player_id provided.`);
+			error = new Error('No player_id provided.');
 		} else if (typeof options.player_id !== 'string') {
 			error = new Error(`Expected player_id to be a string, but was given a ${typeof(options.player_id)}.`);
 		} else if (options.pitching && typeof options.pitching !== 'boolean') {

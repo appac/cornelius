@@ -1,8 +1,8 @@
 'use strict';
 
 const chai = require('chai'),
-			expect = chai.expect,
-			validate = require('../utils/validate');
+	expect = chai.expect,
+	validate = require('../utils/validate');
 
 describe('validate', function () {
 	describe('_getOptions', function () {
@@ -58,7 +58,7 @@ describe('validate', function () {
 			});
 			it('options is an invalid type', function () {
 				let options = 12345;
-				let expectedErrMessage = `Expected options to be a string or object, but was given a ${typeof(options)}.`
+				let expectedErrMessage = `Expected options to be a string or object, but was given a ${typeof(options)}.`;
 				let error = validate.getRoster(options);
 
 				expect(error).to.be.an('Error', expectedErrMessage);

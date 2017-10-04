@@ -1,9 +1,8 @@
 'use strict';
 
 let mlbRequest = require('./request'),
-		find = require('../find'),
-		pruneData = require('../prune'),
-		validate = require('../validate');
+	pruneData = require('../prune'),
+	validate = require('../validate');
 
 /**
  * Constructs and makes call to MLB for getting a player.

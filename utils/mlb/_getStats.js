@@ -1,9 +1,9 @@
 'use strict';
 
 let mlbRequest = require('./request'),
-		find = require('../find'),
-		pruneData = require('../prune'),
-		validate = require('../validate');
+	find = require('../find'),
+	pruneData = require('../prune'),
+	validate = require('../validate');
 
 /**
  * Constructs and makes call to MLB for stats.

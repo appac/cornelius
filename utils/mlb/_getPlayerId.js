@@ -1,7 +1,7 @@
 'use strict';
 
 let mlbRequest = require('./request'),
-		find = require('../find');
+	find = require('../find');
 
 /**
  * Constructs and makes call to MLB for getting a player's ID. This function is basically a search that we then look through the results for.

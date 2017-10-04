@@ -1,10 +1,9 @@
 'use strict';
 
 const chai = require('chai'),
-			expect = chai.expect,
-			find = require('../utils/find');
+	expect = chai.expect,
+	find = require('../utils/find');
 
-let search_player_all = require('./mock/search_player_all.json');
 let sport_hitting_tm = require('./mock/sport_hitting_tm.json');
 let sport_pitching_tm = require('./mock/sport_pitching_tm.json');
 

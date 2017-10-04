@@ -13,7 +13,7 @@
 function matchingPlayer (data, options) {
 	let key = options.key;
 	if (!key) {
-		return new Error(`No key provided.`);
+		return new Error('No key provided.');
 	} else if (typeof (key) !== 'string') {
 		return new Error(`Expected key to be a string, but was given a ${typeof(key)}.`);
 	}
@@ -37,7 +37,6 @@ function matchingPlayer (data, options) {
 
 	data.search_player_all.queryResults.totalSize = 1;
 	
-	let error;
 	let gotName = requestedPlayer.name_display_first_last.toUpperCase();
 	let expectedName = options.query.toUpperCase();
 

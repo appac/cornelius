@@ -1,7 +1,7 @@
 'use strict';
 
 const http = require('http'),
-			Promise = require('bluebird');
+	Promise = require('bluebird');
 
 /**
  * Makes the request to MLB.

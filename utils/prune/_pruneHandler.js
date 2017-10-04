@@ -1,9 +1,9 @@
 'use strict';
 
 let prunePlayerData = require('./_playerInfo'),
-		pruneSearchResults = require('./_searchResults.js'),
-		pruneRosterData = require('./_rosterData'),
-		prunePlayerStats = require('./_playerStats');
+	pruneSearchResults = require('./_searchResults.js'),
+	pruneRosterData = require('./_rosterData'),
+	prunePlayerStats = require('./_playerStats');
 
 /**
  * Checks the type of data, hands it off to appropriate pruner.
@@ -17,16 +17,16 @@ function pruneHandler(data) {
 	let typeOfData = checkTypeOfData(data);
 
 	switch (typeOfData) {
-		case 'player':
-			return prunePlayerData(data);
-		case 'search':
-			return pruneSearchResults(data);
-		case 'roster':
-			return pruneRosterData(data);
-		case 'stats':
-			return prunePlayerStats(data);
-		default:
-			return data;
+	case 'player':
+		return prunePlayerData(data);
+	case 'search':
+		return pruneSearchResults(data);
+	case 'roster':
+		return pruneRosterData(data);
+	case 'stats':
+		return prunePlayerStats(data);
+	default:
+		return data;
 	}
 
 }

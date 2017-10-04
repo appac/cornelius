@@ -14,7 +14,7 @@ function validateSearchOptions(options) {
 		error = new Error('No options provided.');
 	} else if (typeof options === 'object') {
 		if (!options.query) {
-			error = new Error(`No query provided.`);
+			error = new Error('No query provided.');
 		} else if (typeof options.query !== 'string') {
 			error = new Error(`Expected query to be a string, but was given a ${typeof(options.query)}.`);
 		} else if (options.active && typeof options.active !== 'boolean') {
