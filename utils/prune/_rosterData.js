@@ -11,34 +11,22 @@ let pruneFullRosterPlayerData = require('./_rosterPlayerData'),
  * @returns {Array} - Pruned roster data, or an empty array if there's nothing to prune.
  */
 function pruneRosterData(data) {
-	let hasRoster = data.roster_40.queryResults.totalSize > 0;
-	let prunedRoster = [];
+	const roster = {
+		exists: data.roster_40.queryResults.totalSize > 0,
+		data: data.roster_40.queryResults.row
+	};
 
-	if (!hasRoster) {
-		return prunedRoster;
-	} else {
-		let roster = data.roster_40.queryResults.row;
-		let hasFullPlayerData = roster[0].hasOwnProperty('pro_debut_date');
-
-		if (hasFullPlayerData) {
-			for (let i = 0; i < roster.length; i++) {
-				let player = roster[i];
-				let prunedPlayer = pruneRosterPlayer(player);
-				prunedRoster.push(prunedPlayer);
-			}
-		} else {
-			for (let i = 0; i < roster.length; i++) {
-				let player = roster[i];
-				let prunedPlayer = {
-					id: player.player_id,
-					name: player.name_display_first_last
-				};
-				prunedRoster.push(prunedPlayer);
-			}
-		}
-		return prunedRoster;
+	if (!roster.exists) {
+		return [];
 	}
-	
+
+	// Only full player data has a 'pro_debut_date' property - use that to verify what we're working with
+	const hasFullPlayerData = roster.data[0].hasOwnProperty('pro_debut_date');
+	if (hasFullPlayerData) {
+		return roster.data.map(pruneFullRosterPlayerData);
+	} else {
+		return roster.data.map(pruneShortRosterPlayerData);
+	}
 }
 
 module.exports = pruneRosterData;
