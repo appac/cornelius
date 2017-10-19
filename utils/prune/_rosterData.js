@@ -1,6 +1,7 @@
 'use strict';
 
-let pruneRosterPlayer = require('./_rosterPlayerData');
+let pruneFullRosterPlayerData = require('./_rosterPlayerData'),
+	pruneShortRosterPlayerData = require('./_rosterPlayerDataShort');
 
 /**
  * Prunes roster data.
