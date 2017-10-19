@@ -28,7 +28,7 @@
     "chai": "^3.5.0",
     "chai-as-promised": "^6.0.0",
     "eslint": "^4.9.0",
-    "eslint-config-google": "^0.9.1",
+    "eslint-config-crockford": "^2.0.0",
     "mocha": "^3.2.0",
     "rewire": "^2.5.2"
   }
