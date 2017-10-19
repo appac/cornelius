@@ -1,9 +1,9 @@
 'use strict';
 
 let prunePlayerData = require('./_playerInfo'),
-	pruneSearchResults = require('./_searchResults.js'),
-	pruneRosterData = require('./_rosterData'),
-	prunePlayerStats = require('./_playerStats');
+    pruneSearchResults = require('./_searchResults.js'),
+    pruneRosterData = require('./_rosterData'),
+    prunePlayerStats = require('./_playerStats');
 
 /**
  * Checks the type of data, hands it off to appropriate pruner.
@@ -14,20 +14,20 @@ let prunePlayerData = require('./_playerInfo'),
  */
 function pruneHandler(data) {
 
-	let typeOfData = checkTypeOfData(data);
+    let typeOfData = checkTypeOfData(data);
 
-	switch (typeOfData) {
-	case 'player':
-		return prunePlayerData(data);
-	case 'search':
-		return pruneSearchResults(data);
-	case 'roster':
-		return pruneRosterData(data);
-	case 'stats':
-		return prunePlayerStats(data);
-	default:
-		return data;
-	}
+    switch (typeOfData) {
+    case 'player':
+        return prunePlayerData(data);
+    case 'search':
+        return pruneSearchResults(data);
+    case 'roster':
+        return pruneRosterData(data);
+    case 'stats':
+        return prunePlayerStats(data);
+    default:
+        return data;
+    }
 
 }
 /**
@@ -38,22 +38,22 @@ function pruneHandler(data) {
  * @returns {string} - A string denoting the type of data it was given.
  */
 function checkTypeOfData(data) {
-	let isPlayerData = data.hasOwnProperty('player_id') || data.hasOwnProperty('player_info');
-	let isSearchResults = data.hasOwnProperty('search_player_all');
-	let isRosterData = data.hasOwnProperty('roster_40');
-	let isPlayerStats = data.hasOwnProperty('sport_hitting_tm') || data.hasOwnProperty('sport_pitching_tm');
+    let isPlayerData = data.hasOwnProperty('player_id') || data.hasOwnProperty('player_info');
+    let isSearchResults = data.hasOwnProperty('search_player_all');
+    let isRosterData = data.hasOwnProperty('roster_40');
+    let isPlayerStats = data.hasOwnProperty('sport_hitting_tm') || data.hasOwnProperty('sport_pitching_tm');
 
-	if (isPlayerData) {
-		return 'player';
-	} else if (isSearchResults) {
-		return 'search';
-	} else if (isRosterData) {
-		return 'roster';
-	} else if (isPlayerStats) {
-		return 'stats';
-	} else {
-		return;
-	}
+    if (isPlayerData) {
+        return 'player';
+    } else if (isSearchResults) {
+        return 'search';
+    } else if (isRosterData) {
+        return 'roster';
+    } else if (isPlayerStats) {
+        return 'stats';
+    } else {
+        return;
+    }
 
 }
 
