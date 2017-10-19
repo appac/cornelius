@@ -5,21 +5,20 @@
  *
  * @private
  * @param {Object} data - The stats data to look through.
- * @returns {Object} sport_[stat_type]_tm - Returns a modified version of the stats data.
+ * @return {Object} sport_[stat_type]_tm - Returns a modified version of the stats data.
  */
-function latestStats (data) {
-	let statType = data.hasOwnProperty('sport_hitting_tm') ? 'sport_hitting_tm' : 'sport_pitching_tm';
-	let hasStats = data[statType].queryResults.totalSize > 0;
+function latestStats(data) {
+    let statType = data.hasOwnProperty('sport_hitting_tm') ? 'sport_hitting_tm' : 'sport_pitching_tm';
+    let hasStats = data[statType].queryResults.totalSize > 0;
 
-	if (!hasStats) {
-		return data;
-	} else {
-		let latestStats = data[statType].queryResults.row.pop();
-		data[statType].queryResults.row = latestStats;
-		data[statType].queryResults.totalSize = 1;
-		return data;
-	}
-
+    if (!hasStats) {
+        return data;
+    } else {
+        let latestStats = data[statType].queryResults.row.pop();
+        data[statType].queryResults.row = latestStats;
+        data[statType].queryResults.totalSize = 1;
+        return data;
+    }
 }
 
 module.exports = latestStats;

@@ -1,28 +1,15 @@
 {
+    "extends": "crockford",
     "env": {
-        "es6": true,
-				"node": true,
-				"mocha": true
+        "node": true,
+        "mocha": true,
+        "es6": true
     },
-    "extends": "eslint:recommended",
     "rules": {
-        "indent": [
-            "error",
-            "tab"
-        ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "quotes": [
-            "error",
-            "single"
-        ],
-        "semi": [
-            "error",
-            "always"
-				],
-				"no-mixed-spaces-and-tabs": "error",
-				"strict": "error"
+       "valid-jsdoc": "error",
+       "max-len": "error",
+       "max-depth": "error",
+       "eol-last": "error",
+       "no-trailing-spaces": "error"
     }
 }

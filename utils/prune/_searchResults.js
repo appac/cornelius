@@ -10,23 +10,23 @@ let pruneSearchPlayerData = require('./_searchPlayerData');
  * @returns {Array} - Pruned player objects, or an empty array if there's nothing to prune.
  */
 function pruneSearchResults(data) {
-	let hasResults = data.search_player_all.queryResults.totalSize > 0;
-	let prunedResults = [];
+    let hasResults = data.search_player_all.queryResults.totalSize > 0;
+    let prunedResults = [];
 
-	if (!hasResults) {
-		return prunedResults;
-	} else {
-		let resultsCount = data.search_player_all.queryResults.totalSize;
-		if (resultsCount > 1) {
-			let searchResults = data.search_player_all.queryResults.row;
-			prunedResults = searchResults.map(pruneSearchPlayerData);
-		} else {
-			let player = data.search_player_all.queryResults.row;
-			let prunedPlayer = pruneSearchPlayerData(player);
-			prunedResults.push(prunedPlayer);
-		}
-		return prunedResults;
-	}
+    if (!hasResults) {
+        return prunedResults;
+    } else {
+        let resultsCount = data.search_player_all.queryResults.totalSize;
+        if (resultsCount > 1) {
+            let searchResults = data.search_player_all.queryResults.row;
+            prunedResults = searchResults.map(pruneSearchPlayerData);
+        } else {
+            let player = data.search_player_all.queryResults.row;
+            let prunedPlayer = pruneSearchPlayerData(player);
+            prunedResults.push(prunedPlayer);
+        }
+        return prunedResults;
+    }
 
 }
 
