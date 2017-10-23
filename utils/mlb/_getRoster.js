@@ -3,7 +3,7 @@
 let mlbRequest = require('./request'),
     find = require('../find'),
     pruneData = require('../prune'),
-    validate = require('../validate');
+    validate = require('../validator');
 
 /**
  * Constructs and makes call to MLB for a roster.
@@ -17,12 +17,14 @@ let mlbRequest = require('./request'),
  */
 function getRoster(options) {
     return new Promise(function (resolve, reject) {
-        let error = validate.getRoster(options);
-        if (error) {
-            reject(error);
-        }
+        validate.rosterOptions(options, (err) => {
+            if (err) {
+                reject(err);
+            }
+        });
 
         let teamID = find.matchingTeamId(options.team_id || options);
+        
         if (!teamID) {
             reject(`No team matching '${options.team_id || options}' was found.`);
         }

@@ -2,7 +2,7 @@
 
 let mlbRequest = require('./request'),
     pruneData = require('../prune'),
-    validate = require('../validate');
+    validate = require('../validator');
 
 /**
  * Constructs and makes call to MLB for getting a player.
@@ -15,11 +15,11 @@ let mlbRequest = require('./request'),
  */
 function getPlayer(options) {
     return new Promise(function (resolve, reject) {
-        let error = validate.getPlayer(options);
-
-        if (error) {
-            reject(error);
-        }
+        validate.playerOptions(options, (err) => {
+            if (err) {
+                reject(err);
+            }
+        });
 
         let url = mlbRequest.build('get', options);
 

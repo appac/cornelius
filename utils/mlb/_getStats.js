@@ -3,7 +3,7 @@
 let mlbRequest = require('./request'),
     find = require('../find'),
     pruneData = require('../prune'),
-    validate = require('../validate');
+    validate = require('../validator');
 
 /**
  * Constructs and makes call to MLB for stats.
@@ -18,12 +18,14 @@ let mlbRequest = require('./request'),
 function getStats(options) {
     validate.getStats(options);
     return new Promise (function (resolve, reject) {
-        let error = validate.getStats(options);
-        if (error) {
-            reject(error);
-        }
+        validate.statsOptions(options, (err) => {
+            if (err) {
+                reject(err);
+            }
+        });
 
         let url = mlbRequest.build('stats', options);
+        
         if (!url) {
             reject(new Error('Error building sport_[stat_type]_tm request URL.'));
         }
