@@ -2,7 +2,7 @@
 
 let mlbRequest = require('./request'),
     find = require('../find'),
-    pruneData = require('../pruner'),
+    prune = require('../prune'),
     validate = require('../validate');
 
 /**

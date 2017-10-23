@@ -2,9 +2,9 @@
 
 const chai = require('chai'),
     expect = chai.expect,
-    prune = require('../utils/pruner');
+    prune = require('../utils/prune');
 
-describe('pruner', () => {
+describe('prune', () => {
     it('should return an error when given invalid data', () => {
         const data = { some: 'invalid data' },
             prunedData = prune(data);
