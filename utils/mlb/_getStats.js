@@ -2,7 +2,7 @@
 
 let mlbRequest = require('./request'),
     find = require('../find'),
-    pruneData = require('../prune'),
+    pruneData = require('../pruner'),
     validate = require('../validate');
 
 /**
@@ -36,7 +36,7 @@ function getStats(options) {
                     data = find.latestStats(data);
                 }
                 if (options.prune) {
-                    data = pruneData.playerStats(data);
+                    data = pruneData(data);
                 }
                 resolve(data);
             })
