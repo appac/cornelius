@@ -3,7 +3,7 @@
 let mlbRequest = require('./request'),
     find = require('../find'),
     pruneData = require('../prune'),
-    validate = require('../validator');
+    validate = require('../validate');
 
 /**
  * Constructs and makes call to MLB for a roster.

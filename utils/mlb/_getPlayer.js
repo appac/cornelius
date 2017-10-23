@@ -2,7 +2,7 @@
 
 let mlbRequest = require('./request'),
     pruneData = require('../prune'),
-    validate = require('../validator');
+    validate = require('../validate');
 
 /**
  * Constructs and makes call to MLB for getting a player.
