@@ -1,5 +1,14 @@
 'use strict';
 
+/**
+ * Given an array of search results, or single search result object,
+ * returns a pruned/restructured copy.
+ * 
+ * If given an array, uses array.map to process each object in the array.
+ * 
+ * @param {Object|Array} data - Raw search results. 
+ * @return {Object|Array} - Pruned/restructured search results.
+ */
 function pruneSearchData(data) {
     function restructure(data) {
         return {
@@ -50,6 +59,13 @@ function pruneSearchData(data) {
     }
 }
 
+/**
+ * Given a `player_info` object, returns a pruned copy.
+ * 
+ * @param {Object} data - Raw player data. 
+ * @return {Object} - Pruned/restructured player data.
+ * 
+ */
 function prunePlayerInfo(data) {
     function restructure(data) {
         return {
@@ -103,6 +119,16 @@ function prunePlayerInfo(data) {
     return restructure(data);
 }
 
+/**
+ * Given an `roster_40` array, returns a pruned/restructured copy. 
+ * 
+ * This function also handles short form roster data (just a name and ID for each player).
+ * It determines short form roster data by looking for a `pro_debut_date` property on the
+ * first element of the roster array. This property is only present on full/long form roster data.
+ * 
+ * @param {Array} data - Raw roster data.
+ * @return {Array} - Pruned/restructured roster data.
+ */
 function pruneRosterData(data) {
     function restructure(data) {
         return {
@@ -158,6 +184,16 @@ function pruneRosterData(data) {
 
 }
 
+/**
+ * Given either a `sport_hitting_tm` or `sport_pitching_tm` stats data object,
+ * returns a pruned/restructured copy.
+ * 
+ * Typically this function will only receive a single stats object to prune,
+ * but if it does receive an array of objects, they are handled via array.map.
+ * 
+ * @param {Object} data - Raw stat data.
+ * @return {Object|Array} - Pruned/restructured stats data.
+ */
 function pruneStatData(data) {
     function restructure(data) {
         const props = Object.keys(data),
@@ -191,13 +227,16 @@ function pruneStatData(data) {
 }
 
 /**
- * Takes in some raw MLB data, and prunes it.
+ * Given a raw MLB data object, determines what type of data it is
+ * by checking the first property on the object. 
+ * 
+ * The object is then passed on to an appropriate pruner, or an
+ * error is returned (to be thrown by the caller) if none can be found.
  * 
  * @private
  * @param {Object} rawData - Raw MLB data.
  * @returns {Object|Array} - Returns an object or array of objects.
  */
-
 function pruneHandler(rawData) {
     const dataType = Object.keys(rawData)[0];
 
