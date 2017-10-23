@@ -15,11 +15,11 @@ let mlbRequest = require('./request'),
  */
 function getPlayer(options) {
     return new Promise(function (resolve, reject) {
-        let error = validate.getPlayer(options);
-
-        if (error) {
-            reject(error);
-        }
+        validate.playerOptions(options, (err) => {
+            if (err) {
+                reject(err);
+            }
+        });
 
         let url = mlbRequest.build('get', options);
 
