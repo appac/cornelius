@@ -1,7 +1,7 @@
 'use strict';
 
 let mlbRequest = require('./request'),
-    pruneData = require('../prune'),
+    pruneData = require('../pruner'),
     validate = require('../validate');
 
 /**
@@ -30,7 +30,7 @@ function getPlayer(options) {
         mlbRequest.make(url)
             .then(data => {
                 if (options.prune === true) {
-                    data = pruneData.playerInfo(data);
+                    data = pruneData(data);
                 }
                 resolve(data);
             })

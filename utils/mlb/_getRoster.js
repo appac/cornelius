@@ -2,7 +2,7 @@
 
 let mlbRequest = require('./request'),
     find = require('../find'),
-    pruneData = require('../prune'),
+    pruneData = require('../pruner'),
     validate = require('../validate');
 
 /**
@@ -43,7 +43,7 @@ function getRoster(options) {
         mlbRequest.make(url)
             .then(data => {
                 if (options.prune === true) {
-                    data = pruneData.roster(data);
+                    data = pruneData(data);
                 }
                 resolve(data);
             })
