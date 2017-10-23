@@ -8,9 +8,10 @@
  * 
  * @private
  * @param {Object} options - The options to validate.
+ * @param {Function} cb - Callback once all validation is complete.
  * @returns {Error|null} - An error, or null if validation successful.
  */
-function validateSearchOptions(options) {
+function validateSearchOptions(options, cb) {
     let error = null;
 
     if (!options) {
@@ -28,7 +29,7 @@ function validateSearchOptions(options) {
     } else if (typeof options !== 'string') {
         error = new Error(`Expected options to be a string or object, but was given a ${typeof (options)}.`);
     }
-    return error;
+    cb(error);
 }
 
 /**
@@ -39,9 +40,10 @@ function validateSearchOptions(options) {
  * 
  * @private
  * @param {Object} options - The options to validate.
+ * @param {Function} cb - Callback once all validation is complete.
  * @returns {Error|undefined} - An error, or null if validation successful.
  */
-function validateGetOptions(options) {
+function validateGetOptions(options, cb) {
     let error = null;
 
     if (!options) {
@@ -57,7 +59,7 @@ function validateGetOptions(options) {
     } else if (typeof options !== 'string') {
         error = new Error(`Expected options to be a string or object, but was given a ${typeof (options)}.`);
     }
-    return error;
+    cb(error);
 }
 
 /**
@@ -68,9 +70,10 @@ function validateGetOptions(options) {
  * 
  * @private
  * @param {Object} options - The options to validate.
+ * @param {Function} cb - Callback once all validation is complete.
  * @returns {Error|undefined} - An error, or null if validation successful.
  */
-function validateRosterOptions(options) {
+function validateRosterOptions(options, cb) {
     let error = null;
 
     if (!options) {
@@ -88,7 +91,7 @@ function validateRosterOptions(options) {
     } else if (typeof options !== 'string') {
         error = new Error(`Expected options to be a string or object, but was given a ${typeof (options)}.`);
     }
-    return error;
+    cb(error);
 }
 
 /**
@@ -99,9 +102,10 @@ function validateRosterOptions(options) {
  * 
  * @private
  * @param {Object} options - The options to validate.
+ * @param {Function} cb - Callback once all validation is complete.
  * @returns {Error|undefined} - An error, or null if validation successful.
  */
-function validateStatsOptions(options) {
+function validateStatsOptions(options, cb) {
     let error = null;
 
     if (!options) {
@@ -121,7 +125,7 @@ function validateStatsOptions(options) {
     } else if (typeof options !== 'string') {
         error = new Error(`Expected options to be a string or object, but was given a ${typeof (options)}.`);
     }
-    return error;
+    cb(error);
 }
 
 module.exports = {
