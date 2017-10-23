@@ -10,7 +10,7 @@ describe('pruner', () => {
             prunedData = prune(data);
         expect(prunedData).to.be.an('Error', 'Data did not match any expected pruneable structure.');
     });
-    it('should return an array of pruned results when given data from "search_player_all"', () => {
+    it('should return an array of pruned results when given search results', () => {
         const data = require('./mock/search_player_all.json'),
             prunedData = prune(data),
             prunedResult = prunedData[0];
