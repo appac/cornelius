@@ -55,7 +55,9 @@ function pruneSearchData(data) {
     if (data.length > 1) {
         return data.map(restructure);
     } else {
-        return restructure(data);
+        const arr = [];
+        arr.push(restructure(data));
+        return arr;
     }
 }
 
@@ -222,7 +224,9 @@ function pruneStatData(data) {
     if (data.length > 1) {
         return data.map(restructure);
     } else {
-        return restructure(data);
+        const arr = [];
+        arr.push(restructure(data));
+        return arr;
     }
 }
 
