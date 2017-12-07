@@ -16,7 +16,6 @@ let mlbRequest = require('./request'),
  * @returns {Promise} - Promise to be fulfilled with player stats object, or error.
  */
 function getStats(options) {
-    validate.getStats(options);
     return new Promise (function (resolve, reject) {
         validate.statsOptions(options, (err) => {
             if (err) {
