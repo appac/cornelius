@@ -204,19 +204,29 @@ function pruneStatData(data) {
                 team: {},
                 league: {},
                 sport: {}
-            };
+            },
+            patterns = [/team/, /league/, /sport/],
+            [teamPattern, leaguePattern, sportPattern] = patterns;
 
         return props.reduce((restructured, prop) => {
-            if (/team/.test(prop)) {
-                restructured.team[prop] = data[prop];
-            } else if (/league/.test(prop)) {
-                restructured.league[prop] = data[prop];
-            } else if (/sport/.test(prop)) {
-                restructured.sport[prop] = data[prop];
-            } else if (prop === 'player_id') {
-                restructured.id = data[prop];
+            if (/team|league|sport/.test(prop)) {
+                if (teamPattern.test(prop)) {
+                    restructured.team[prop] = data[prop];
+                } else if (leaguePattern.test(prop)) {
+                    if (prop === 'league') {
+                        restructured.league.league_abbrev = data[prop];
+                    } else {
+                        restructured.league[prop] = data[prop];
+                    }
+                } else if (sportPattern.test(prop)) {
+                    restructured.sport[prop] = data[prop];
+                }
             } else {
-                restructured[prop] = data[prop];
+                if (prop === 'player_id') {
+                    restructured.id = data[prop];
+                } else {
+                    restructured[prop] = data[prop];
+                }
             }
             return restructured;
         }, restruct);
