@@ -5,7 +5,7 @@
  * returns a pruned/restructured copy.
  * 
  * If given an array, uses array.map to process each object in the array.
- * 
+ * @private
  * @param {Object|Array} data - Raw search results. 
  * @return {Object|Array} - Pruned/restructured search results.
  */
@@ -65,7 +65,7 @@ function pruneSearchData(data) {
 
 /**
  * Given a `player_info` object, returns a pruned copy.
- * 
+ * @private
  * @param {Object} data - Raw player data. 
  * @return {Object} - Pruned/restructured player data.
  * 
@@ -133,7 +133,7 @@ function prunePlayerInfo(data) {
  * This function also handles short form roster data (just a name and ID for each player).
  * It determines short form roster data by looking for a `pro_debut_date` property on the
  * first element of the roster array. This property is only present on full/long form roster data.
- * 
+ * @private
  * @param {Array} data - Raw roster data.
  * @return {Array} - Pruned/restructured roster data.
  */
@@ -200,7 +200,7 @@ function pruneRosterData(data) {
  * 
  * Typically this function will only receive a single stats object to prune,
  * but if it does receive an array of objects, they are handled via array.map.
- * 
+ * @private
  * @param {Object} data - Raw stat data.
  * @return {Object|Array} - Pruned/restructured stats data.
  */
