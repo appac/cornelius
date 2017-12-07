@@ -35,7 +35,7 @@ function getStats(options) {
                     data = find.latestStats(data);
                 }
                 if (options.prune) {
-                    data = pruneData(data);
+                    data = prune(data);
                 }
                 resolve(data);
             })
