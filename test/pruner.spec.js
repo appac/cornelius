@@ -133,7 +133,6 @@ test('prune(sport_hitting_tm) should return an array of pruned hitting stats',
         data = require('./mock/sport_hitting_tm.json');
         pruned = prune(data);
         expectedLength = +data.sport_hitting_tm.queryResults.totalSize;
-        
 
         t.true(
             Array.isArray(pruned),
