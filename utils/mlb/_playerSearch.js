@@ -17,7 +17,7 @@ class SearchOptions {
  * @param {Object|string} options - The options to make the request with.
  * @param {string} options.query - Search term to use.
  * @param {boolean} [options.active=true] - Active or historic player.
- * @param {boolean} [options.prune=false] - Whether the data retrieved should be pruned.
+ * @param {boolean} [options.prune=true] - Whether the data retrieved should be pruned.
  * @returns {Promise} - Promise to be fulfilled with search results object, or error.
  */
 function playerSearch(options) {
