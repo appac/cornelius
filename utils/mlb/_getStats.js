@@ -5,7 +5,7 @@ let mlbRequest = require('./request'),
 
 class StatsOptions {
     constructor(options) {
-        this.player_id = options.player_id || null;
+        this.player_id = options.player_id || -1;
         this.pitching = (options.hasOwnProperty('pitching') && typeof (options.pitching === 'boolean')) ? options.pitching : false;
         this.prune = (options.hasOwnProperty('prune') && typeof (options.prune === 'boolean')) ? options.prune : true;
         this.year = options.year || null;

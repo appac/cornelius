@@ -5,8 +5,8 @@ let mlbRequest = require('./request'),
 
 class RosterOptions {
     constructor(options) {
-        this.team_id = options.team_id || null;
         this.full = (options.hasOwnProperty('full') && typeof (options.full === 'boolean')) ? options.full : true;
+        this.team_id = options.team_id || -1;
         this.prune = (options.hasOwnProperty('prune') && typeof (options.prune === 'boolean')) ? options.prune : true;
     }
 }

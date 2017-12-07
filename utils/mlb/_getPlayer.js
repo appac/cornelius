@@ -5,7 +5,7 @@ let mlbRequest = require('./request'),
 
 class PlayerOptions {
     constructor(options) {
-        this.player_id = options.player_id || null;
+        this.player_id = options.player_id || -1;
         this.prune = (options.hasOwnProperty('prune') && typeof (options.prune === 'boolean')) ? options.prune : true;
     }
 }
