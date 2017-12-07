@@ -1,7 +1,6 @@
 'use strict';
 
 let mlbRequest = require('./request'),
-    find = require('../find'),
     prune = require('../prune');
 
 class RosterOptions {
