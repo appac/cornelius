@@ -8,6 +8,7 @@ class StatsOptions {
     constructor(options) {
         this.player_id = options.player_id || null;
         this.pitching = (options.hasOwnProperty('pitching') && typeof (options.pitching === 'boolean')) ? options.pitching : false;
+        this.prune = (options.hasOwnProperty('prune') && typeof (options.prune === 'boolean')) ? options.prune : true;
         this.year = options.year || null;
     }
 }
@@ -39,7 +40,7 @@ function getStats(options) {
 
         mlbRequest.make(url)
             .then(data => {
-                if (options.prune) {
+                if (o.prune) {
                     data = prune(data);
                 }
                 resolve(data);
