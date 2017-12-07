@@ -27,11 +27,7 @@ function buildRequest(type, options) {
 
     switch (type) {
     case 'search_player_all':
-        if (options.active === false) {
-            uri += `${endpoints.search}?sport_code='mlb'&name_part='${options.query}%25'&active_sw='N'`;
-        } else {
-            uri += `${endpoints.search}?sport_code='mlb'&name_part='${options.query || options}%25'&active_sw='Y'`;
-        }
+        uri += `${endpoints.search}?sport_code='mlb'&name_part='${options.query || options}%25'&active_sw='${options.active ? 'Y' : 'N'}'`;
         break;
     case 'player_info':
         uri += `${endpoints.player_info}?sport_code='mlb'&player_id='${options.player_id || options}'`;
