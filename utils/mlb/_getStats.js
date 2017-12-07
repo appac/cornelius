@@ -2,8 +2,15 @@
 
 let mlbRequest = require('./request'),
     find = require('../find'),
-    prune = require('../prune'),
-    validate = require('../validate');
+    prune = require('../prune');
+
+class StatsOptions {
+    constructor(options) {
+        this.player_id = options.player_id || null;
+        this.pitching = (options.hasOwnProperty('pitching') && typeof (options.pitching === 'boolean')) ? options.pitching : false;
+        this.year = options.year || null;
+    }
+}
 
 /**
  * Constructs and makes call to MLB for stats.
@@ -17,17 +24,13 @@ let mlbRequest = require('./request'),
  */
 function getStats(options) {
     return new Promise (function (resolve, reject) {
-        validate.statsOptions(options, (err) => {
-            if (err) {
-                reject(err);
-            }
-        });
+        const o = new StatsOptions(options);
 
         let url;
-        if (options.pitching) {
-            url = mlbRequest.build('sport_pitching_tm', options);
+        if (o.pitching) {
+            url = mlbRequest.build('sport_pitching_tm', o);
         } else {
-            url = mlbRequest.build('sport_hitting_tm', options);
+            url = mlbRequest.build('sport_hitting_tm', o);
         }
 
         if (!url) {
@@ -36,9 +39,6 @@ function getStats(options) {
 
         mlbRequest.make(url)
             .then(data => {
-                if (!options.year) {
-                    data = find.latestStats(data);
-                }
                 if (options.prune) {
                     data = prune(data);
                 }

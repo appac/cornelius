@@ -1,8 +1,14 @@
 'use strict';
 
 let mlbRequest = require('./request'),
-    prune = require('../prune'),
-    validate = require('../validate');
+    prune = require('../prune');
+
+class PlayerOptions {
+    constructor(options) {
+        this.player_id = options.player_id || null;
+        this.prune = (options.hasOwnProperty('prune') && typeof (options.prune === 'boolean')) ? options.prune : true;
+    }
+}
 
 /**
  * Constructs and makes call to MLB for getting a player.
@@ -15,21 +21,16 @@ let mlbRequest = require('./request'),
  */
 function getPlayer(options) {
     return new Promise(function (resolve, reject) {
-        validate.playerOptions(options, (err) => {
-            if (err) {
-                reject(err);
-            }
-        });
+        const o = new PlayerOptions(options);
 
-        let url = mlbRequest.build('player_info', options);
-
+        const url = mlbRequest.build('player_info', o);
         if (!url) {
             reject(new Error('Error building player_info request URL.'));
         }
 
         mlbRequest.make(url)
             .then(data => {
-                if (options.prune === true) {
+                if (o.prune === true) {
                     data = prune(data);
                 }
                 resolve(data);

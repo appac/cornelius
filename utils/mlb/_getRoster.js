@@ -2,8 +2,15 @@
 
 let mlbRequest = require('./request'),
     find = require('../find'),
-    prune = require('../prune'),
-    validate = require('../validate');
+    prune = require('../prune');
+
+class RosterOptions {
+    constructor(options) {
+        this.team_id = options.team_id || null;
+        this.full = (options.hasOwnProperty('full') && typeof (options.full === 'boolean')) ? options.full : true;
+        this.prune = (options.hasOwnProperty('prune') && typeof (options.prune === 'boolean')) ? options.prune : true;
+    }
+}
 
 /**
  * Constructs and makes call to MLB for a roster.
@@ -17,32 +24,16 @@ let mlbRequest = require('./request'),
  */
 function getRoster(options) {
     return new Promise(function (resolve, reject) {
-        validate.rosterOptions(options, (err) => {
-            if (err) {
-                reject(err);
-            }
-        });
+        const o = new RosterOptions(options);
 
-        let teamID = find.matchingTeamId(options.team_id || options);
-        
-        if (!teamID) {
-            reject(`No team matching '${options.team_id || options}' was found.`);
-        }
-
-        let buildOptions = {
-            team_id: teamID,
-            full: options.full
-        };
-
-        let url = mlbRequest.build('roster_40', buildOptions);
-
+        const url = mlbRequest.build('roster_40', o);
         if (!url) {
             reject(new Error('Error building roster_40 request URL.'));
         }
 
         mlbRequest.make(url)
             .then(data => {
-                if (options.prune === true) {
+                if (o.prune === true) {
                     data = prune(data);
                 }
                 resolve(data);
