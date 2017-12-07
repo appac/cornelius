@@ -52,7 +52,9 @@ function pruneSearchData(data) {
             }
         };
     }
-    if (data.length > 1) {
+    if (!data) {
+        return [];
+    } else if (data.length > 1) {
         return data.map(restructure);
     } else {
         const arr = [];
@@ -118,7 +120,11 @@ function prunePlayerInfo(data) {
             }
         };
     }
-    return restructure(data);
+    if (!data) {
+        return {};
+    } else {
+        return restructure(data);
+    }
 }
 
 /**
@@ -178,7 +184,9 @@ function pruneRosterData(data) {
             name: data.name_display_first_last
         };
     }
-    if (data[0].hasOwnProperty('pro_debut_date')) {
+    if (!data) {
+        return [];
+    } else if (data[0].hasOwnProperty('pro_debut_date')) {
         return data.map(restructure);
     } else {
         return data.map(restructureShort);
@@ -231,7 +239,9 @@ function pruneStatData(data) {
             return restructured;
         }, restruct);
     }
-    if (data.length > 1) {
+    if (!data) {
+        return [];
+    } else if (data.length > 1) {
         return data.map(restructure);
     } else {
         const arr = [];
