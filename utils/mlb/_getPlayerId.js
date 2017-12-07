@@ -15,7 +15,7 @@ let mlbRequest = require('./request'),
 function getPlayerId(options) {
     return new Promise(function (resolve, reject) {
 
-        let url = mlbRequest.build('search', options);
+        let url = mlbRequest.build('search_player_all', options);
 
         mlbRequest.make(url)
             .then(data => {

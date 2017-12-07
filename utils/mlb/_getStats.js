@@ -23,8 +23,13 @@ function getStats(options) {
             }
         });
 
-        let url = mlbRequest.build('stats', options);
-        
+        let url;
+        if (options.pitching) {
+            url = mlbRequest.build('sport_pitching_tm', options);
+        } else {
+            url = mlbRequest.build('sport_hitting_tm', options);
+        }
+
         if (!url) {
             reject(new Error('Error building sport_[stat_type]_tm request URL.'));
         }

@@ -22,7 +22,7 @@ function playerSearch(options) {
             }
         });
 
-        let url = mlbRequest.build('search', options);
+        let url = mlbRequest.build('search_player_all', options);
 
         if (!url) {
             reject(new Error('Error building search_player_all request URL.'));

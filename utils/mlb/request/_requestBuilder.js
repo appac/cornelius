@@ -26,36 +26,35 @@ function buildRequest(type, options) {
     let uri = base;
 
     switch (type) {
-    case 'search':
+    case 'search_player_all':
         if (options.active === false) {
             uri += `${endpoints.search}?sport_code='mlb'&name_part='${options.query}%25'&active_sw='N'`;
         } else {
             uri += `${endpoints.search}?sport_code='mlb'&name_part='${options.query || options}%25'&active_sw='Y'`;
         }
         break;
-    case 'get':
+    case 'player_info':
         uri += `${endpoints.player_info}?sport_code='mlb'&player_id='${options.player_id || options}'`;
         break;
-    case 'roster':
+    case 'roster_40':
         if (options.full === true) {
             uri += `${endpoints.roster}?team_id='${options.team_id || options}'`;
         } else {
             uri += `${endpoints.roster}?team_id='${options.team_id || options}'&roster_40.col_in=name_display_first_last&roster_40.col_in=player_id`;
         }
         break;
-    case 'stats':
-        if (options.pitching === true) {
-            if (options.year) {
-                uri += `${endpoints.stats.pitching}?player_id=${options.player_id}&sport_pitching_tm.season=${options.year}&game_type='R'&league_list_id='mlb'`;
-            } else {
-                uri += `${endpoints.stats.pitching}?player_id=${options.player_id || options}&game_type='R'&league_list_id='mlb'`;
-            }
+    case 'sport_hitting_tm':
+        if (options.year) {
+            uri += `${endpoints.stats.hitting}?player_id=${options.player_id}&sport_hitting_tm.season=${options.year}&game_type='R'&league_list_id='mlb'`;
         } else {
-            if (options.year) {
-                uri += `${endpoints.stats.hitting}?player_id=${options.player_id}&sport_hitting_tm.season=${options.year}&game_type='R'&league_list_id='mlb'`;
-            } else {
-                uri += `${endpoints.stats.hitting}?player_id=${options.player_id || options}&game_type='R'&league_list_id='mlb'`;
-            }
+            uri += `${endpoints.stats.hitting}?player_id=${options.player_id || options}&game_type='R'&league_list_id='mlb'`;
+        }
+        break;
+    case 'sport_pitching_tm':
+        if (options.year) {
+            uri += `${endpoints.stats.pitching}?player_id=${options.player_id}&sport_pitching_tm.season=${options.year}&game_type='R'&league_list_id='mlb'`;
+        } else {
+            uri += `${endpoints.stats.pitching}?player_id=${options.player_id || options}&game_type='R'&league_list_id='mlb'`;
         }
         break;
     default:

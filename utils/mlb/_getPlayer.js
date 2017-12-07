@@ -21,7 +21,7 @@ function getPlayer(options) {
             }
         });
 
-        let url = mlbRequest.build('get', options);
+        let url = mlbRequest.build('player_info', options);
 
         if (!url) {
             reject(new Error('Error building player_info request URL.'));

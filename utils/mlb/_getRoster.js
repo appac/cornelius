@@ -34,7 +34,7 @@ function getRoster(options) {
             full: options.full
         };
 
-        let url = mlbRequest.build('roster', buildOptions);
+        let url = mlbRequest.build('roster_40', buildOptions);
 
         if (!url) {
             reject(new Error('Error building roster_40 request URL.'));
