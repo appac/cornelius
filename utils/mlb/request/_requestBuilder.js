@@ -33,10 +33,10 @@ function buildRequest(type, options) {
         uri += `${endpoints.player_info}?sport_code='mlb'&player_id='${options.player_id || options}'`;
         break;
     case 'roster_40':
-        if (options.full === true) {
-            uri += `${endpoints.roster}?team_id='${options.team_id || options}'`;
+        if (options.short === true) {
+            uri += `${endpoints.roster}?team_id='${options.team_id}'&roster_40.col_in=name_display_first_last&roster_40.col_in=player_id`;
         } else {
-            uri += `${endpoints.roster}?team_id='${options.team_id || options}'&roster_40.col_in=name_display_first_last&roster_40.col_in=player_id`;
+            uri += `${endpoints.roster}?team_id='${options.team_id}'`;
         }
         break;
     case 'sport_hitting_tm':

@@ -5,8 +5,8 @@ let mlbRequest = require('./request'),
 
 class RosterOptions {
     constructor(options) {
-        this.full = (options.hasOwnProperty('full') && typeof (options.full === 'boolean')) ? options.full : true;
         this.team_id = options.team_id || -1;
+        this.short = (options.hasOwnProperty('short') && typeof (options.full === 'boolean')) ? options.short : false;
         this.prune = (options.hasOwnProperty('prune') && typeof (options.prune === 'boolean')) ? options.prune : true;
     }
 }
@@ -17,7 +17,7 @@ class RosterOptions {
  * @private
  * @param {Object|string} options - The options to make the request with.
  * @param {string} options.team_id - ID of team to get roster for.
- * @param {boolean} [options.full=true] - Whether players in the roster should have their full info.
+ * @param {boolean} [options.short=false] - Whether players in the roster should have their full info.
  * @param {boolean} [options.prune=false] - Whether the data should be pruned.
  * @returns {Promise} - Promise to be fulfilled with roster data, or error.
  */
