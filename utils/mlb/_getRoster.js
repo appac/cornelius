@@ -23,9 +23,9 @@ class RosterOptions {
  */
 function getRoster(options) {
     return new Promise(function (resolve, reject) {
-        const o = new RosterOptions(options);
+        const o = new RosterOptions(options),
+            url = mlbRequest.build('roster_40', o);
 
-        const url = mlbRequest.build('roster_40', o);
         if (!url) {
             reject(new Error('Error building roster_40 request URL.'));
         }

@@ -22,9 +22,9 @@ class SearchOptions {
  */
 function playerSearch(options) {
     return new Promise(function (resolve, reject) {
-        const o = new SearchOptions(options);
-        
-        const url = mlbRequest.build('search_player_all', o);
+        const o = new SearchOptions(options),
+            url = mlbRequest.build('search_player_all', o);
+
         if (!url) {
             reject(new Error('Error building search_player_all request URL.'));
         }

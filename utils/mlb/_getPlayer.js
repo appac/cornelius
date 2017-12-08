@@ -21,9 +21,9 @@ class PlayerOptions {
  */
 function getPlayer(options) {
     return new Promise(function (resolve, reject) {
-        const o = new PlayerOptions(options);
+        const o = new PlayerOptions(options),
+            url = mlbRequest.build('player_info', o);
 
-        const url = mlbRequest.build('player_info', o);
         if (!url) {
             reject(new Error('Error building player_info request URL.'));
         }

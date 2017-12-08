@@ -19,11 +19,11 @@ function requestMaker(url) {
         };
 
         http.get(options, function (res) {
-            const statusCode = res.statusCode;
-            const statusMessage = res.statusMessage;
-            const contentType = res.headers['content-type'];
+            const statusCode = res.statusCode,
+                statusMessage = res.statusMessage,
+                contentType = res.headers['content-type'];
 
-            let error;
+            let error, rawData;
 
             if (statusCode !== 200) {
                 error = new Error(`${statusCode} - ${statusMessage}.`);
@@ -37,8 +37,6 @@ function requestMaker(url) {
             }
 
             res.setEncoding('utf8');
-
-            let rawData = '';
             res.on('data', (chunk) => {
                 rawData += chunk;
             });
