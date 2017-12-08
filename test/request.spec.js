@@ -17,7 +17,7 @@ test('buildRequest should return undefined when given invalid query type',
 
 test('buildRequest(search_player_all) should return a valid search url',
     (t) => {
-        t.plan(1);
+        t.plan(2);
         let url;
         let  expectedUrl;
 
@@ -28,6 +28,9 @@ test('buildRequest(search_player_all) should return a valid search url',
             url.href, expectedUrl,
             'Actual search_player_all url does not match expected url.'
         );
+        t.comment('Historic player search.');
+        url = mlbReq.build('search_player_all', { query: 'someTestQuery3579', active: false });
+        expectedUrl = 'http://mlb.mlb.com/lookup/json/named.search_player_all.bam?sport_code=%27mlb%27&name_part=%27someTestQuery3579%25%27&active_sw=%27N%27';
         t.equal(
             url.href, expectedUrl,
             'Actual search_player_all url does not match expected url.'
