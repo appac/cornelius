@@ -1,42 +1,47 @@
 'use strict';
 
 let mlbRequest = require('./request'),
-    find = require('../find'),
-    prune = require('../prune'),
-    validate = require('../validate');
+    prune = require('../prune');
+
+class StatsOptions {
+    constructor(options) {
+        this.player_id = options.player_id || -1;
+        this.pitching = (options.hasOwnProperty('pitching') && typeof (options.pitching === 'boolean')) ? options.pitching : false;
+        this.prune = (options.hasOwnProperty('prune') && typeof (options.prune === 'boolean')) ? options.prune : true;
+        this.year = options.year || null;
+    }
+}
 
 /**
  * Constructs and makes call to MLB for stats.
  *
  * @private
- * @param {Object|string} options - The options to make the request with.
+ * @param {Object} options - The options to make the request with.
  * @param {string} options.player_id - ID of player to get stats for.
- * @param {string} [options.pitching=false] - The type of stats to get.
+ * @param {boolean} [options.pitching=false] - The type of stats to get.
  * @param {string} [options.year] - The season to get stats for.
+ * @param {boolean} [options.prune=true] - Whether the data received should be pruned. 
  * @returns {Promise} - Promise to be fulfilled with player stats object, or error.
  */
 function getStats(options) {
-    validate.getStats(options);
     return new Promise (function (resolve, reject) {
-        validate.statsOptions(options, (err) => {
-            if (err) {
-                reject(err);
-            }
-        });
+        const o = new StatsOptions(options);
 
-        let url = mlbRequest.build('stats', options);
-        
+        let url;
+        if (o.pitching) {
+            url = mlbRequest.build('sport_pitching_tm', o);
+        } else {
+            url = mlbRequest.build('sport_hitting_tm', o);
+        }
+
         if (!url) {
             reject(new Error('Error building sport_[stat_type]_tm request URL.'));
         }
 
         mlbRequest.make(url)
             .then(data => {
-                if (!options.year) {
-                    data = find.latestStats(data);
-                }
-                if (options.prune) {
-                    data = pruneData(data);
+                if (o.prune) {
+                    data = prune(data);
                 }
                 resolve(data);
             })

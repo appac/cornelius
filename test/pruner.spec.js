@@ -1,66 +1,191 @@
 'use strict';
 
-const chai = require('chai'),
-    expect = chai.expect,
+const test = require('tape'),
     prune = require('../utils/prune');
 
-describe('prune', () => {
-    it('should return an error when given invalid data', () => {
-        const data = { some: 'invalid data' },
-            prunedData = prune(data);
-        expect(prunedData).to.be.an('Error', 'Data did not match any expected pruneable structure.');
-    });
-    it('should return an array of pruned results when given search results', () => {
-        const data = require('./mock/search_player_all.json'),
-            prunedData = prune(data),
-            prunedResult = prunedData[0];
+test('pruning invalid data should result in an error',
+    (t) => {
+        t.plan(2);
+        const data = {
+                some: 'invalid data'
+            },
+            err = prune(data);
 
-        expect(prunedData).to.be.an('array');
-        expect(prunedResult).to.have.property('attribute');
-        expect(prunedResult.id).to.be.an('string');
+        t.equal(
+            typeof (err), 'object',
+            'Error should be an error object.'
+        );
+        t.equal(
+            err.message, 'Data does not match any pruneable type.',
+            'Error object should have a message.'
+        );
+        t.end();
     });
-    it('should return a pruned player object when given a player object', () => {
-        const data = require('./mock/player_info.json'),
-            prunedData = prune(data);
 
-        expect(prunedData).to.be.an('object');
-        expect(prunedData).to.have.property('attribute');
+test('prune(search_player_all) should return an array of pruned search results',
+    (t) => {
+        t.plan(6);
+        let data, pruned, expectedLength;
+
+        data = require('./mock/search_player_all.json');
+        pruned = prune(data);
+        expectedLength = +data.search_player_all.queryResults.totalSize;
+
+        t.true(
+            Array.isArray(pruned),
+            'Pruned should be an array.'
+        );
+        t.true(
+            pruned[0].hasOwnProperty('name'),
+            'A pruned result should have `name` property.'
+        );
+        t.equal(
+            expectedLength, pruned.length,
+            `Expected array length to be ${expectedLength}, but it was ${pruned.length}`
+        );
+
+        data = require('./mock/search_player_all.single.json');
+        pruned = prune(data);
+        expectedLength = +data.search_player_all.queryResults.totalSize;
+
+        t.true(
+            Array.isArray(pruned),
+            'Pruned should be an array.'
+        );
+        t.true(
+            pruned[0].hasOwnProperty('name'),
+            'A pruned result should have `name` property.'
+        );
+        t.equal(
+            expectedLength, pruned.length,
+            `Expected array length to be ${expectedLength}, but it was ${pruned.length}`
+        );
+
+        t.end();
     });
-    it('should return an array of pruned player objects when given a team roster', () => {
-        const data = require('./mock/roster_40.json'),
-            prunedData = prune(data),
-            prunedResult = prunedData[0];
 
-        expect(prunedData).to.be.an('array');
-        expect(prunedResult).to.be.an('object');
-        expect(prunedResult).to.have.property('attribute');
+test('prune(roster_40) should return an array of pruned players',
+    (t) => {
+        t.plan(6);
+        let data, pruned, expectedLength;
+
+        data = require('./mock/roster_40.json');
+        pruned = prune(data);
+        expectedLength = +data.roster_40.queryResults.totalSize;
+
+        t.true(
+            Array.isArray(pruned),
+            'Pruned should be an array.'
+        );
+        t.true(
+            pruned[0].hasOwnProperty('attribute'),
+            'A pruned roster entry should have an `attribute` property.'
+        );
+        t.equal(
+            expectedLength, pruned.length,
+            `Expected array length to be ${expectedLength}, but it was ${pruned.length}`
+        );
+
+        data = require('./mock/roster_40.short.json');
+        pruned = prune(data);
+        expectedLength = +data.roster_40.queryResults.totalSize;
+
+        t.true(
+            Array.isArray(pruned),
+            'Pruned should be an array.'
+        );
+        t.true(
+            pruned[0].hasOwnProperty('name'),
+            'A pruned short roster entry should have an `name` property.'
+        );
+        t.equal(
+            expectedLength, pruned.length,
+            `Expected array length to be ${expectedLength}, but it was ${pruned.length}`
+        );
+
+        t.end();
     });
-    it('should return an array of pruned player objects when given a short team roster', () => {
-        const data = require('./mock/roster_40.short.json'),
-            prunedData = prune(data),
-            prunedResult = prunedData[0];
 
-        expect(prunedData).to.be.an('array');
-        expect(prunedResult).to.be.an('object');
-        expect(prunedResult).to.have.keys('name', 'id');
+test('prune(player_info) should return a pruned player object',
+    (t) => {
+        t.plan(2);
+        let data, pruned;
+
+        data = require('./mock/player_info.json');
+        pruned = prune(data);
+
+        t.equal(
+            typeof (pruned), 'object',
+            'Pruned player should be an object.'
+        );
+        t.true(
+            pruned.hasOwnProperty('attribute'),
+            'A pruned player should have `attribute` property.'
+        );
+        t.end();
     });
-    it('should return a pruned hitting stats object when given a hitting stats object', () => {
-        const data = require('./mock/sport_hitting_tm.json'),
-            prunedData = prune(data);
 
-        expect(prunedData).to.be.an('object');
-        expect(prunedData).to.have.property('team');
-        expect(prunedData).to.have.property('league');
-        expect(prunedData).to.have.property('sport');
+test('prune(sport_hitting_tm) should return an array of pruned hitting stats',
+    (t) => {
+        t.plan(6);
+        let data, pruned, expectedLength;
+
+        data = require('./mock/sport_hitting_tm.json');
+        pruned = prune(data);
+        expectedLength = +data.sport_hitting_tm.queryResults.totalSize;
+
+        t.true(
+            Array.isArray(pruned),
+            'Pruned stats should be an array.'
+        );
+        t.true(
+            pruned[0].hasOwnProperty('team'),
+            'Pruned stats should have `team` property.'
+        );
+        t.equal(
+            expectedLength, pruned.length,
+            `Expected array length to be ${expectedLength}, but it was ${pruned.length}`
+        );
+
+        data = require('./mock/sport_hitting_tm.single.json');
+        pruned = prune(data);
+        expectedLength = +data.sport_hitting_tm.queryResults.totalSize;
+
+        t.true(
+            Array.isArray(pruned),
+            'Pruned stat data should be an array.'
+        );
+        t.true(
+            pruned[0].hasOwnProperty('team'),
+            'Pruned stat object should have `team` property'
+        );
+        t.equal(
+            expectedLength, pruned.length,
+            `Expected array length to be ${expectedLength}, but it was ${pruned.length}`
+        );
+        t.end();
     });
-    it('should return a pruned pitching stats object when given a pitching stats object', () => {
-        const data = require('./mock/sport_pitching_tm.json'),
-            prunedData = prune(data);
 
+test('prune(sport_pitching_tm) should return an array of pruned pitching stats',
+    (t) => {
+        t.plan(3);
+        let data, pruned, expectedLength;
 
-        expect(prunedData).to.be.an('object');
-        expect(prunedData).to.have.property('team');
-        expect(prunedData).to.have.property('league');
-        expect(prunedData).to.have.property('sport');
+        data = require('./mock/sport_pitching_tm.json');
+        pruned = prune(data);
+        expectedLength = +data.sport_pitching_tm.queryResults.totalSize;
+
+        t.true(
+            Array.isArray(pruned),
+            'Pruned stats should be an array.'
+        );
+        t.true(
+            pruned[0].hasOwnProperty('team'),
+            'Pruned stats should have `team` property.'
+        );
+        t.equal(
+            expectedLength, pruned.length,
+            `Expected array length to be ${expectedLength}, but it was ${pruned.length}`
+        );
+        t.end();
     });
-});

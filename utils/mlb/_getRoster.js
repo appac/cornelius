@@ -1,40 +1,30 @@
 'use strict';
 
 let mlbRequest = require('./request'),
-    find = require('../find'),
-    prune = require('../prune'),
-    validate = require('../validate');
+    prune = require('../prune');
+
+class RosterOptions {
+    constructor(options) {
+        this.team_id = options.team_id || -1;
+        this.short = (options.hasOwnProperty('short') && typeof (options.full === 'boolean')) ? options.short : false;
+        this.prune = (options.hasOwnProperty('prune') && typeof (options.prune === 'boolean')) ? options.prune : true;
+    }
+}
 
 /**
  * Constructs and makes call to MLB for a roster.
  *
  * @private
- * @param {Object|string} options - The options to make the request with.
+ * @param {Object} options - The options to make the request with.
  * @param {string} options.team_id - ID of team to get roster for.
- * @param {boolean} [options.full=true] - Whether players in the roster should have their full info.
- * @param {boolean} [options.prune=false] - Whether the data should be pruned.
+ * @param {boolean} [options.short=false] - Whether players in the roster should have their full info.
+ * @param {boolean} [options.prune=true] - Whether the data received should be pruned. 
  * @returns {Promise} - Promise to be fulfilled with roster data, or error.
  */
 function getRoster(options) {
     return new Promise(function (resolve, reject) {
-        validate.rosterOptions(options, (err) => {
-            if (err) {
-                reject(err);
-            }
-        });
-
-        let teamID = find.matchingTeamId(options.team_id || options);
-        
-        if (!teamID) {
-            reject(`No team matching '${options.team_id || options}' was found.`);
-        }
-
-        let buildOptions = {
-            team_id: teamID,
-            full: options.full
-        };
-
-        let url = mlbRequest.build('roster', buildOptions);
+        const o = new RosterOptions(options),
+            url = mlbRequest.build('roster_40', o);
 
         if (!url) {
             reject(new Error('Error building roster_40 request URL.'));
@@ -42,7 +32,7 @@ function getRoster(options) {
 
         mlbRequest.make(url)
             .then(data => {
-                if (options.prune === true) {
+                if (o.prune === true) {
                     data = prune(data);
                 }
                 resolve(data);

@@ -5,7 +5,7 @@
  * returns a pruned/restructured copy.
  * 
  * If given an array, uses array.map to process each object in the array.
- * 
+ * @private
  * @param {Object|Array} data - Raw search results. 
  * @return {Object|Array} - Pruned/restructured search results.
  */
@@ -52,16 +52,20 @@ function pruneSearchData(data) {
             }
         };
     }
-    if (data.length > 1) {
+    if (!data) {
+        return [];
+    } else if (data.length > 1) {
         return data.map(restructure);
     } else {
-        return restructure(data);
+        const arr = [];
+        arr.push(restructure(data));
+        return arr;
     }
 }
 
 /**
  * Given a `player_info` object, returns a pruned copy.
- * 
+ * @private
  * @param {Object} data - Raw player data. 
  * @return {Object} - Pruned/restructured player data.
  * 
@@ -116,7 +120,11 @@ function prunePlayerInfo(data) {
             }
         };
     }
-    return restructure(data);
+    if (!data) {
+        return {};
+    } else {
+        return restructure(data);
+    }
 }
 
 /**
@@ -125,7 +133,7 @@ function prunePlayerInfo(data) {
  * This function also handles short form roster data (just a name and ID for each player).
  * It determines short form roster data by looking for a `pro_debut_date` property on the
  * first element of the roster array. This property is only present on full/long form roster data.
- * 
+ * @private
  * @param {Array} data - Raw roster data.
  * @return {Array} - Pruned/restructured roster data.
  */
@@ -176,7 +184,9 @@ function pruneRosterData(data) {
             name: data.name_display_first_last
         };
     }
-    if (data[0].hasOwnProperty('pro_debut_date')) {
+    if (!data) {
+        return [];
+    } else if (data[0].hasOwnProperty('pro_debut_date')) {
         return data.map(restructure);
     } else {
         return data.map(restructureShort);
@@ -190,7 +200,7 @@ function pruneRosterData(data) {
  * 
  * Typically this function will only receive a single stats object to prune,
  * but if it does receive an array of objects, they are handled via array.map.
- * 
+ * @private
  * @param {Object} data - Raw stat data.
  * @return {Object|Array} - Pruned/restructured stats data.
  */
@@ -202,27 +212,41 @@ function pruneStatData(data) {
                 team: {},
                 league: {},
                 sport: {}
-            };
+            },
+            patterns = [/team/, /league/, /sport/],
+            [teamPattern, leaguePattern, sportPattern] = patterns;
 
         return props.reduce((restructured, prop) => {
-            if (/team/.test(prop)) {
-                restructured.team[prop] = data[prop];
-            } else if (/league/.test(prop)) {
-                restructured.league[prop] = data[prop];
-            } else if (/sport/.test(prop)) {
-                restructured.sport[prop] = data[prop];
-            } else if (prop === 'player_id') {
-                restructured.id = data[prop];
+            if (/team|league|sport/.test(prop)) {
+                if (teamPattern.test(prop)) {
+                    restructured.team[prop] = data[prop];
+                } else if (leaguePattern.test(prop)) {
+                    if (prop === 'league') {
+                        restructured.league.league_abbrev = data[prop];
+                    } else {
+                        restructured.league[prop] = data[prop];
+                    }
+                } else if (sportPattern.test(prop)) {
+                    restructured.sport[prop] = data[prop];
+                }
             } else {
-                restructured[prop] = data[prop];
+                if (prop === 'player_id') {
+                    restructured.id = data[prop];
+                } else {
+                    restructured[prop] = data[prop];
+                }
             }
             return restructured;
         }, restruct);
     }
-    if (data.length > 1) {
+    if (!data) {
+        return [];
+    } else if (data.length > 1) {
         return data.map(restructure);
     } else {
-        return restructure(data);
+        const arr = [];
+        arr.push(restructure(data));
+        return arr;
     }
 }
 
