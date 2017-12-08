@@ -79,7 +79,7 @@ test('buildRequest(sport_pitching_tm) should return a valid pitching stats url',
 
 test('buildRequest(roster_40) should return a valid roster url',
     (t) => {
-        t.plan(1);
+        t.plan(2);
         let url;
         let expectedUrl;
 
@@ -90,6 +90,10 @@ test('buildRequest(roster_40) should return a valid roster url',
             url.href, expectedUrl,
             'Actual roster_40 url does not match expected url.'
         );
+
+        t.comment('Short form player data.');
+        url = mlbReq.build('roster_40', { team_id: '3579', short: true });
+        expectedUrl = 'http://mlb.mlb.com/lookup/json/named.roster_40.bam?team_id=%273579%27&roster_40.col_in=name_display_first_last&roster_40.col_in=player_id';
         t.equal(
             url.href, expectedUrl,
             'Actual roster_40 url does not match expected url.'
