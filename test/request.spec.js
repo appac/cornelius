@@ -21,14 +21,13 @@ test('buildRequest(search_player_all) should return a valid search url',
         let url;
         let  expectedUrl;
 
-        t.comment('Active player search.');
         url = mlbReq.build('search_player_all', { query: 'someTestQuery3579', active: true });
         expectedUrl = 'http://mlb.mlb.com/lookup/json/named.search_player_all.bam?sport_code=%27mlb%27&name_part=%27someTestQuery3579%25%27&active_sw=%27Y%27';
         t.equal(
             url.href, expectedUrl,
             'Actual search_player_all url does not match expected url.'
         );
-        t.comment('Historic player search.');
+
         url = mlbReq.build('search_player_all', { query: 'someTestQuery3579', active: false });
         expectedUrl = 'http://mlb.mlb.com/lookup/json/named.search_player_all.bam?sport_code=%27mlb%27&name_part=%27someTestQuery3579%25%27&active_sw=%27N%27';
         t.equal(
@@ -83,7 +82,6 @@ test('buildRequest(roster_40) should return a valid roster url',
         let url;
         let expectedUrl;
 
-        t.comment('Long form player data.');
         url = mlbReq.build('roster_40', { team_id: '3579' });
         expectedUrl = 'http://mlb.mlb.com/lookup/json/named.roster_40.bam?team_id=%273579%27';
         t.equal(
@@ -91,7 +89,6 @@ test('buildRequest(roster_40) should return a valid roster url',
             'Actual roster_40 url does not match expected url.'
         );
 
-        t.comment('Short form player data.');
         url = mlbReq.build('roster_40', { team_id: '3579', short: true });
         expectedUrl = 'http://mlb.mlb.com/lookup/json/named.roster_40.bam?team_id=%273579%27&roster_40.col_in=name_display_first_last&roster_40.col_in=player_id';
         t.equal(
