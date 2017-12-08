@@ -9,6 +9,10 @@ const fs = require('fs'),
             url: 'http://mlb.mlb.com/lookup/json/named.search_player_all.bam?sport_code=%27mlb%27&name_part=%27wright%25%27&active_sw=%27Y%27'
         },
         {
+            name: 'search_player_all.single',
+            url: 'http://mlb.mlb.com/lookup/json/named.search_player_all.bam?sport_code=%27mlb%27&name_part=%27cespedes%25%27&active_sw=%27Y%27'
+        },
+        {
             name: 'player_info',
             url: 'http://mlb.mlb.com/lookup/json/named.player_info.bam?sport_code=%27mlb%27&player_id=%27431151%27'
         },
@@ -23,6 +27,10 @@ const fs = require('fs'),
         {
             name: 'sport_pitching_tm_empty',
             url: 'http://mlb.mlb.com/lookup/json/named.sport_pitching_tm.bam?player_id=431151&game_type=%27R%27&league_list_id=%27mlb%27'
+        },
+        {
+            name: 'sport_hitting_tm.single',
+            url: 'http://mlb.mlb.com/lookup/json/named.sport_hitting_tm.bam?player_id=431151&sport_hitting_tm.season=2015&game_type=%27R%27&league_list_id=%27mlb%27'
         },
         {
             name: 'roster_40.short',
