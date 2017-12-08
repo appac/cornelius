@@ -1,0 +1,14 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/cornelius
+    docker:
+      - image: circleci/node:latest
+    steps:
+      - checkout
+      - run:
+          name: install-npm
+          command: npm install
+      - run:
+          name: test
+          command: npm test

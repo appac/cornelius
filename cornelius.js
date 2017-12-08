@@ -1,11 +1,10 @@
 'use strict';
 
-function cornelius () {}
+function Cornelius() {}
 
-cornelius.prototype.searchPlayer = require('./lib/searchPlayer');
-cornelius.prototype.getPlayer = require('./lib/getPlayer');
-cornelius.prototype.getStats = require('./lib/getStats');
-cornelius.prototype.getRoster = require('./lib/getRoster');
-cornelius.prototype.pruneData = require('./lib/pruneData');
+Cornelius.prototype.playerSearch = require('./lib/playerSearch');
+Cornelius.prototype.getPlayer = require('./lib/getPlayer');
+Cornelius.prototype.getStats = require('./lib/getStats');
+Cornelius.prototype.getRoster = require('./lib/getRoster');
 
-module.exports = new cornelius();
+module.exports = new Cornelius();

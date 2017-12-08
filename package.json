@@ -1,10 +1,11 @@
 {
   "name": "cornelius",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "Get data provided by MLB's public lookup routes.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --reporter spec"
+    "pretest": "node test/mock.gen.js",
+    "test": "tape test/*.spec.js | faucet"
   },
   "repository": {
     "type": "git",
@@ -21,12 +22,12 @@
   "author": "Chris Apparicio <chris@apparicio.me>",
   "license": "MIT",
   "dependencies": {
-    "bluebird": "^3.5.0"
+    "bluebird": "^3.5.1"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
-    "chai-as-promised": "^6.0.0",
-    "mocha": "^3.2.0",
-    "rewire": "^2.5.2"
+    "eslint": "^4.9.0",
+    "eslint-config-crockford": "^2.0.0",
+    "faucet": "0.0.1",
+    "tape": "^4.8.0"
   }
 }
