@@ -23,7 +23,7 @@ function requestMaker(url) {
                 statusMessage = res.statusMessage,
                 contentType = res.headers['content-type'];
 
-            let error, rawData;
+            let error, rawData = '';
 
             if (statusCode !== 200) {
                 error = new Error(`${statusCode} - ${statusMessage}.`);
