@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "pretest": "node test/mock.gen.js",
-    "test": "node test/*.spec.js | faucet"
+    "test": "tape test/*.spec.js | faucet"
   },
   "repository": {
     "type": "git",
