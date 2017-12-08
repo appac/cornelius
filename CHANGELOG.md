@@ -1,25 +1,33 @@
 # Change Log
-## [Unreleased]
-### Added
-- Player status functionality
 
-## [1.2.0] - 2017-09-28
+## [2.0.0] - 2017-12-08
 
 ### Changed
 
-- Data used to test against is now generated via requests to MLB, and is no longer distributed with Cornelius.
-  - See the 'Development' section of the readme for more information.
-- Switched from jshint to eslint
-  - Files were tidied to meet new eslint rules, but this is an ongoing process.
-- Validation and pruning functionality have been refactored into single files for easier maintenance - `validate.js` and `prune.js` respectively.
-  - Both of these functionalities were originally abstracted out into numerous files, but this was troublesome to maintain and debug.
-- All pruning functions are now pure.
-  - `map` and `reduce` methods now handle much of the pruning, so input data can remain untouched.
-- Stats pruning now uses a more generalised function.
-  - Since there weren't any changes to the stats properties themselves, checking for the type of stats isn't needed. The stats pruner now simply collates team/player/league/sport properties and leaves the statistics themselves untouched as before.
+- All Cornelius methods now **require** an options object.
+- Cornelius methods no longer throw errors if an options object is missing a property or has an invalid property. Instead, a request will be attempted using fallback values, and if no results or data could be retrieved, an empty array or object will be returned.
+- Data is now pruned by default, which can be disabled by setting `prune: false` in the options object of a method.
+- `getRoster` now takes a `short` option rather than a `full` option, and returns the long form player data by default.
+  - Previously short form player data was returned with rosters by default, and long form player data could be gotten using the `full: true` option.
+  - Now, long form player data is returned by default and you can set `short: true` if you'd like short form player data instead.
 - There are no longer trailing underscores on the team/player/league/sport properties for pruned stats.
 - Player objects that are pruned have had their `attributes` properties renamed to `attribute` in all pruning functions.
-  - Some functions were using one or the other property name.
+  - Some functions were using one or the other property name. All now consistently use `attribute`.
+- Pruning functionality has been refactored into a single file for easier maintenance.
+- Pruning functions are now pure.
+- Data used to test against is now generated via requests to MLB the first time tests are run (and only thereafter if data is missing), and is no longer distributed with Cornelius.
+- Switched from jshint to eslint
+  - Files were tidied to meet new eslint rules.
+- Stats pruning now uses a more generalised function.
+  - Since there weren't any changes to the stats properties themselves, checking for the type of stats wasn't needed. The stats pruner now simply collates team/player/league/sport properties and leaves the statistics themselves untouched as before.
+- Testing is now done using Tape and Faucet.
+
+### Removed
+
+- Find utilities were removed as they were largely unused.
+- Validation utilities were removed in lieu of classes setting defaults for method options.
+- The `pruneData` method has been removed. Pruning (or not) is handled by the `prune` option.
+
 
 
 ## [1.1.0] - 2017-07-04
