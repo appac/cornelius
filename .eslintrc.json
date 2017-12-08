@@ -2,12 +2,11 @@
     "extends": "crockford",
     "env": {
         "node": true,
-        "mocha": true,
         "es6": true
     },
     "rules": {
        "valid-jsdoc": "error",
-       "max-len": "error",
+       "max-len": "warn",
        "max-depth": "error",
        "eol-last": "error",
        "no-trailing-spaces": "error"
