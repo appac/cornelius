@@ -39,6 +39,12 @@ function buildRequest(type, options) {
             uri += `${endpoints.roster}?team_id='${options.team_id}'`;
         }
         break;
+    case 'roster_team_alltime':
+        uri += `roster_team_alltime.bam?team_id='${options.team_id}'&start_season='${options.seasonStart}'&end_season='${options.seasonEnd}'`;
+        if (options.short === true) {
+            uri += '&roster_team_alltime.col_in=name_first_last&roster_team_alltime.col_in=player_id';
+        }
+        break;
     case 'sport_hitting_tm':
         if (options.year) {
             uri += `${endpoints.stats.hitting}?player_id=${options.player_id}&sport_hitting_tm.season=${options.year}&game_type='R'&league_list_id='mlb'`;
