@@ -194,6 +194,61 @@ function pruneRosterData(data) {
 
 }
 
+function pruneAllTimeRosterData(data) {
+    function restructure(data) {
+        return {
+            id: data.player_id,
+            jersey_number: data.jersey_number,
+            name: {
+                first: data.name_first_last.split(' ')[0],
+                last: data.name_last_first.split(' ')[0],
+                full: data.name_first_last
+            },
+            status: {
+                short: data.status_short,
+                still_active: (data.active_sw === 'Y') ? true : false,
+                current_roster: (data.current_sw === 'Y') ? true : false,
+                forty_man: (data.forty_man_sw === 'Y') ? true : false
+            },
+            team: {
+                id: data.team_id
+            },
+            position: {
+                id: data.primary_position,
+                designation: data.position_desig
+            },
+            date: {
+                birth: data.birth_date
+            },
+            attribute: {
+                tenure: data.roster_years,
+                bats: data.bats,
+                throws: data.throws,
+                weight: data.weight,
+                height: {
+                    feet: data.height_feet,
+                    inches: data.height_inches
+                }
+            }
+        };
+    }
+
+    function restructureShort(data) {
+        return {
+            id: data.player_id,
+            name: data.name_first_last
+        };
+    }
+
+    if (!data) {
+        return [];
+    } else if (data[0].hasOwnProperty('birth_date')) {
+        return data.map(restructure);
+    } else {
+        return data.map(restructureShort);
+    }
+}
+
 /**
  * Given either a `sport_hitting_tm` or `sport_pitching_tm` stats data object,
  * returns a pruned/restructured copy.
@@ -270,6 +325,8 @@ function pruneHandler(rawData) {
         return prunePlayerInfo(rawData[dataType].queryResults.row);
     } else if (dataType === 'roster_40') {
         return pruneRosterData(rawData[dataType].queryResults.row);
+    } else if (dataType === 'roster_team_alltime') {
+        return pruneAllTimeRosterData(rawData[dataType].queryResults.row);
     } else if (dataType === 'sport_hitting_tm' || dataType === 'sport_pitching_tm') {
         return pruneStatData(rawData[dataType].queryResults.row);
     } else {
