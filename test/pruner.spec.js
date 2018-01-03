@@ -106,6 +106,48 @@ test('prune(roster_40) should return an array of pruned players',
         t.end();
     });
 
+test('prune(roster_team_alltime) should return an array of pruned players',
+    (t) => {
+        t.plan(6);
+        let data, pruned, expectedLength;
+
+        data = require('./mock/roster_team_alltime.json');
+        pruned = prune(data);
+        expectedLength = +data.roster_team_alltime.queryResults.totalSize;
+
+        t.true(
+            Array.isArray(pruned),
+            'Pruned should be an array.'
+        );
+        t.true(
+            pruned[0].hasOwnProperty('attribute'),
+            'A pruned roster entry should have an `attribute` property.'
+        );
+        t.equal(
+            expectedLength, pruned.length,
+            `Expected array length to be ${expectedLength}, but it was ${pruned.length}`
+        );
+
+        data = require('./mock/roster_team_alltime.short.json');
+        pruned = prune(data);
+        expectedLength = +data.roster_team_alltime.queryResults.totalSize;
+
+        t.true(
+            Array.isArray(pruned),
+            'Pruned should be an array.'
+        );
+        t.true(
+            pruned[0].hasOwnProperty('name'),
+            'A pruned short roster entry should have an `name` property.'
+        );
+        t.equal(
+            expectedLength, pruned.length,
+            `Expected array length to be ${expectedLength}, but it was ${pruned.length}`
+        );
+
+        t.end();
+    });
+
 test('prune(player_info) should return a pruned player object',
     (t) => {
         t.plan(2);
