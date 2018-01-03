@@ -8,6 +8,27 @@ class RosterOptions {
         this.team_id = options.team_id || -1;
         this.short = (options.hasOwnProperty('short') && typeof (options.full === 'boolean')) ? options.short : false;
         this.prune = (options.hasOwnProperty('prune') && typeof (options.prune === 'boolean')) ? options.prune : true;
+        this.endpoint = (options.hasOwnProperty('season') ? 'roster_team_alltime' : 'roster_40');
+        if (options.hasOwnProperty('season') && typeof (options.season) === 'string') {
+            this.setSeasons(options.season);
+        }
+    }
+
+    setSeasons(seasons) {
+        const s = seasons.split(' ');
+
+        if (s.length > 1) {
+            if (s[0] < s[1]) {
+                this.seasonStart = s[0];
+                this.seasonEnd = s[1];
+            } else {
+                this.seasonStart = s[1];
+                this.seasonEnd = s[0];
+            }
+        } else {
+            this.seasonStart = s[0];
+            this.seasonEnd = s[0];
+        }
     }
 }
 
@@ -24,10 +45,10 @@ class RosterOptions {
 function getRoster(options) {
     return new Promise(function (resolve, reject) {
         const o = new RosterOptions(options),
-            url = mlbRequest.build('roster_40', o);
+            url = mlbRequest.build(o.endpoint, o);
 
         if (!url) {
-            reject(new Error('Error building roster_40 request URL.'));
+            reject(new Error(`Error building ${o.endpoint} request URL.`));
         }
 
         mlbRequest.make(url)

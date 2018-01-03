@@ -97,3 +97,27 @@ test('buildRequest(roster_40) should return a valid roster url',
         );
         t.end();
     });
+
+test('buildRequest(roster_team_alltime) should return a valid roster url',
+    (t) => {
+        t.plan(2);
+        let url;
+        let expectedUrl;
+
+        url = mlbReq.build('roster_team_alltime', { team_id: '3579', seasonStart: '2015', seasonEnd: '2016' });
+        expectedUrl = 'http://mlb.mlb.com/lookup/json/named.roster_team_alltime.bam?team_id=%273579%27&start_season=%272015%27&end_season=%272016%27';
+
+        t.equal(
+            url.href, expectedUrl,
+            'Actual roster_team_alltime url does not match expected url.'
+        );
+
+        url = mlbReq.build('roster_team_alltime', {team_id: '3579', seasonStart: '2015', seasonEnd: '2016', short: true });
+        expectedUrl = 'http://mlb.mlb.com/lookup/json/named.roster_team_alltime.bam?team_id=%273579%27&start_season=%272015%27&end_season=%272016%27&roster_team_alltime.col_in=name_first_last&roster_team_alltime.col_in=player_id';
+
+        t.equal(
+            url.href, expectedUrl,
+            'Actual roster_team_alltime url does not match expected url.'
+        );
+        t.end();
+    });
