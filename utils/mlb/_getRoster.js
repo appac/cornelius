@@ -9,6 +9,26 @@ class RosterOptions {
         this.short = (options.hasOwnProperty('short') && typeof (options.full === 'boolean')) ? options.short : false;
         this.prune = (options.hasOwnProperty('prune') && typeof (options.prune === 'boolean')) ? options.prune : true;
         this.endpoint = (options.hasOwnProperty('season') ? 'roster_team_alltime' : 'roster_40');
+        if (options.hasOwnProperty('season') && typeof (options.season) === 'string') {
+            this.setSeasons(options.season);
+        }
+    }
+
+    setSeasons(seasons) {
+        const s = seasons.split(' ');
+
+        if (s.length > 1) {
+            if (s[0] < s[1]) {
+                this.seasonStart = s[0];
+                this.seasonEnd = s[1];
+            } else {
+                this.seasonStart = s[1];
+                this.seasonEnd = s[0];
+            }
+        } else {
+            this.seasonStart = s[0];
+            this.seasonEnd = s[0];
+        }
     }
 }
 
