@@ -39,6 +39,14 @@ const fs = require('fs'),
         {
             name: 'roster_40',
             url: 'http://mlb.mlb.com/lookup/json/named.roster_40.bam?team_id=%27121%27'
+        },
+        {
+            name: 'roster_team_alltime.short',
+            url: 'http://mlb.mlb.com/lookup/json/named.roster_team_alltime.bam?team_id=%27121%27&start_season=%272017%27&end_season=%272017%27&roster_team_alltime.col_in=name_first_last&roster_team_alltime.col_in=player_id'
+        },
+        {
+            name: 'roster_team_alltime',
+            url: 'http://mlb.mlb.com/lookup/json/named.roster_team_alltime.bam?team_id=%27121%27&start_season=%272017%27&end_season=%272017%27'
         }
     ];
 
