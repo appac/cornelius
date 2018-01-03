@@ -1,5 +1,11 @@
 # Change Log
 
+## [2.1.0] - 2018-01-03
+
+### Added
+
+- `getRoster` now supports a `season` property that allows you to retrieve a teams roster for a given season, or a cumulative roster across multiple seasons. See README.md for more details.
+
 ## [2.0.0] - 2017-12-08
 
 ### Changed
