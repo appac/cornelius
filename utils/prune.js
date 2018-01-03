@@ -131,7 +131,7 @@ function prunePlayerInfo(data) {
  * Given an `roster_40` array, returns a pruned/restructured copy. 
  * 
  * This function also handles short form roster data (just a name and ID for each player).
- * It determines short form roster data by looking for a `pro_debut_date` property on the
+ * It determines short form roster data by looking for a `birth_date` property on the
  * first element of the roster array. This property is only present on full/long form roster data.
  * @private
  * @param {Array} data - Raw roster data.
@@ -186,7 +186,7 @@ function pruneRosterData(data) {
     }
     if (!data) {
         return [];
-    } else if (data[0].hasOwnProperty('pro_debut_date')) {
+    } else if (data[0].hasOwnProperty('birth_date')) {
         return data.map(restructure);
     } else {
         return data.map(restructureShort);
