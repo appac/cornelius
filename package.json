@@ -26,6 +26,6 @@
     "eslint": "^4.9.0",
     "eslint-config-crockford": "^2.0.0",
     "faucet": "git+https://github.com/appac/faucet.git#sprintfjs_update",
-    "tape": "^4.8.0"
+    "tape": "^4.9.0"
   }
 }
