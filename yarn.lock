@@ -263,9 +263,9 @@ escape-string-regexp@^1.0.2, escape-string-regexp@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
 
-eslint-config-crockford@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-crockford/-/eslint-config-crockford-2.0.0.tgz#e110f9b79f6fca2feb4e3235bfd0734bd8df10cf"
+eslint-config-google@^0.9.1:
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/eslint-config-google/-/eslint-config-google-0.9.1.tgz#83353c3dba05f72bb123169a4094f4ff120391eb"
 
 eslint-scope@^3.7.1:
   version "3.7.1"

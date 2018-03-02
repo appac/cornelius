@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "eslint": "^4.18.1",
-    "eslint-config-crockford": "^2.0.0",
+    "eslint-config-google": "^0.9.1",
     "faucet": "git+https://github.com/appac/faucet.git#sprintfjs_update",
     "tape": "^4.9.0"
   }
