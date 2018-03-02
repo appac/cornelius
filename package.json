@@ -8,10 +8,7 @@
     "pretest": "node test/mock.gen.js",
     "test": "tape test/*.spec.js | faucet"
   },
-  "repository": {
-    "type": "git",
-    "url": "http://github.com/appac/cornelius.git"
-  },
+  "repository": "http://github.com/appac/cornelius.git",
   "keywords": [
     "mlb",
     "baseball",
