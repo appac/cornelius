@@ -21,7 +21,7 @@ class StatsOptions {
  * @param {boolean} [options.pitching=false] - The type of stats to get.
  * @param {string} [options.year] - The season to get stats for.
  * @param {boolean} [options.prune=true] - Whether the data received should be pruned. 
- * @returns {Promise} - Promise to be fulfilled with player stats object, or error.
+ * @return {Promise} - Promise to be fulfilled with player stats object, or error.
  */
 function getStats(options) {
     return new Promise (function (resolve, reject) {

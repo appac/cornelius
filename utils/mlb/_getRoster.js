@@ -40,7 +40,7 @@ class RosterOptions {
  * @param {string} options.team_id - ID of team to get roster for.
  * @param {boolean} [options.short=false] - Whether players in the roster should have their full info.
  * @param {boolean} [options.prune=true] - Whether the data received should be pruned. 
- * @returns {Promise} - Promise to be fulfilled with roster data, or error.
+ * @return {Promise} - Promise to be fulfilled with roster data, or error.
  */
 function getRoster(options) {
     return new Promise(function (resolve, reject) {

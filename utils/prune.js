@@ -314,7 +314,7 @@ function pruneStatData(data) {
  * 
  * @private
  * @param {Object} rawData - Raw MLB data.
- * @returns {Object|Array} - Returns an object or array of objects.
+ * @return {Object|Array} - Returns an object or array of objects.
  */
 function pruneHandler(rawData) {
     const dataType = Object.keys(rawData)[0];

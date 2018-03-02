@@ -20,7 +20,7 @@ const url = require('url'),
  * @private
  * @param {string} type - The type of request - determines the endpoint to use.
  * @param {Object|string} options - The options to make the request with.
- * @returns {Object} url - Parsed URL object.
+ * @return {Object} url - Parsed URL object.
  */
 function buildRequest(type, options) {
     let uri = base;

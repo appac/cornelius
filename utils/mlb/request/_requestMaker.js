@@ -8,7 +8,7 @@ const http = require('http'),
  *
  * @private
  * @param {Object} url - Parsed URL object.
- * @returns {Promise} - Promise to be fulfilled with JSON parsed response data, or error.
+ * @return {Promise} - Promise to be fulfilled with JSON parsed response data, or error.
  */
 function requestMaker(url) {
     return new Promise(function (resolve, reject) {
