@@ -23,7 +23,7 @@
     "bluebird": "^3.5.1"
   },
   "devDependencies": {
-    "eslint": "^4.9.0",
+    "eslint": "^4.18.1",
     "eslint-config-crockford": "^2.0.0",
     "faucet": "git+https://github.com/appac/faucet.git#sprintfjs_update",
     "tape": "^4.9.0"
