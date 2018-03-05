@@ -150,7 +150,12 @@ Returns **([Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/G
 
 ### cornelius.getRoster
 
-Takes a team's ID and returns their 40 man roster.
+Takes a team's ID and returns their 40 man, or all time roster.
+
+The `season` property is a string of two years which mark the start and end seasons of the
+all time rosters you're requesting. Providing a single year will return only that years roster.
+
+Omitting the `season` property will return a team's current 40 man roster.
 
 `options` should be an object.
 If you provide no team ID, or an incorrect one, `getRoster` returns an empty array.
@@ -159,6 +164,7 @@ If you provide no team ID, or an incorrect one, `getRoster` returns an empty arr
 
 -   `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Options object.
     -   `options.team_id` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Team's ID.
+    -   `options.season` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Season to get roster for.
     -   `options.short` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Return full player info with roster. (optional, default `false`)
     -   `options.prune` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Prune the data. (optional, default `true`)
 
@@ -176,7 +182,19 @@ cornelius.getRoster({ team_id: '121' }) // New York Mets
   });
 ```
 
-Returns **([Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array) \| [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object))** Pruned roster _or_ MLB `roster_40` JSON data.
+_Get a team's cumulative roster for the seasons beginning 2016 and ending 2017_
+
+```javascript
+cornelius.getRoster({ team_id: '121', season: '2016 2017' })
+  .then(function(data) {
+    // do stuff with roster data
+  })
+  .catch(function (error) {
+    // handle error
+  });
+```
+
+Returns **([Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array) \| [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object))** Pruned roster _or_ MLB `roster_40` \| `roster_team_alltime` JSON data.
 
 ## License
 

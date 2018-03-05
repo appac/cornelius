@@ -1,16 +1,14 @@
 {
   "name": "cornelius",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Get data provided by MLB's public lookup routes.",
   "main": "index.js",
   "scripts": {
+    "build-docs": "rm README.md && documentation build --config documentation.yml -f md > README.md",
     "pretest": "node test/mock.gen.js",
     "test": "tape test/*.spec.js | faucet"
   },
-  "repository": {
-    "type": "git",
-    "url": "http://github.com/appac/cornelius.git"
-  },
+  "repository": "http://github.com/appac/cornelius.git",
   "keywords": [
     "mlb",
     "baseball",
@@ -25,9 +23,9 @@
     "bluebird": "^3.5.1"
   },
   "devDependencies": {
-    "eslint": "^4.9.0",
-    "eslint-config-crockford": "^2.0.0",
-    "faucet": "0.0.1",
-    "tape": "^4.8.0"
+    "eslint": "^4.18.1",
+    "eslint-config-google": "^0.9.1",
+    "faucet": "git+https://github.com/appac/faucet.git#sprintfjs_update",
+    "tape": "^4.9.0"
   }
 }

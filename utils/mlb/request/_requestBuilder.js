@@ -1,7 +1,7 @@
 'use strict';
 
 const url = require('url'),
-    base = 'http://mlb.mlb.com/lookup/json/named.',
+    base = 'http://lookup-service-prod.mlb.com/json/named.',
     endpoints = {
         search: 'search_player_all.bam',
         player_info: 'player_info.bam',
@@ -20,7 +20,7 @@ const url = require('url'),
  * @private
  * @param {string} type - The type of request - determines the endpoint to use.
  * @param {Object|string} options - The options to make the request with.
- * @returns {Object} url - Parsed URL object.
+ * @return {Object} url - Parsed URL object.
  */
 function buildRequest(type, options) {
     let uri = base;
@@ -37,6 +37,12 @@ function buildRequest(type, options) {
             uri += `${endpoints.roster}?team_id='${options.team_id}'&roster_40.col_in=name_display_first_last&roster_40.col_in=player_id`;
         } else {
             uri += `${endpoints.roster}?team_id='${options.team_id}'`;
+        }
+        break;
+    case 'roster_team_alltime':
+        uri += `roster_team_alltime.bam?team_id='${options.team_id}'&start_season='${options.seasonStart}'&end_season='${options.seasonEnd}'`;
+        if (options.short === true) {
+            uri += '&roster_team_alltime.col_in=name_first_last&roster_team_alltime.col_in=player_id';
         }
         break;
     case 'sport_hitting_tm':
