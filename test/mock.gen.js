@@ -6,47 +6,47 @@ const fs = require('fs'),
     endpoints = [
         {
             name: 'search_player_all',
-            url: 'http://mlb.mlb.com/lookup/json/named.search_player_all.bam?sport_code=%27mlb%27&name_part=%27wright%25%27&active_sw=%27Y%27'
+            url: 'http://lookup-service-prod.mlb.com/json/named.search_player_all.bam?sport_code=%27mlb%27&name_part=%27wright%25%27&active_sw=%27Y%27'
         },
         {
             name: 'search_player_all.single',
-            url: 'http://mlb.mlb.com/lookup/json/named.search_player_all.bam?sport_code=%27mlb%27&name_part=%27cespedes%25%27&active_sw=%27Y%27'
+            url: 'http://lookup-service-prod.mlb.com/json/named.search_player_all.bam?sport_code=%27mlb%27&name_part=%27cespedes%25%27&active_sw=%27Y%27'
         },
         {
             name: 'player_info',
-            url: 'http://mlb.mlb.com/lookup/json/named.player_info.bam?sport_code=%27mlb%27&player_id=%27431151%27'
+            url: 'http://lookup-service-prod.mlb.com/json/named.player_info.bam?sport_code=%27mlb%27&player_id=%27431151%27'
         },
         {
             name: 'sport_hitting_tm',
-            url: 'http://mlb.mlb.com/lookup/json/named.sport_hitting_tm.bam?player_id=431151&game_type=%27R%27&league_list_id=%27mlb%27'
+            url: 'http://lookup-service-prod.mlb.com/json/named.sport_hitting_tm.bam?player_id=431151&game_type=%27R%27&league_list_id=%27mlb%27'
         },
         {
             name: 'sport_pitching_tm',
-            url: 'http://mlb.mlb.com/lookup/json/named.sport_pitching_tm.bam?player_id=453286&game_type=%27R%27&league_list_id=%27mlb%27'
+            url: 'http://lookup-service-prod.mlb.com/json/named.sport_pitching_tm.bam?player_id=453286&game_type=%27R%27&league_list_id=%27mlb%27'
         },
         {
             name: 'sport_pitching_tm.empty',
-            url: 'http://mlb.mlb.com/lookup/json/named.sport_pitching_tm.bam?player_id=431151&game_type=%27R%27&league_list_id=%27mlb%27'
+            url: 'http://lookup-service-prod.mlb.com/json/named.sport_pitching_tm.bam?player_id=431151&game_type=%27R%27&league_list_id=%27mlb%27'
         },
         {
             name: 'sport_hitting_tm.single',
-            url: 'http://mlb.mlb.com/lookup/json/named.sport_hitting_tm.bam?player_id=431151&sport_hitting_tm.season=2015&game_type=%27R%27&league_list_id=%27mlb%27'
+            url: 'http://lookup-service-prod.mlb.com/json/named.sport_hitting_tm.bam?player_id=431151&sport_hitting_tm.season=2015&game_type=%27R%27&league_list_id=%27mlb%27'
         },
         {
             name: 'roster_40.short',
-            url: 'http://mlb.mlb.com/lookup/json/named.roster_40.bam?team_id=%27121%27&roster_40.col_in=name_display_first_last&roster_40.col_in=player_id'
+            url: 'http://lookup-service-prod.mlb.com/json/named.roster_40.bam?team_id=%27121%27&roster_40.col_in=name_display_first_last&roster_40.col_in=player_id'
         },
         {
             name: 'roster_40',
-            url: 'http://mlb.mlb.com/lookup/json/named.roster_40.bam?team_id=%27121%27'
+            url: 'http://lookup-service-prod.mlb.com/json/named.roster_40.bam?team_id=%27121%27'
         },
         {
             name: 'roster_team_alltime.short',
-            url: 'http://mlb.mlb.com/lookup/json/named.roster_team_alltime.bam?team_id=%27121%27&start_season=%272017%27&end_season=%272017%27&roster_team_alltime.col_in=name_first_last&roster_team_alltime.col_in=player_id'
+            url: 'http://lookup-service-prod.mlb.com/json/named.roster_team_alltime.bam?team_id=%27121%27&start_season=%272017%27&end_season=%272017%27&roster_team_alltime.col_in=name_first_last&roster_team_alltime.col_in=player_id'
         },
         {
             name: 'roster_team_alltime',
-            url: 'http://mlb.mlb.com/lookup/json/named.roster_team_alltime.bam?team_id=%27121%27&start_season=%272017%27&end_season=%272017%27'
+            url: 'http://lookup-service-prod.mlb.com/json/named.roster_team_alltime.bam?team_id=%27121%27&start_season=%272017%27&end_season=%272017%27'
         }
     ];
 

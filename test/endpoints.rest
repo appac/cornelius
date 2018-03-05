@@ -1,42 +1,42 @@
 // Search for players.
-GET http://mlb.mlb.com/lookup/json/named.search_player_all.bam
-	?sport_code=%27mlb%27
-	&name_part=%27wright%25%27
-	&active_sw=%27Y%27
+GET http://lookup-service-prod.mlb.com/json/named.search_player_all.bam
+    ?sport_code=%27mlb%27
+    &name_part=%27wright%25%27
+    &active_sw=%27Y%27
 
 ###
 
 // Get single player info.
-GET http://mlb.mlb.com/lookup/json/named.player_info.bam
-	?sport_code=%27mlb%27
-	&player_id=%27431151%27
+GET http://lookup-service-prod.mlb.com/json/named.player_info.bam
+    ?sport_code=%27mlb%27
+    &player_id=%27431151%27
 
 ###
 
 // Get player hitting stats.
-GET http://mlb.mlb.com/lookup/json/named.sport_hitting_tm.bam
-	?player_id=431151
-	&game_type=%27R%27
-	&league_list_id=%27mlb%27
+GET http://lookup-service-prod.mlb.com/json/named.sport_hitting_tm.bam
+    ?player_id=431151
+    &game_type=%27R%27
+    &league_list_id=%27mlb%27
 
 ###
 
 // Get player pitching stats.
-GET http://mlb.mlb.com/lookup/json/named.sport_pitching_tm.bam
-	?player_id=453286
-	&game_type=%27R%27
-	&league_list_id=%27mlb%27
+GET http://lookup-service-prod.mlb.com/json/named.sport_pitching_tm.bam
+    ?player_id=453286
+    &game_type=%27R%27
+    &league_list_id=%27mlb%27
 
 ###
 
 // Get team roster (short).
-GET http://mlb.mlb.com/lookup/json/named.roster_40.bam
-	?team_id=%27121%27
-	&roster_40.col_in=name_display_first_last
-	&roster_40.col_in=player_id
+GET http://lookup-service-prod.mlb.com/json/named.roster_40.bam
+    ?team_id=%27121%27
+    &roster_40.col_in=name_display_first_last
+    &roster_40.col_in=player_id
 
 ###
 // Get team roster (full).
-GET http://mlb.mlb.com/lookup/json/named.roster_40.bam
-	?team_id=%27121%27
+GET http://lookup-service-prod.mlb.com/json/named.roster_40.bam
+    ?team_id=%27121%27
 

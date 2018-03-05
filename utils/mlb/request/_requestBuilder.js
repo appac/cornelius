@@ -1,7 +1,7 @@
 'use strict';
 
 const url = require('url'),
-    base = 'http://mlb.mlb.com/lookup/json/named.',
+    base = 'http://lookup-service-prod.mlb.com/json/named.',
     endpoints = {
         search: 'search_player_all.bam',
         player_info: 'player_info.bam',
