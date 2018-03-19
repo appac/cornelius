@@ -280,7 +280,7 @@ test('DataTransformer given valid player_info data should...', (t) => {
         v.plan(2);
 
         const dataTransformer = new DataTransformer(data);
-        
+
         let transformedData;
         dataTransformer.on('transform:success', (d) => {
             transformedData = d;
@@ -345,7 +345,7 @@ test('DataTransformer given valid sport_hitting_tm data should...', (t) => {
             expectedLength, transformedData.length,
             `Expected array length to be ${expectedLength}, but it was ${transformedData.length}.`
         );
-        
+
         v.end();
     });
 
@@ -426,7 +426,7 @@ test('DataTransformer given valid sport_pitching_tm data should...', (t) => {
             expectedLength, transformedData.length,
             `Expected array length to be ${expectedLength}, but it was ${transformedData.length}.`
         );
-        
+
         v.end();
     });
 
