@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Given an array of search results, or single search result object,
  * returns a pruned/restructured copy.

@@ -1,7 +1,7 @@
 'use strict';
 
-const http = require('http'),
-    Promise = require('bluebird');
+const http = require('http');
+const Promise = require('bluebird');
 
 /**
  * Makes the request to MLB.
@@ -11,19 +11,18 @@ const http = require('http'),
  * @return {Promise} - Promise to be fulfilled with JSON parsed response data, or error.
  */
 function requestMaker(url) {
-    return new Promise(function (resolve, reject) {
-
-        let options = {
+    return new Promise((resolve, reject) => {
+        const options = {
             host: url.host,
-            path: url.path
+            path: url.path,
         };
 
-        http.get(options, function (res) {
-            const statusCode = res.statusCode,
-                statusMessage = res.statusMessage,
-                contentType = res.headers['content-type'];
+        http.get(options, (res) => {
+            const statusCode = res.statusCode;
+            const statusMessage = res.statusMessage;
+            const contentType = res.headers['content-type'];
 
-            let error, rawData = '';
+            let error;
 
             if (statusCode !== 200) {
                 error = new Error(`${statusCode} - ${statusMessage}.`);
@@ -36,6 +35,7 @@ function requestMaker(url) {
                 reject(error);
             }
 
+            let rawData = '';
             res.setEncoding('utf8');
             res.on('data', (chunk) => {
                 rawData += chunk;

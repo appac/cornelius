@@ -1,9 +1,17 @@
 'use strict';
 
-let mlbRequest = require('./request'),
-    prune = require('../prune');
+const mlbRequest = require('./request');
+const prune = require('../prune');
 
+/**
+ * Represents options given to MLB Request Builder.
+ */
 class SearchOptions {
+    /**
+     * Sets fallback values for options properties.
+     *
+     * @param {object} options
+     */
     constructor(options) {
         this.query = options.query || null;
         this.active = (options.hasOwnProperty('active') && typeof (options.active === 'boolean')) ? options.active : true;
@@ -21,25 +29,24 @@ class SearchOptions {
  * @return {Promise} - Promise to be fulfilled with search results object, or error.
  */
 function playerSearch(options) {
-    return new Promise(function (resolve, reject) {
-        const o = new SearchOptions(options),
-            url = mlbRequest.build('search_player_all', o);
+    return new Promise((resolve, reject) => {
+        const o = new SearchOptions(options);
+        const url = mlbRequest.build('search_player_all', o);
 
         if (!url) {
             reject(new Error('Error building search_player_all request URL.'));
         }
 
         mlbRequest.make(url)
-            .then(data => {
+            .then((data) => {
                 if (o.prune === true) {
                     data = prune(data);
                 }
                 resolve(data);
             })
-            .catch(error => {
+            .catch((error) => {
                 reject(error);
             });
-
     });
 }
 
