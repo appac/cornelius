@@ -51,7 +51,7 @@ test('DataTransformer given invalid data should...', (t) => {
 });
 
 test('DataTransformer given valid search_player_all data should...', (t) => {
-    t.plan(2);
+    t.plan(3);
 
     t.test('...emit a success event on transform()', (u) => {
         u.plan(1);
@@ -104,11 +104,40 @@ test('DataTransformer given valid search_player_all data should...', (t) => {
         v.end();
     });
 
+    t.test('...emit `transform:nodata` and be able to handle no search results.', (w) => {
+        w.plan(3);
+
+        const data = require('./mock/search_player_all.empty.json');
+        const dataTransformer = new DataTransformer(data);
+        const expectedLength = +data.search_player_all.queryResults.totalSize;
+
+        let transformedData;
+        dataTransformer.on('transform:nodata', (d) => {
+            transformedData = d;
+        });
+        dataTransformer.transform();
+
+        w.equal(
+            dataTransformer._eventsCount, 1,
+            `DataTransformer instance should have an _eventsCount of 1.`
+        );
+        w.true(
+            Array.isArray(transformedData),
+            `Transformed data should be an array, but is a ${typeof(transformedData)}.`
+        );
+        w.equal(
+            expectedLength, transformedData.length,
+            `Expected array length to be ${expectedLength}, but it was ${transformedData.length}.`
+        );
+
+        w.end();
+    });
+
     t.end();
 });
 
 test('DataTransformer given valid roster_40 data should...', (t) => {
-    t.plan(3);
+    t.plan(4);
 
     t.test('...emit a success event on transform().', (u) => {
         u.plan(1);
@@ -179,11 +208,40 @@ test('DataTransformer given valid roster_40 data should...', (t) => {
         );
     });
 
+    t.test('...emit `transform:nodata` and be able to handle no roster data.', (x) => {
+        x.plan(3);
+
+        const data = require('./mock/roster_40.empty.json');
+        const dataTransformer = new DataTransformer(data);
+        const expectedLength = +data.roster_40.queryResults.totalSize;
+
+        let transformedData;
+        dataTransformer.on('transform:nodata', (d) => {
+            transformedData = d;
+        });
+        dataTransformer.transform();
+
+        x.equal(
+            dataTransformer._eventsCount, 1,
+            `DataTransformer instance should have an _eventsCount of 1.`
+        );
+        x.true(
+            Array.isArray(transformedData),
+            `Transformed data should be an array, but is a ${typeof(transformedData)}.`
+        );
+        x.equal(
+            expectedLength, transformedData.length,
+            `Expected array length to be ${expectedLength}, but it was ${transformedData.length}.`
+        );
+
+        x.end();
+    });
+
     t.end();
 });
 
 test('DataTransformer given valid roster_team_alltime data should...', (t) => {
-    t.plan(3);
+    t.plan(4);
 
     t.test('...emit a success event on transform().', (u) => {
         u.plan(1);
@@ -255,12 +313,41 @@ test('DataTransformer given valid roster_team_alltime data should...', (t) => {
         );
     });
 
+    t.test('...emit `transform:nodata` and be able to handle no roster data.', (x) => {
+        x.plan(3);
+
+        const data = require('./mock/roster_team_alltime.empty.json');
+        const dataTransformer = new DataTransformer(data);
+        const expectedLength = +data.roster_team_alltime.queryResults.totalSize;
+
+        let transformedData;
+        dataTransformer.on('transform:nodata', (d) => {
+            transformedData = d;
+        });
+        dataTransformer.transform();
+
+        x.equal(
+            dataTransformer._eventsCount, 1,
+            `DataTransformer instance should have an _eventsCount of 1.`
+        );
+        x.true(
+            Array.isArray(transformedData),
+            `Transformed data should be an array, but is a ${typeof(transformedData)}.`
+        );
+        x.equal(
+            expectedLength, transformedData.length,
+            `Expected array length to be ${expectedLength}, but it was ${transformedData.length}.`
+        );
+
+        x.end();
+    });
+
     t.end();
 });
 
 test('DataTransformer given valid player_info data should...', (t) => {
-    const data = require('./mock/player_info.json');
-    t.plan(2);
+    let data = require('./mock/player_info.json');
+    t.plan(3);
 
     t.test('...emit a success event on transform().', (u) => {
         u.plan(1);
@@ -296,6 +383,30 @@ test('DataTransformer given valid player_info data should...', (t) => {
             `A transformed player should have 'attribute' property.`
         );
         v.end();
+    });
+
+    t.test('...emit `transform:nodata` and be able to handle no player object.', (w) => {
+        w.plan(2);
+
+        data = require('./mock/player_info.empty.json');
+        const dataTransformer = new DataTransformer(data);
+
+        let transformedData;
+        dataTransformer.on('transform:nodata', (d) => {
+            transformedData = d;
+        });
+        dataTransformer.transform();
+
+        w.equal(
+            dataTransformer._eventsCount, 1,
+            `DataTransformer instance should have an _eventsCount of 1.`
+        );
+        w.equal(
+            typeof(transformedData), 'object',
+            `Transformed data should be an object, but is a ${typeof(transformedData)}.`
+        );
+
+        w.end();
     });
 
     t.end();
