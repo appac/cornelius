@@ -490,28 +490,3 @@ test('DataTransformer given valid sport_pitching_tm data should...', (t) => {
 
     t.end();
 });
-
-
-test.skip('prune(sport_pitching_tm) should return an array of pruned pitching stats',
-    (t) => {
-        t.plan(3);
-        let data, pruned, expectedLength;
-
-        data = require('./mock/sport_pitching_tm.json');
-        pruned = prune(data);
-        expectedLength = +data.sport_pitching_tm.queryResults.totalSize;
-
-        t.true(
-            Array.isArray(pruned),
-            'Pruned stats should be an array.'
-        );
-        t.true(
-            pruned[0].hasOwnProperty('team'),
-            'Pruned stats should have `team` property.'
-        );
-        t.equal(
-            expectedLength, pruned.length,
-            `Expected array length to be ${expectedLength}, but it was ${pruned.length}`
-        );
-        t.end();
-    });
