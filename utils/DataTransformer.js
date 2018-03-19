@@ -11,7 +11,24 @@ class DataTransformer extends EventEmitter {
     constructor(originalData) {
         super();
         this.typeOfData = Object.keys(originalData)[0];
-        this.transformableData = originalData[this.typeOfData].queryResults.row;
+        this.transformableData = getTransformableData(originalData[this.typeOfData]);
+
+        /**
+         * Prunes MLB data down to the single row
+         * needed for transformations to occur.
+         * 
+         * @return {array|null}
+         */
+        function getTransformableData(data) {
+            const hasQueryResultsProp = data.hasOwnProperty('queryResults');
+            if (hasQueryResultsProp) {
+                const hasRowProp = data.queryResults.hasOwnProperty('row');
+                if (hasRowProp) {
+                    return data.queryResults.row;
+                }
+            }
+            return null;
+        }
     }
 
     /**
