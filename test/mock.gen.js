@@ -13,8 +13,16 @@ const fs = require('fs'),
             url: 'http://lookup-service-prod.mlb.com/json/named.search_player_all.bam?sport_code=%27mlb%27&name_part=%27cespedes%25%27&active_sw=%27Y%27'
         },
         {
+            name: 'search_player_all.empty',
+            url: 'http://lookup-service-prod.mlb.com/json/named.search_player_all.bam?sport_code=%27mlb%27&name_part=%27invalid%25%27&active_sw=%27Y%27'
+        },
+        {
             name: 'player_info',
             url: 'http://lookup-service-prod.mlb.com/json/named.player_info.bam?sport_code=%27mlb%27&player_id=%27431151%27'
+        },
+        {
+            name: 'player_info.empty',
+            url: 'http://lookup-service-prod.mlb.com/json/named.player_info.bam?sport_code=%27mlb%27&player_id=%27-1%27'
         },
         {
             name: 'sport_hitting_tm',
@@ -45,12 +53,20 @@ const fs = require('fs'),
             url: 'http://lookup-service-prod.mlb.com/json/named.roster_40.bam?team_id=%27121%27'
         },
         {
+            name: 'roster_40.empty',
+            url: 'http://lookup-service-prod.mlb.com/json/named.roster_40.bam?team_id=%27-1%27'
+        },
+        {
             name: 'roster_team_alltime.short',
             url: 'http://lookup-service-prod.mlb.com/json/named.roster_team_alltime.bam?team_id=%27121%27&start_season=%272017%27&end_season=%272017%27&roster_team_alltime.col_in=name_first_last&roster_team_alltime.col_in=player_id'
         },
         {
             name: 'roster_team_alltime',
             url: 'http://lookup-service-prod.mlb.com/json/named.roster_team_alltime.bam?team_id=%27121%27&start_season=%272017%27&end_season=%272017%27'
+        },
+        {
+            name: 'roster_team_alltime.empty',
+            url: 'http://lookup-service-prod.mlb.com/json/named.roster_team_alltime.bam?team_id=%27-1%27&start_season=%272017%27&end_season=%272017%27'
         }
     ];
 
