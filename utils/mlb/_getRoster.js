@@ -1,5 +1,5 @@
 const mlbRequest = require('./request');
-const prune = require('../prune');
+const DataTransformer = require('../DataTransformer');
 
 /**
  * Represents options given to MLB Request Builder.
@@ -65,9 +65,18 @@ function getRoster(options) {
         mlbRequest.make(url)
             .then((data) => {
                 if (o.prune === true) {
-                    data = prune(data);
+                    const dataTransformer = new DataTransformer(data);
+                    dataTransformer.on('transform:success', (transformedData) => {
+                        resolve(transformedData);
+                    }).on('transform:nodata', (emptyData) => {
+                        resolve(emptyData);
+                    }).on('error', (err) => {
+                        reject(err);
+                    });
+                    dataTransformer.transform();
+                } else {
+                    resolve(data);
                 }
-                resolve(data);
             })
             .catch((error) => {
                 reject(error);

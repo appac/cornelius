@@ -1,7 +1,7 @@
 'use strict';
 
 const mlbRequest = require('./request');
-const SearchDataTransformer = require('../transformers/SearchDataTransformer');
+const DataTransformer = require('../DataTransformer');
 
 /**
  * Represents options given to MLB Request Builder.
@@ -40,7 +40,7 @@ function playerSearch(options) {
         mlbRequest.make(url)
             .then((data) => {
                 if (o.prune === true) {
-                    const dataTransformer = new SearchDataTransformer(data);
+                    const dataTransformer = new DataTransformer(data);
                     dataTransformer.on('transform:success', (transformedData) => {
                         resolve(transformedData);
                     }).on('transform:nodata', (emptyData) => {
