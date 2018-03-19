@@ -25,6 +25,10 @@ const fs = require('fs'),
             url: 'http://lookup-service-prod.mlb.com/json/named.sport_pitching_tm.bam?player_id=453286&game_type=%27R%27&league_list_id=%27mlb%27'
         },
         {
+            name: 'sport_pitching_tm.single',
+            url: 'http://lookup-service-prod.mlb.com/json/named.sport_pitching_tm.bam?player_id=453286&game_type=%27R%27&league_list_id=%27mlb%27&season=2016'
+        },
+        {
             name: 'sport_pitching_tm.empty',
             url: 'http://lookup-service-prod.mlb.com/json/named.sport_pitching_tm.bam?player_id=431151&game_type=%27R%27&league_list_id=%27mlb%27'
         },
