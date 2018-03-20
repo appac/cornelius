@@ -1,3 +1,4 @@
+const Promise = require('bluebird');
 const mlbRequest = require('./request');
 const DataTransformer = require('../DataTransformer');
 
