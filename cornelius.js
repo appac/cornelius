@@ -1,5 +1,6 @@
 /**
  * Represents Cornelius module.
+ * @private
  */
 class Cornelius {
     /**

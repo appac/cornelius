@@ -3,6 +3,8 @@ const DataTransformer = require('../DataTransformer');
 
 /**
  * Represents options given to MLB Request Builder.
+ *
+ * @private
  */
 class PlayerOptions {
     /**

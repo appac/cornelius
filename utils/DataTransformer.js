@@ -1,6 +1,8 @@
 const EventEmitter = require('events').EventEmitter;
 /**
  * Represents a data pruner/transformer.
+ *
+ * @private
  */
 class DataTransformer extends EventEmitter {
     /**
@@ -16,7 +18,9 @@ class DataTransformer extends EventEmitter {
         /**
          * Prunes MLB data down to the single row
          * needed for transformations to occur.
-         * 
+         *
+         * @private
+         * @param {object} data
          * @return {array|null}
          */
         function getTransformableData(data) {
@@ -78,6 +82,7 @@ class DataTransformer extends EventEmitter {
          * as a map callback.
          *
          * Returns transformed data.
+         * @private
          * @param {object} data
          * @return {object}
          */
@@ -152,6 +157,7 @@ class DataTransformer extends EventEmitter {
          * as an array.map callback.
          *
          * Returns transformed data.
+         * @private
          * @param {object} data
          * @return {object}
          */
@@ -229,6 +235,7 @@ class DataTransformer extends EventEmitter {
          * as an array.map callback.
          *
          * Returns transformed data.
+         * @private
          * @param {object} data
          * @return {object}
          */
@@ -274,6 +281,7 @@ class DataTransformer extends EventEmitter {
         }
         /**
          * Transforms short form roster data.
+         * @private
          * @param {object} data
          * @return {object}
          */
@@ -313,6 +321,7 @@ class DataTransformer extends EventEmitter {
          * as an array.map callback.
          *
          * Returns transformed data.
+         * @private
          * @param {object} data
          * @return {object}
          */
@@ -355,6 +364,7 @@ class DataTransformer extends EventEmitter {
         }
         /**
          * Transforms short form roster data.
+         * @private
          * @param {object} data
          * @return {object}
          */
@@ -394,6 +404,7 @@ class DataTransformer extends EventEmitter {
          * as an array.map callback.
          *
          * Returns transformed data.
+         * @private
          * @param {object} data
          * @return {object}
          */
