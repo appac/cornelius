@@ -8,6 +8,14 @@
   - The `requestBuilder` and `requestMaker` are next.
 - Better implement classes to handle default/fallback values on user given options objects.
 
+## [2.0.2] - 2018-03-20
+
+## Changed
+
+- The old pruning functions have been re-factored as methods to a `DataTransformer` class.
+  - This DataTransformer handles all transformations and pruning of data, extending Node's `EventEmitter` to emit events on completion of tasks.
+  - This should bring no changes to the expected behaviour of Cornelius for users.
+
 ## [2.0.1] - 2018-03-05
 
 ### Added
