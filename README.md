@@ -19,11 +19,11 @@ Cornelius let's you grab MLB data via MLBAM's public lookup routes. All of the d
 ## Getting Started
 
 ```sh
-  npm install cornelius --save
+  yarn add cornelius
 ```
 
 ```javascript
-  var cornelius = require('cornelius');
+  const cornelius = require('cornelius');
 ```
 
 
@@ -109,7 +109,7 @@ Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/G
 Takes a player's ID and returns their stats.
 
 `options` should be an object.
-If you provide no player ID, or an incorrect one, `getStats` returns an empty array. 
+If you provide no player ID, or an incorrect one, `getStats` returns an empty array.
 If no year is provided, `getStats` returns all available stats for the given player.
 
 **Parameters**

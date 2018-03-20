@@ -1,9 +1,18 @@
-'use strict';
+const Promise = require('bluebird');
+const mlbRequest = require('./request');
+const DataTransformer = require('../DataTransformer');
 
-let mlbRequest = require('./request'),
-    prune = require('../prune');
-
+/**
+ * Represents options given to MLB Request Builder.
+ *
+ * @private
+ */
 class StatsOptions {
+    /**
+     * Sets fallback values for options properties.
+     *
+     * @param {object} options
+     */
     constructor(options) {
         this.player_id = options.player_id || -1;
         this.pitching = (options.hasOwnProperty('pitching') && typeof (options.pitching === 'boolean')) ? options.pitching : false;
@@ -20,11 +29,11 @@ class StatsOptions {
  * @param {string} options.player_id - ID of player to get stats for.
  * @param {boolean} [options.pitching=false] - The type of stats to get.
  * @param {string} [options.year] - The season to get stats for.
- * @param {boolean} [options.prune=true] - Whether the data received should be pruned. 
+ * @param {boolean} [options.prune=true] - Whether the data received should be pruned.
  * @return {Promise} - Promise to be fulfilled with player stats object, or error.
  */
 function getStats(options) {
-    return new Promise (function (resolve, reject) {
+    return new Promise((resolve, reject) => {
         const o = new StatsOptions(options);
 
         let url;
@@ -39,13 +48,22 @@ function getStats(options) {
         }
 
         mlbRequest.make(url)
-            .then(data => {
+            .then((data) => {
                 if (o.prune) {
-                    data = prune(data);
+                    const dataTransformer = new DataTransformer(data);
+                    dataTransformer.on('transform:success', (transformedData) => {
+                        resolve(transformedData);
+                    }).on('transform:nodata', (emptyData) => {
+                        resolve(emptyData);
+                    }).on('error', (err) => {
+                        reject(err);
+                    });
+                    dataTransformer.transform();
+                } else {
+                    resolve(data);
                 }
-                resolve(data);
             })
-            .catch(error => {
+            .catch((error) => {
                 reject(error);
             });
     });

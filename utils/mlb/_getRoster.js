@@ -1,9 +1,18 @@
-'use strict';
+const Promise = require('bluebird');
+const mlbRequest = require('./request');
+const DataTransformer = require('../DataTransformer');
 
-let mlbRequest = require('./request'),
-    prune = require('../prune');
-
+/**
+ * Represents options given to MLB Request Builder.
+ *
+ * @private
+ */
 class RosterOptions {
+    /**
+     * Sets fallback values for options properties.
+     *
+     * @param {object} options
+     */
     constructor(options) {
         this.team_id = options.team_id || -1;
         this.short = (options.hasOwnProperty('short') && typeof (options.full === 'boolean')) ? options.short : false;
@@ -14,6 +23,11 @@ class RosterOptions {
         }
     }
 
+    /**
+     * Splits the `seasons` property into individual strings
+     * to be stored as seasonStart and seasonEnd properties.
+     * @param {string} seasons
+     */
     setSeasons(seasons) {
         const s = seasons.split(' ');
 
@@ -39,29 +53,37 @@ class RosterOptions {
  * @param {Object} options - The options to make the request with.
  * @param {string} options.team_id - ID of team to get roster for.
  * @param {boolean} [options.short=false] - Whether players in the roster should have their full info.
- * @param {boolean} [options.prune=true] - Whether the data received should be pruned. 
+ * @param {boolean} [options.prune=true] - Whether the data received should be pruned.
  * @return {Promise} - Promise to be fulfilled with roster data, or error.
  */
 function getRoster(options) {
-    return new Promise(function (resolve, reject) {
-        const o = new RosterOptions(options),
-            url = mlbRequest.build(o.endpoint, o);
+    return new Promise(function(resolve, reject) {
+        const o = new RosterOptions(options);
+        const url = mlbRequest.build(o.endpoint, o);
 
         if (!url) {
             reject(new Error(`Error building ${o.endpoint} request URL.`));
         }
 
         mlbRequest.make(url)
-            .then(data => {
+            .then((data) => {
                 if (o.prune === true) {
-                    data = prune(data);
+                    const dataTransformer = new DataTransformer(data);
+                    dataTransformer.on('transform:success', (transformedData) => {
+                        resolve(transformedData);
+                    }).on('transform:nodata', (emptyData) => {
+                        resolve(emptyData);
+                    }).on('error', (err) => {
+                        reject(err);
+                    });
+                    dataTransformer.transform();
+                } else {
+                    resolve(data);
                 }
-                resolve(data);
             })
-            .catch(error => {
+            .catch((error) => {
                 reject(error);
             });
-
     });
 }
 

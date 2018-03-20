@@ -2,6 +2,22 @@
 
 ## [Unreleased]
 
+## Changed
+
+- More refactoring of older code to bring it up to a better standard, and utilise ES6 features where beneficial.
+  - The `requestBuilder` and `requestMaker` are next.
+- Better implement classes to handle default/fallback values on user given options objects.
+
+## [2.0.2] - 2018-03-20
+
+## Changed
+
+- The old pruning functions have been re-factored as methods to a `DataTransformer` class.
+  - This DataTransformer handles all transformations and pruning of data, extending Node's `EventEmitter` to emit events on completion of tasks.
+  - This should bring no changes to the expected behaviour of Cornelius for users.
+
+## [2.0.1] - 2018-03-05
+
 ### Added
 
 - `getRoster` now supports a `season` property that allows you to retrieve a teams roster for a given season, or a cumulative roster across multiple seasons. See README.md for more details.

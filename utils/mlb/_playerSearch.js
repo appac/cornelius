@@ -1,9 +1,18 @@
-'use strict';
+const Promise = require('bluebird');
+const mlbRequest = require('./request');
+const DataTransformer = require('../DataTransformer');
 
-let mlbRequest = require('./request'),
-    prune = require('../prune');
-
+/**
+ * Represents options given to MLB Request Builder.
+ *
+ * @private
+ */
 class SearchOptions {
+    /**
+     * Sets fallback values for options properties.
+     *
+     * @param {object} options
+     */
     constructor(options) {
         this.query = options.query || null;
         this.active = (options.hasOwnProperty('active') && typeof (options.active === 'boolean')) ? options.active : true;
@@ -21,25 +30,33 @@ class SearchOptions {
  * @return {Promise} - Promise to be fulfilled with search results object, or error.
  */
 function playerSearch(options) {
-    return new Promise(function (resolve, reject) {
-        const o = new SearchOptions(options),
-            url = mlbRequest.build('search_player_all', o);
+    return new Promise((resolve, reject) => {
+        const o = new SearchOptions(options);
+        const url = mlbRequest.build('search_player_all', o);
 
         if (!url) {
             reject(new Error('Error building search_player_all request URL.'));
         }
 
         mlbRequest.make(url)
-            .then(data => {
+            .then((data) => {
                 if (o.prune === true) {
-                    data = prune(data);
+                    const dataTransformer = new DataTransformer(data);
+                    dataTransformer.on('transform:success', (transformedData) => {
+                        resolve(transformedData);
+                    }).on('transform:nodata', (emptyData) => {
+                        resolve(emptyData);
+                    }).on('error', (err) => {
+                        reject(err);
+                    });
+                    dataTransformer.transform();
+                } else {
+                    resolve(data);
                 }
-                resolve(data);
             })
-            .catch(error => {
+            .catch((error) => {
                 reject(error);
             });
-
     });
 }
 

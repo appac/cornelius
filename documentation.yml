@@ -5,10 +5,10 @@ toc:
   - name: Getting Started
     description: |
       ```sh
-        npm install cornelius --save
+        yarn add cornelius
       ```
       ```javascript
-        var cornelius = require('cornelius');
+        const cornelius = require('cornelius');
       ```
   - name: Usage
     children:
