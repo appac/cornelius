@@ -1,5 +1,3 @@
-'use strict';
-
 const mlbRequest = require('./request');
 const DataTransformer = require('../DataTransformer');
 
