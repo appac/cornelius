@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## Changed
+
+- More refactoring of older code to bring it up to a better standard, and utilise ES6 features where beneficial.
+  - The `requestBuilder` and `requestMaker` are next.
+- Better implement classes to handle default/fallback values on user given options objects.
+
 ## [2.0.1] - 2018-03-05
 
 ### Added
