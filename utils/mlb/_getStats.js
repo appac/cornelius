@@ -1,25 +1,7 @@
 const Promise = require('bluebird');
 const mlbRequest = require('./request');
 const DataTransformer = require('../DataTransformer');
-
-/**
- * Represents options given to MLB Request Builder.
- *
- * @private
- */
-class StatsOptions {
-    /**
-     * Sets fallback values for options properties.
-     *
-     * @param {object} options
-     */
-    constructor(options) {
-        this.player_id = options.player_id || -1;
-        this.pitching = (options.hasOwnProperty('pitching') && typeof (options.pitching === 'boolean')) ? options.pitching : false;
-        this.prune = (options.hasOwnProperty('prune') && typeof (options.prune === 'boolean')) ? options.prune : true;
-        this.year = options.year || null;
-    }
-}
+const GetStatsOptions = require('../Options').GetStatsOptions;
 
 /**
  * Constructs and makes call to MLB for stats.
@@ -34,13 +16,13 @@ class StatsOptions {
  */
 function getStats(options) {
     return new Promise((resolve, reject) => {
-        const o = new StatsOptions(options);
+        const opts = new GetStatsOptions(options);
 
         let url;
-        if (o.pitching) {
-            url = mlbRequest.build('sport_pitching_tm', o);
+        if (opts.pitching) {
+            url = mlbRequest.build('sport_pitching_tm', opts);
         } else {
-            url = mlbRequest.build('sport_hitting_tm', o);
+            url = mlbRequest.build('sport_hitting_tm', opts);
         }
 
         if (!url) {
@@ -49,7 +31,7 @@ function getStats(options) {
 
         mlbRequest.make(url)
             .then((data) => {
-                if (o.prune) {
+                if (opts.prune) {
                     const dataTransformer = new DataTransformer(data);
                     dataTransformer.on('transform:success', (transformedData) => {
                         resolve(transformedData);
