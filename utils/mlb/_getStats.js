@@ -10,7 +10,7 @@ const GetStatsOptions = require('../Options').GetStatsOptions;
  * @param {Object} options - The options to make the request with.
  * @param {string} options.player_id - ID of player to get stats for.
  * @param {boolean} [options.pitching=false] - The type of stats to get.
- * @param {string} [options.year] - The season to get stats for.
+ * @param {string} [options.season] - The season to get stats for.
  * @param {boolean} [options.prune=true] - Whether the data received should be pruned.
  * @return {Promise} - Promise to be fulfilled with player stats object, or error.
  */
