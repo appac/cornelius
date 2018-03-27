@@ -16,7 +16,7 @@ const GetRosterOptions = require('../Options').GetRosterOptions;
 function getRoster(options) {
     return new Promise(function(resolve, reject) {
         const opts = new GetRosterOptions(options);
-        const url = mlbRequest.build(o.endpoint, o);
+        const url = mlbRequest.build(opts.endpoint, opts);
 
         if (!url) {
             reject(new Error(`Error building ${opts.endpoint} request URL.`));
