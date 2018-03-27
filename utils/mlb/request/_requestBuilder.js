@@ -39,7 +39,7 @@ function buildRequest(type, options) {
         }
         break;
     case 'roster_team_alltime':
-        uri += `roster_team_alltime.bam?team_id='${options.team_id}'&start_season='${options.seasonStart}'&end_season='${options.seasonEnd}'`;
+        uri += `roster_team_alltime.bam?team_id='${options.team_id}'&start_season='${options.season.start}'&end_season='${options.season.end}'`;
         if (options.short === true) {
             uri += '&roster_team_alltime.col_in=name_first_last&roster_team_alltime.col_in=player_id';
         }
