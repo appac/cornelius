@@ -58,7 +58,13 @@ class GetStatsOptions extends GetPlayerOptions {
     constructor(options) {
         super(options);
         this.pitching = (options.hasOwnProperty('pitching') && typeof options.pitching === 'boolean') ? options.pitching : false;
-        this.year = (options.hasOwnProperty('year') && typeof options.year === 'string') ? options.year : null;
+        if (options.hasOwnProperty('season') && typeof options.season === 'string') {
+            this.season = options.season;
+        } else if (options.hasOwnProperty('year') && typeof options.year === 'string') {
+            this.season = options.year;
+        } else {
+            this.season = null;
+        }
     }
 };
 

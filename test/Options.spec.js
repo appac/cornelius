@@ -31,14 +31,14 @@ test('Instances of Options classes should...', (t) => {
         opts = new Options.GetStatsOptions({
             player_id: '12345',
             pitching: true,
-            year: '2018',
+            season: '2018',
             prune: false,
         });
 
         u.deepEqual(opts, {
             player_id: '12345',
             pitching: true,
-            year: '2018',
+            season: '2018',
             prune: false,
         });
 
@@ -137,19 +137,19 @@ test('Instances of Options classes should...', (t) => {
         v.deepEqual(opts, {
             player_id: '',
             pitching: false,
-            year: null,
+            season: null,
             prune: true,
         });
 
         opts = new Options.GetStatsOptions({
             pitching: 'true',
-            year: 2018,
+            season: 2018,
         });
 
         v.deepEqual(opts, {
             player_id: '',
             pitching: false,
-            year: null,
+            season: null,
             prune: true,
         });
 
