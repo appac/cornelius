@@ -1,24 +1,8 @@
 const Promise = require('bluebird');
 const mlbRequest = require('./request');
 const DataTransformer = require('../DataTransformer');
+const SearchPlayerOptions = require('../Options').SearchPlayerOptions
 
-/**
- * Represents options given to MLB Request Builder.
- *
- * @private
- */
-class SearchOptions {
-    /**
-     * Sets fallback values for options properties.
-     *
-     * @param {object} options
-     */
-    constructor(options) {
-        this.query = options.query || null;
-        this.active = (options.hasOwnProperty('active') && typeof (options.active === 'boolean')) ? options.active : true;
-        this.prune = (options.hasOwnProperty('prune') && typeof (options.active === 'boolean')) ? options.prune : true;
-    }
-}
 /**
  * Constructs and makes call to MLB for player search.
  *
@@ -31,8 +15,8 @@ class SearchOptions {
  */
 function playerSearch(options) {
     return new Promise((resolve, reject) => {
-        const o = new SearchOptions(options);
-        const url = mlbRequest.build('search_player_all', o);
+        const opts = new SearchPlayerOptions(options);
+        const url = mlbRequest.build('search_player_all', opts);
 
         if (!url) {
             reject(new Error('Error building search_player_all request URL.'));
@@ -40,7 +24,7 @@ function playerSearch(options) {
 
         mlbRequest.make(url)
             .then((data) => {
-                if (o.prune === true) {
+                if (opts.prune === true) {
                     const dataTransformer = new DataTransformer(data);
                     dataTransformer.on('transform:success', (transformedData) => {
                         resolve(transformedData);

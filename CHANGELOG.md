@@ -1,16 +1,22 @@
 # Change Log
 
-## [Unreleased]
-
-## Changed
+[Unreleased]
 
 - More refactoring of older code to bring it up to a better standard, and utilise ES6 features where beneficial.
-  - The `requestBuilder` and `requestMaker` are next.
-- Better implement classes to handle default/fallback values on user given options objects.
+
+## [2.1.0] - 2018-03-27
+
+### Changed
+
+- New options classes validate and set the options passed in by users via the options object.
+  - Behaviour for users should remain the same.
+- `getStats` now takes a `season` property as an alternative to `year`.
+  - This brings it in line with other functions that use a `season` property. `year` is still a valid and accepted property.
+- Fixed numerous bugs where `typeof` was incorrectly implemented, meaning property checks on options objects weren't being performed fully.
 
 ## [2.0.2] - 2018-03-20
 
-## Changed
+### Changed
 
 - The old pruning functions have been re-factored as methods to a `DataTransformer` class.
   - This DataTransformer handles all transformations and pruning of data, extending Node's `EventEmitter` to emit events on completion of tasks.

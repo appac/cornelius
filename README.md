@@ -116,7 +116,7 @@ If no year is provided, `getStats` returns all available stats for the given pla
 
 -   `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Options object.
     -   `options.player_id` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Player's ID.
-    -   `options.year` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** The season to get stats for.
+    -   `options.season` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** The season to get stats for.
     -   `options.pitching` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Return pitching stats instead. (optional, default `false`)
     -   `options.prune` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Prune the data. (optional, default `true`)
 
@@ -137,7 +137,7 @@ cornelius.getStats({ player_id: '493316' })
 _Get a player's pitching stats for the 2017 season_
 
 ```javascript
-cornelius.getStats({ player_id: '592789', pitching: true, year: '2017' })
+cornelius.getStats({ player_id: '592789', pitching: true, season: '2017' })
   .then(function (data) {
     // do stuff with stats data
   })
