@@ -1,1 +1,1 @@
-module.exports = require('./cornelius');
+module.exports = require('./lib/Cornelius');
