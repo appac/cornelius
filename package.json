@@ -4,7 +4,6 @@
   "description": "Get data provided by MLB's public lookup routes.",
   "main": "index.js",
   "scripts": {
-    "build-docs": "rm README.md && documentation build --config documentation.yml -f md > README.md",
     "pretest": "node test/mock.gen.js",
     "test": "tape test/*.spec.js | faucet"
   },
