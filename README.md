@@ -188,9 +188,6 @@ Get current injuries.
 If `id` is omitted, this returns all injuries regardless of team. With an `id` option, the results
 are filtered to only include injuries that feature the given team id.
 
-## Game Types
+# License
 
-## Roster Types
-
-## Leader Metrics
-
+[MIT](LICENSE.md)
