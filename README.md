@@ -62,10 +62,10 @@ Get details for a given player.
 ### `'stats'`
 
 - `id` `String` *`required`* - A player ID e.g. '493316'
-- `role` `String` `'HITTING'` - Role to get stats for
-- `type` `String` `'TEAM'` - Context of stats
+- `stat_role` `String` `'HITTING'` - Role to get stats for
+- `stat_type` `String` `'TEAM'` - Context of stats
 - `season` `String` `CURRENT_YEAR` - The season to get data for e.g. '2018'
-- `game_type` `String` `'R'` - Game type code e.g. 'R' (see [Game Types]())
+- `game_type` `String` `'R'` - Game type code e.g. 'R'
 
 Get a player's stats for a given season, game type, role and context.
 
@@ -79,7 +79,7 @@ Get a player's stats for a given season, game type, role and context.
 
 - `id` `String` - A player ID e.g. '493316'
 - `start_date` `String` `FIRST_OF_MONTH` - The start date for a period e.g. '20170501'
-- `end_date` `String` `LAST_OF_MONTH` - The end date for a period e.g. '20170510'
+- `end_date` `String` `CURRENT_DATE` - The end date for a period e.g. '20170510'
 
 Get transactions over a given period.
 
@@ -128,7 +128,7 @@ Get details for a given team.
 ### `'roster'`
 
 - `id` `String` *`required`* - A team ID e.g. '121'
-- `roster_type` `String` `active` - The roster type e.g. 'TEAM' (see [Roster Types]())
+- `roster_type` `String` `active` - The roster type e.g. 'TEAM'
 
 Get a given roster type for a given team.
 
@@ -147,8 +147,8 @@ Get affiliate organisations for a given team. This includes organisations from A
 ### `'leaders'`
 
 - `id` `String` *`required`* - A team ID e.g. '121'
-- `metric` `String` *`required`* - Metric to get leader data for e.g. 'homeRuns' (see [Leader Metrics]())
-- `game_type` `String` - Game type code e.g. 'R' (see [Game Types]())
+- `metric` `String` *`required`* - Metric to get leader data for e.g. 'homeRuns'
+- `game_type` `String` `'R'` - Game type code e.g. 'R'
 - `season` `String` `CURRENT_YEAR` - The season to get data for e.g. '2018'
 - `limit` `Number` `5` - Limit the number of results
 
@@ -158,7 +158,7 @@ Get team leaders for a given metric.
 
 - `id` `String` - A team ID e.g. '121'
 - `start_date` `String` `FIRST_OF_MONTH` - The start date for a period e.g. '20170501'
-- `end_date` `String` `LAST_OF_MONTH` - The end date for a period e.g. '20170510'
+- `end_date` `String` `CURRENT_DATE` - The end date for a period e.g. '20170510'
 
 Get transactions over a given period.
 
