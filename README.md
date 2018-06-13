@@ -62,10 +62,18 @@ Get details for a given player.
 ### `'stats'`
 
 - `id` `String` *`required`* - A player ID e.g. '493316'
+- `role` `String` `'HITTING'` - Role to get stats for
+- `type` `String` `'TEAM'` - Context of stats
 - `season` `String` `CURRENT_YEAR` - The season to get data for e.g. '2018'
 - `game_type` `String` `'R'` - Game type code e.g. 'R' (see [Game Types]())
 
-Get a player's stats for a given season and game type.
+Get a player's stats for a given season, game type, role and context.
+
+`role` determines what to get stats for; 'hitting', 'pitching' or 'fielding'.
+
+`type` determines the context of the stats; 'team', 'league' or 'career'.
+
+`team` stats will break down stats across multiple teams if a player has moved team mid-season. `league` stats will do the same, splitting stats per league. `career` stats collates all of a player's stats regardless of team or league.
 
 ### `'transactions'`
 
