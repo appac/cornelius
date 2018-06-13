@@ -117,6 +117,13 @@ If a `league` option is passed, you can define 'AL' or 'NL' to only get teams fo
 
 Get details for a given team.
 
+### `'roster'`
+
+- `id` `String` *`required`* - A team ID e.g. '121'
+- `roster_type` `String` `active` - The roster type e.g. 'TEAM' (see [Roster Types]())
+
+Get a given roster type for a given team.
+
 ### `'coaches'`
 
 - `id` `String` *`required`* - A team ID e.g. '121'
@@ -175,6 +182,7 @@ are filtered to only include injuries that feature the given team id.
 
 ## Game Types
 
+## Roster Types
 
 ## Leader Metrics
 
